@@ -1,0 +1,129 @@
+
+<!-- #component:dashboard/domain-categories-scores:start -->
+<div class="card h-100">
+    <div class="card-body">
+        <!-- Email Security Score -->
+        <div class="p-20">
+            <div class="d-flex">
+                <div class="m-r-20 align-self-center">
+                    <font class="text-muted display-5"><i class="mdi mdi-email-outline"></i></font>
+                </div>
+                <div>
+                    <h3 class="card-title">Email Security <sup>
+                            <a href="javascript:void(0)" data-toggle="tooltip" title="Can we trust that email communications are encrypted, private and secure?">?</a>
+                        </sup></h3>
+                    <h6 id="email-security-score" class="card-subtitle">
+
+                        {% if report.email_security_score == 5 %}
+                            Email meets minimal security requirements
+                        {% elif report.email_security_score == 2 %}
+                            Email does not meet minimal security requirements
+                        {% elif report.email_security_score == 0 %}
+                            Email is  vulnerable to fraud and spoofing
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </h6>
+                </div>
+            </div>
+            <div class="progress-segment">
+                <div class="item item1 seg{{ report.email_security_score  }}"></div>
+                <div class="item item2 seg{{ report.email_security_score  }}"></div>
+                <div class="item item3 seg{{ report.email_security_score  }}"></div>
+            </div>
+
+        </div>
+        <!-- Web Security Score -->
+        <div class="p-20">
+            <div class="d-flex">
+                <div class="m-r-20 align-self-center">
+                    <font class="text-muted display-5"><i class="mdi mdi-lock"></i></font>
+                </div>
+                <div>
+                    <h3 class="card-title">Web Security
+                        <sup>
+                            <a href="javascript:void(0)" data-toggle="tooltip" title="Can we trust the website to be encrypted protecting privacy and security??">?</a>
+                        </sup>
+                    </h3>
+                    <h6 id="web-security-score" class="card-subtitle">
+                        {% if report.web_security_score == 5 %}
+                            Web Security meets minimal security requirements
+                        {% elif report.web_security_score == 2 %}
+                            Web Security does not meet minimal security requirements
+                        {% elif report.web_security_score == 0 %}
+                            Web Security requires immediate remediation
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </h6>
+                </div>
+            </div>
+            <div class="progress-segment">
+                <div class="item item1 seg{{ report.web_security_score }}"></div>
+                <div class="item item2 seg{{ report.web_security_score }}"></div>
+                <div class="item item3 seg{{ report.web_security_score }}"></div>
+            </div>
+        </div>
+        <!-- Web Security Score -->
+        <div class="p-20">
+            <div class="d-flex">
+                <div class="m-r-20 align-self-center">
+                    <font class="text-muted display-5"><i class="mdi mdi-web"></i></font>
+                </div>
+                <div>
+                    <h3 class="card-title">Web Application
+                        <sup>
+                            <a href="javascript:void(0)" data-toggle="tooltip" title="Can we trust the website to be protected from common vulnerabilities?">?</a>
+                        </sup>
+                    </h3>
+                    <h6 id="infrastructure-score" class="card-subtitle">
+                        {% if report.web_application_score == 5 %}
+                            No isues detected
+                        {% elif report.web_application_score == 2 %}
+                            Potential issues detected
+                        {% elif report.web_application_score == 0 %}
+                            Web Application Security requires immediate remediation
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </h6>
+                </div>
+
+            </div>
+            <div class="progress-segment">
+                <div class="item item1 seg{{ report.web_application_score }}"></div>
+                <div class="item item2 seg{{ report.web_application_score }}"></div>
+                <div class="item item3 seg{{ report.web_application_score }}"></div>
+            </div>
+        </div>
+        <!-- Infrastructure Score -->
+        <div class="p-20">
+            <div class="d-flex">
+                <div class="m-r-20 align-self-center">
+                    <font class="text-muted display-5"><i class="mdi mdi-server-security"></i></font>
+                </div>
+                <div>
+                    <h3 class="card-title">Infrastructure<sup><a href="javascript:void(0)" data-toggle="tooltip" title="Is the public facing infrastructure already compromised or vulnerable to common security issues?">?</a></sup></h3>
+                    <h6 id="infra-security-score" class="card-subtitle">
+                        {% if report.infrastructure_score == 5 %}
+                            No vulnerabilities or compromised systems
+                        {% elif report.infrastructure_score == 2 %}
+                            Potential issues detected
+                        {% elif report.infrastructure_score == 0 %}
+                            Vulnerabilities or compromised systems detected
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </h6>
+                </div>
+
+            </div>
+            <div class="progress-segment">
+                <div class="item item1 seg{{ report.infrastructure_score }}"></div>
+                <div class="item item2 seg{{ report.infrastructure_score }}"></div>
+                <div class="item item3 seg{{ report.infrastructure_score }}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #component:dashboard/domain-categories-scores:end -->

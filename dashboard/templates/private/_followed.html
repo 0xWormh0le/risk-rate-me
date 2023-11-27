@@ -1,0 +1,57 @@
+<!-- #component:dashboard/my-companies:start -->
+{% if user.profile.can_track_companies %}
+    {% if user.profile.followed_domains|length > 0 %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">My Tracked Companies <a class="pull-right btn btn-success" href="{% url 'my-companies' %}" style="margin-top:-10px;">View All</a></h4>
+                    <hr>
+                    <div class="table-responsive m-t-20">
+                        <table id="tracked-companies-dash" data-source="{% url 'dashboard/actions/follow' %}" class="table stylish-table datatable "  style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th >Rating</th>
+                                    <th ><i class="mdi mdi-email-outline"></i></th>
+                                    <th ><i class="mdi mdi-lock"></i></th>
+                                    <th ><i class="mdi mdi-web"></i></th>
+                                    <th ><i class="mdi mdi-server-security"></i></th>
+                                    <th>Company</th>
+                                    <th>Sector</th>
+                                    <th>Tags</th>
+                                    <th>Date</th>
+                                    <th class="tb-actions">Options</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Tracked Companies</h4>
+                    <div class="card-body">You are not tracking any companies.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% else %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">My Tracked Companies</h4>
+                    <p>Full members can easily track companies of interest for quick access to their records</p>
+                    <a href="{% url 'pricing' %}" class="btn btn-warning">Upgrade Now!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+<!-- #component:dashboard/my-companies:end -->

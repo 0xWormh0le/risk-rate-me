@@ -1,0 +1,440 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block header_extra_js %}
+
+{% endblock header_extra_js %}
+
+
+{% block page_content %}
+<!-- #component:dashboard/my-companies-contents:start -->
+
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">My Tracked Companies</h3>
+        <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+
+            <li class="breadcrumb-item active">My Tracked Companies</li>
+        </ol>
+    </div>
+</div>
+
+
+<!-- #component:dashboard/my-companies-info:start -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body text-center align-self-center">
+                {% if report is None %}
+                    <h2 class="card-title">You are not tracking any organizations.</h2>
+                {% else %}
+                    <h2 class="card-title">
+                        <i class="mdi mdi-security-network"></i> {{ report.count }} Tracked Organisations
+                    </h2>
+                    <small>My custom tags: </small>
+                    {% if not tags %}
+                        <small><strong>no tags set</strong></small>
+                    {% else %}
+                        {% for tag in tags %}
+                            <a href='{% url "tag-info" tag=tag %}' class="label label-light-tag m-r-2" id="btn-load-tag"> {{ tag }}</a>
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #component:dashboard/my-companies-contents:end -->
+
+{% if report %}
+    <!-- #component:dashboard/my-companies-report:start -->
+    <div class="row">
+        <div class="col-lg-6 m-b-30">
+            {% include "private/_ratings_gauge.html" with chart_title='Average Rating' %}
+        </div>
+        <div class="col-lg-6 m-b-30">
+            {% include "private/_ratings_distribution.html" %}
+        </div>
+    </div>
+    <!-- #component:dashboard/my-companies-report:end -->
+{% endif %}
+
+{% if report %}
+    {% include "private/_warning_stats.html" %}
+
+{% endif %}
+
+{% if report %}
+<!-- #component:dashboard/my-companies-table:start -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">My Tracked Companies</h4>
+                <div class="table-responsive m-t-20">
+                    <table id="tracked-companies" data-source="/user/companies" class="table stylish-table datatable m-t-30"  style="width:100%">
+                        <thead>
+                            <tr>
+                                <th style="width:80px;" data-toggle='tooltip' title='Overall Rating'>Rating</th>
+                                <th class="tb-cat" data-toggle='tooltip' title='Email Security'><i class="mdi mdi-email"></i></th>
+                                <th class="tb-cat" data-toggle='tooltip' title='Web Security'><i class="mdi mdi-lock"></i></th>
+                                <th class="tb-cat" data-toggle='tooltip' title='Web Application'><i class="mdi mdi-web"></i></th>
+                                <th class="tb-cat" data-toggle='tooltip' title='Infrastructure'><i class="mdi mdi-server-security"></i></th>
+                                <th>Domain/Company</th>
+                                <th>Tags</th>
+                                <th>Date</th>
+                                <th class="tb-actions" style="width:80px;">Options</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #component:dashboard/my-companies-table:end -->
+{% endif %}
+
+{% endblock page_content %}
+
+{% block extra_js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <script>
+
+            {% if report %}
+            var g = echarts.init(document.getElementById("overall-rating-gage"));
+            var option = {
+                tooltip : {
+                    formatter: "{a} <br/>{b} : {c}%"
+                },
+                toolbox: {
+                    show: false
+                },
+                series: [
+                    {
+                        name: "Average Rating",
+                        type: "gauge",
+                        detail: {
+                            formatter:function customValue(value) {
+                                    if (value < 0) {
+                                        return "N/A";
+                                    } else {
+                                        return "{{ report.avg_overall_rating }}";
+                                    }
+                                },
+                            fontSize: 80,
+                            fontWeight: "900",
+                            fontFamily: "Poppins, sans-serif",
+                            offsetCenter: [0, "100%"]
+                        },
+                        data: [{
+                            value: {{ report.avg_overall_score }} * 100,
+                            name: "AVERAGE RATING"
+                        }],
+                        itemStyle: {
+                            color: "#000"
+                        },
+                        title: {
+                            offsetCenter: [0, "40%"],
+                            fontSize: 10,
+                            color: "#99abb4",
+                            fontWeight: "lighter"
+                        },
+                         splitNumber: 8,
+                        axisLine: {
+                            lineStyle: {
+                                color: [[0.375, "#ff3728"], [0.75, "#ffb22b"], [1, "#a1bc2b"]]
+                                , width: 30
+                            }
+                        },
+                        splitLine: {
+                            show: true,
+                            lineStyle: {
+                                width: 3,
+                                color: "#fff"
+                            }
+                        },
+                        axisLabel: false,
+                        axisTick: false,
+                        pointer: {
+                            length: "90%",
+                        },
+
+                    }
+                ]
+            };
+
+            g.setOption(option, true), $(function () {
+                function resize() {
+                    setTimeout(function () {g.resize();}, 100)
+                }
+                $(window).on("resize", resize), $(".sidebartoggler").on("click", resize);
+            });
+
+
+            var ratingsChartSector = echarts.init(document.getElementById("sector-distribution"));
+            var option = {
+                tooltip : {
+                formatter: "{b} : {c}"
+                },
+                xAxis: {
+                    type: "category",
+                    axisLine: {
+                    lineStyle: {color:"#ccc"}
+                        },
+                boundaryGap: true,
+                splitLine: {
+                    show: true,
+                    lineStyle: {color:"#eee"}
+                },
+                data: ["A", "B", "C", "D", "E", "F"]
+                },
+                yAxis: [{
+                    type: "value",
+                    axisLine: {
+                    lineStyle: {color:"#ccc"}
+                        },
+                axisLabel: {
+                    formatter: "{value} "
+                },
+                splitLine: {
+                    lineStyle: {color:"#eee"}
+                }
+              }],
+                series: [{
+                    data: [{{ report.distribution.A }}, {{ report.distribution.B }}, {{ report.distribution.C }}, {{ report.distribution.D }}, {{ report.distribution.E }}, {{ report.distribution.F }}],
+                    type: "bar",
+                    color: ["#26c6da"],
+                }]
+            };
+
+            ratingsChartSector.setOption(option, true), $(function () {
+                function resize() {
+                    setTimeout(function () {
+                        ratingsChartSector.resize()
+                    }, 100);
+                }
+                $(window).on("resize", resize), $(".sidebartoggler").on("click", resize);
+            });
+            {% endif %}
+
+        var table = $('#tracked-companies').DataTable( {
+            processing: false,
+            serverSide: false,
+            searching: false,
+        dom: '<"top"lB>rt<"bottom"ip><"clear">',
+        buttons: [
+            {
+                extend: 'copy',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                    orthogonal: 'export'
+                }
+            },
+            {
+                extend: 'csv',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                    orthogonal: 'export'
+                },
+                customize: function (data) {
+                    var rows = data.split("\n");
+                    header = rows[0];
+                    cols = header.split(",");
+                    cols[0] = "Overall";
+                    cols[1] = "Email Security";
+                    cols[2] = "Web Security";
+                    cols[3] = "Infrastructure";
+                    cols[4] = "Company";
+                    cols[5] = "Sector";
+                    cols[6] = "Tags";
+                    cols[7] = "Date";
+                    header = cols.join(",");
+                    rows[0] = header
+                    return rows.join("\n");
+                }
+            },
+            {
+                extend: 'excel',
+                messageTop: 'Riskrate.me - Tracked Companies',
+                messageBottom: 'Generated by Riskrate.me - https://riskrate.me',
+                orientation: 'landscape',
+                pageSize: 'A4',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                    orthogonal: 'export'
+                }
+            },
+            {
+                extend: 'pdf',
+                messageTop: 'Riskrate.me - Tracked Companies',
+                messageBottom: 'Generated by Riskrate.me - https://riskrate.me',
+                orientation: 'landscape',
+                pageSize: 'A4',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                    orthogonal: 'export'
+                }
+            },
+            {
+                extend: 'print',
+                messageTop: 'Riskrate.me - Tracked Companies',
+                messageBottom: 'Generated by Riskrate.me - https://riskrate.me',
+                orientation: 'landscape',
+                pageSize: 'A4',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                    orthogonal: 'export'
+                }
+            }
+        ],
+        "columns": [
+            {
+                "data": "overall_rating",
+                "sort": "overall_rating",
+                "sClass": "tb-rating",
+                render: function ( data, type, row ) {
+                    return type === "display" || type === "filter" ?
+                    "<div class='round " + data + "'>" + data + "</div>": data;
+                }
+            },
+            {
+                "data": "email_security_score",
+                "sort": "email_security_score",
+                "sClass": "tb-cat",
+                render: function ( data, type, row ) {
+                    return type === "display" || type === "filter" ?
+                    "<span class='tb-seg" + data + "'><i class='mdi mdi-email'></i></span>" : data;
+                }
+            },
+            {
+                "data": "web_security_score",
+                "sort": "web_security_score",
+                "sClass": "tb-cat",
+                render: function ( data, type, row ) {
+                    return type === "display" || type === "filter" ?
+                    "<span class='tb-seg" + data + "'><i class='mdi mdi-lock'></i></span>" : data;
+                }
+            },
+            {
+                "data": "web_application_score",
+                "sort": "web_application_score",
+                "sClass": "tb-cat",
+                render: function ( data, type, row ) {
+                    return type === "display" || type === "filter" ?
+                    "<span class='tb-seg" + data + "'><i class='mdi mdi-web'></i></span>" : data;
+                }
+            },
+            {
+                "data": "infrastructure_score",
+                "sort": "infrastructure_score",
+                "sClass": "tb-cat",
+                 render: function ( data, type, row ) {
+                    return type === "display" || type === "filter" ?
+                    "<span class='tb-seg" + data + "'><i class='mdi mdi-server-security'></i></span>" : data;
+                }
+            },
+            {
+                "data": "company_name",
+                "sort": "company_name",
+                "searchable": true,
+                "sClass": "tb-name",
+                render: function ( data, type, full, meta ) {
+                     return type === "display" || type === "filter"
+                        ? "<h6><a href='/dashboard/report/" + full.domain + "'>" + full.domain + "</a></h6>" +
+                          "<small><a class='text-muted' href='/dashboard/report/" + full.domain + "'>" + full.company_name + "</a></small>"
+                        : full.domain;
+                }
+            },
+            {
+                "data": "company_tags",
+                "sClass": "tb-tags",
+                render: function ( data, type, row ) {
+                    var contents = "";
+                    $.each(data, function( index, value ) {
+                        contents += "<a href='/dashboard/tag/"+value+"'><span class='tag label label-light-tag'>" + value.trim() + "</span></a> ";
+                    });
+                    return contents;
+                }
+            },
+            {
+                "data": "updated",
+                "sort": "updated",
+                "sClass": "tb-data",
+                render: function ( data, type, row ) {
+                var dateSplit = data.split('T');
+                return type === "display" || type === "filter" ?
+                    dateSplit[0]  :
+                    data;
+                }
+            },
+            {
+                "data": "domain",
+                "sClass": "tb-actions",
+                "sortable": false,
+                render: function ( data, type, full, meta  ) {
+                    var contents;
+                    contents = "<a href='/dashboard/report/" + data + "'><i class='mdi mdi-binoculars'></i></a>   ";
+                    if (full.is_followed) {
+                        contents += "<a href='javascript:void(0)' data-toggle='tooltip' title='click here to Unfollow' class='unfollow'><i class='mdi mdi-radar text-success'></i></a>";
+                     } else {
+                        contents += "<a href='javascript:void(0)' data-toggle='tooltip' title='click here to follow' class='follow'><i class='mdi mdi-radar text-danger'></i></a>";
+                     }
+                    return contents;
+                }
+            }
+        ],
+    });
+
+    var data = $("#search-by-domain-form").serialize();
+    table.clear().draw();
+    $.get("{% url 'do-follow' %}", data, function(data) {
+
+    }).done(function(data) {
+        table.rows.add(data).draw();
+        $("#row-no-result").hide();
+        $("#row-search-results").show();
+    }).fail(function(data) {
+        $("#row-no-result").show();
+        $("#row-search-results").hide();
+    });
+
+    function followDomain(domain, row, callback) {
+        $.post("{% url 'do-follow' %}", {domain: domain, csrfmiddlewaretoken: '{{ csrf_token }}'}, function(response) {
+            if (callback) {
+                callback(row, true);
+            } else {
+                return true;
+            }
+        })
+        .fail(function(response) {
+            $("#modal-info-title").html("Unable to track this domain");
+            $("#modal-info-contents").html(response.responseJSON["message"]);
+            $("#modal-info").modal('toggle');
+            return false;
+        });
+    };
+
+    function unfollowDomain(domain, row, callback) {
+        $.post("{% url 'do-unfollow' %}", {domain: domain, csrfmiddlewaretoken: '{{ csrf_token }}'}, function(response) {
+            if (callback) {
+                callback(row, false);
+            } else {
+                return true;
+            }
+        })
+        .fail(function(response) {
+            $("#modal-info-title").html("Warning");
+            $("#modal-info-contents").html(response.responseJSON["message"]);
+            $("#modal-info").modal("toggle");
+            return false;
+        });
+    };
+    </script>
+{% endblock extra_js %}

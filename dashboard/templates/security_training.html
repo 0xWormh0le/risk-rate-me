@@ -1,0 +1,378 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block extra_css %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+{% endblock extra_css %}
+{% block extrajs %}{% endblock extrajs %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-12 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Cyber Security Awareness Training</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item ">Resources</li>
+            <li class="breadcrumb-item active">Awareness Training</li>
+        </ol>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+
+<div class="row m-b-30">
+    <div class="col-12">
+      <div class="card m-b-0">
+     <div class="row no-gutters">
+         <div class="col-md-4">
+             <div class="card-body bg-info h-100 p-r-0 text-center">
+                 <div class="p-t-30">
+                     <i class="mdi mdi-security fa-3x text-white p-t-30"></i>
+                     <h2 class="text-white font-weight-light">My Security <br><span class="font-bold">Action Plan</span>
+                     </h2>
+                 </div>
+                 <h2 class="text-white font-weight-light p-t-10">Step 4
+                 </h2>
+             </div>
+         </div>
+         <div class="col-md-8">
+             <div class="card-body p-0">
+                 <div class="message-box contact-box position-relative">
+                     <div class="message-widget contact-widget position-relative">
+                         <!-- Message -->
+                         <a href="{% url 'my-rating' %}" class="py-3 px-2 border-bottom d-block text-decoration-none">
+                             <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">1</span>
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Risk Report Remediation</h5> <span class="mail-desc font-12 d-block">Find and fix all issues to protect your organisation from common vulnerabilities </span>
+                             </div>
+                         </a>
+                         <!-- Message -->
+                         <a href="{% url 'internal_assessment' %}" class="py-3 px-2 border-bottom d-block text-decoration-none">
+                             <div class="user-img position-relative d-inline-block mr-3  ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">2</span>
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Security Self Assessment</h5> <span class="mail-desc font-12  d-block">Identify weaknesses and generate a remediation plan to ensure essential cybersecurity measures are in place. </span>
+                             </div>
+                         </a>
+                         <!-- Message -->
+                         <a href="{% url 'security_framework' %}" class="py-3 px-2 border-bottom d-block text-decoration-none">
+                             <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">3</span>
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Safeguard Your Assests </h5><span class="mail-desc font-12  d-block">Review, update, manage, develop policies and procedures to maintain your cyber security.</span>
+                             </div>
+                         </a>
+                         <!-- Message -->
+                         <a href="{% url 'security_training' %}" class="py-3 px-2 d-block text-decoration-none" style="background: #f2f4f8;">
+                             <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">4</span>
+
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Security Awareness Education</h5> <span class="mail-desc font-12  d-block">Take preventive action against cyber risks with the deployment of staff awareness training.</span>
+                             </div>
+                         </a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+
+    </div>
+</div>
+
+
+
+<div class="row el-element-overlay">
+   <div class="col-xl-6  m-b-30">
+        <div class="card h-100">
+            <div class="card-body">
+                <h4 class="card-title">Phishing Training</h4>
+                <h6 class="card-subtitle">Staff training is an essential part of a robust cyber security initiative.</h6>
+
+
+                <p><strong>Do your employees know how to spot a phishing email? Are you confident that your colleagues could spot one? Do you know the ways in which fraudsters target businesses through invoice scams, bogus boss emails and social engineering? </strong></p>
+
+<p>This interactive phishing simulation duplicates an email client. Users are presented with a series of emails and have to classify them as either "phishing" or "genuine". Copies of actual phishing emails are used to safely expose users to them in a safe and controlled environment. Each email is fully explained with all phishing identifiers highlighted.</p>
+<p>This lightweight, responsive application can be downloaded and hosted on your own network or intranet or downloaded for each individual user. It's an incredibly effective and very easy to deploy training solution, included in the starter pack.</p>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+       <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="/static/images/Inbox_Quiz.png" alt="user">
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="/static/images/Inbox_Quiz.png"><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="javascript:void(0);"><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+
+   <div class="col-xl-6  m-b-30">
+        <div class="card h-100">
+            <div class="card-body">
+                <h4 class="card-title">Phishing Training</h4>
+                <h6 class="card-subtitle">Staff training is an essential part of a robust cyber security initiative.</h6>
+
+
+                <p><strong>Do your employees know how to spot a phishing email? Are you confident that your colleagues could spot one? Do you know the ways in which fraudsters target businesses through invoice scams, bogus boss emails and social engineering? </strong></p>
+
+<p>This interactive phishing simulation duplicates an email client. Users are presented with a series of emails and have to classify them as either "phishing" or "genuine". Copies of actual phishing emails are used to safely expose users to them in a safe and controlled environment. Each email is fully explained with all phishing identifiers highlighted.</p>
+<p>This lightweight, responsive application can be downloaded and hosted on your own network or intranet or downloaded for each individual user. It's an incredibly effective and very easy to deploy training solution, included in the starter pack.</p>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row el-element-overlay">
+
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="/static/images/bite-sized-2020.jpg" alt="user">
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="/static/images/bite-sized-2020.jpg"><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="javascript:void(0);"><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+
+
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="/static/images/bite-sized-20203.jpg" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="/static/images/bite-sized-20203.jpg"><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="javascript:void(0);"><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="/static/images/bite-sized-20204.jpg" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="/static/images/bite-sized-20204.jpg"><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="javascript:void(0);"><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="/static/images/bite-sized-20205.jpg" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="/static/images/bite-sized-20205.jpg"><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="javascript:void(0);"><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="/static/images/bite-sized-20206.jpg" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="/static/images/bite-sized-20206.jpg"><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="javascript:void(0);"><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="/static/images/bite-sized-20207.jpg" alt="user">
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="/static/images/bite-sized-20207.jpg"><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="javascript:void(0);"><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+    <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="/static/images/bite-sized-20208.jpg" alt="user">
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="/static/images/bite-sized-20208.jpg"><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="javascript:void(0);"><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="/static/images/bite-sized-20209.jpg" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="/static/images/bite-sized-20209.jpg"><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="javascript:void(0);"><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="/static/images/bite-sized-202010.jpg" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="/static/images/bite-sized-202010.jpg"><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="javascript:void(0);"><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="/static/images/bite-sized-202011.jpg" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="/static/images/bite-sized-202011.jpg"><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="javascript:void(0);"><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="/static/images/bite-sized-202012.jpg" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="/static/images/bite-sized-202012.jpg"><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="javascript:void(0);"><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+    <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="/static/images/bite-sized-20202.jpg" alt="user">
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="/static/images/bite-sized-20202.jpg"><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="javascript:void(0);"><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card-deck">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">InfoSec Awareness & Training Program
+                    </h4>
+                    <label class="badge badge-pill badge-primary py-1 px-2">protect</label>
+                    <p class="p-t-30">This document describes the structure of an Information and Security Awareness programme for a small to medium sized business.
+                    </p>
+                    <p>The policy outlines the need to create and maintain an ongoing Information Security Awareness Programme to help inform employees, vendors, service providers, and other individuals using Company Information Systems, about cybersecurity threats and how to prevent or avoid them, as well as what to do in the case of a cybersecurity incident. </p>
+                </div>
+                <div class="card-footer"><a href="#" class="btn btn-secondary" data-toggle="tooltip" title="" data-original-title="Download policy (docx)"><span class="btn-label"><i class="mdi mdi-download"></i></span> Download</a> </div>
+            </div>
+            <div class="card blog-widget">
+                <div class="card-body">
+                    <div class="blog-image"><img src="{% static 'images/info-sec.jpg' %}" alt="Employee Cyber Security Training" class="img-fluid"></div>
+                    <h3>Employee Cyber Security Training</h3>
+
+                    <p class="my-3">
+                        Over 90 per cent of cyber-related incidents are caused not by a lack of basic IT measures, but because of user interaction. Despite sophisticated IT security defenses, one weak link – employees – remains a major vulnerability for organisations of all sizes.
+                    </p>
+                    <div class="d-flex align-items-center">
+                        <div class="read"><a href="{% url 'security_training_LMS' %}" class="link font-medium">Read
+                                More</a></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card blog-widget">
+                <div class="card-body">
+                    <div class="blog-image"><img src="{% static 'images/phishing.jpg' %}" alt="img" class="img-fluid"></div>
+                    <h3>Total Phishing Defence</h3>
+
+                    <p class="my-3">
+                        Phishing simulations are a "hands on training" exercise that allow email users to safely experience how phishing attacks occur. They learn the techniques used in these social engineering scams and how to identifiy them. In doing so they become your frontline of defence.
+                    </p>
+                    <div class="d-flex align-items-center">
+                        <div class="read"><a href="{% url 'security_phishing' %}" class="link font-medium">Read
+                                More</a></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
+<!-- #location:dashboard/policies-email-usage -->
+{% endblock page_content %}
+{% block extra_js %}
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/jquery.magnific-popup-init.js' %}"></script>
+
+{% endblock extra_js %}

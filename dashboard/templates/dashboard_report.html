@@ -1,0 +1,274 @@
+{% extends "private/base.html" %}
+{% load static %}
+
+{% block header_extra_js %}{% endblock header_extra_js %}
+
+
+{% block page_content %}
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Domain Report</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="javascript:void(0)">Report</a>
+            </li>
+            <li class="breadcrumb-item active">
+                {% if report and report.domain.company %}
+                {{ report.domain.company.name }}
+                {% else %}
+                {{ domain }}
+                {% endif %}
+            </li>
+        </ol>
+    </div>
+</div>
+
+{%if report is None %}
+<h1 class="text-center mt-5 text-secondary">No Report for {{ domain }}</h1>
+{% else %}
+<div class="row">
+    <div class="col-lg-8 m-b-30">
+        <div class="card h-100 p-t-30">
+            <div class="card-body text-center">
+
+                {% if not report.domain.company %}
+                 <h2 class="card-subtitle m-t-10">
+                    <i class="fas fa-globe m-r-5"></i>
+                    <a href='http://{{ report.domain }}'> {{ report.domain }}</a>
+                </h2>
+                {% endif %}
+
+                {% if report.domain.company %}
+                <h2 class="card-title m-t-20"><i class="far fa-building m-r-10"></i> {{ report.domain.company.name }}</h2>
+                <h4 class="card-subtitle m-t-10">
+                    <i class="fas fa-globe m-r-5"></i>
+                    <a href='http://{{ report.domain }}'> {{ report.domain }}</a>
+                </h4>
+
+                {% if report.domain.company.sector %}
+                <span class="label label-light-sector m-x-5">
+                    {{ report.domain.company.sector.name }}
+                </span>
+                {% else %}
+                <a href="javascript:void();" data-toggle="modal" data-target="#company-info">
+                    <small><strong>+</strong> Add Sector</small>
+                </a>
+                {% endif %}
+
+
+                {% else %}
+                <a href="javascript:void();" data-toggle="modal" data-target="#company-info">
+                    <small><strong>+</strong> Add Company</small>
+                </a>
+                {% endif %}
+                {% if followed %}
+
+                {% for tag in domain_profile.tags_as_list %}
+                <a href='{% url "tag-info" tag=tag %}' class="label label-light-tag m-r-5" id="btn-load-tag"> {{ tag }}</a>
+                {% endfor %}
+                <a href="javascript:void();" class="add-tags m-l-5" data-toggle="modal" data-target="#company-info">
+                    <small><strong>+</strong> Add Tags</small>
+                </a>
+
+                {% endif %}
+
+                {% if report %}
+                <h6 class="card-subtitle m-t-20"> <i class="far fa-calendar-alt"></i> {{ report.generated_on }}</h6>
+                {% endif %}
+
+                {% if user.profile.can_track_companies %}
+                <button class="btn {{ followed|yesno:'btn-danger followed,btn-success' }} m-t-10" type="button" id="btn-toggle-follow-domain">
+                    <span class="btn-label"><i class="fas fa-save"></i></span>
+                    <span class="btn-follow-content">
+                        {% if followed %}
+                        Unfollow
+                        {% else %}
+                        Follow
+                        {% endif %}
+                    </span>
+                </button>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 m-b-30">
+        {% if report %}
+        {% include "private/_ratings_actions.html" %}
+        {% else %}
+        <div class="card h-100 text-center">
+            <div class="m-t-40"> no data available</div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% if report %}
+<div class="row">
+    <div class="col-lg-6 m-b-30">
+        {% include "private/_ratings_gauge.html" %}
+    </div>
+    <div class="col-lg-6 m-b-30">
+        {% include "private/_ratings_categories.html" %}
+    </div>
+</div>
+{% endif %}
+
+{% include "private/_domain_report.html" %}
+
+{% include "private/_legend.html" %}
+
+{% include "private/_ads_training.html" %}
+
+<!-- Company Edit Modal -->
+
+{% include "private/_company_info.html" %}
+
+
+
+<!-- #location:my-rating -->
+{% endif %}
+{% endblock page_content %}
+
+{% block extra_js %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.min.js"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-tagsinput.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        {% if report %}
+        var g = echarts.init(document.getElementById("overall-rating-gage"));
+        var option = {
+            tooltip: {
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+            toolbox: {
+                show: false
+            },
+            series: [
+                {
+                name: "Rating",
+                type: "gauge",
+                detail: {
+                    formatter: function customValue(value) {
+                        if (value < 0) {
+                            return "N/A";
+                        } else {
+                            return "{{ report.overall_rating }}";
+                        }
+                    },
+                    fontSize: 80,
+                    fontWeight: "900",
+                    fontFamily: "Poppins, sans-serif",
+                    offsetCenter: [0, "100%"]
+                },
+                data: [{
+                    value:
+                        {{report.overall_score}}* 100,
+                    name: "RATING"
+                }],
+                itemStyle: {
+                    color: "#000"
+                },
+                title: {
+                    offsetCenter: [0, "40%"],
+                    fontSize: 10,
+                    color: "#99abb4",
+                    fontWeight: "lighter"
+                },
+                splitNumber: 8,
+                axisLine: {
+                    lineStyle: {
+                        color: [
+                            [0.375, "#ff3728"],
+                            [0.75, "#ffb22b"],
+                            [1, "#a1bc2b"]
+                        ],
+                        width: 30
+                    }
+                },
+                splitLine: {
+                    show: true,
+                    lineStyle: {
+                        width: 3,
+                        color: "#fff"
+                    }
+                },
+                axisLabel: false,
+                axisTick: false,
+                pointer: {
+                    length: "90%",
+                },
+
+            }]
+        };
+
+        g.setOption(option, true), $(function() {
+            function resize() {
+                setTimeout(function() {
+                    g.resize();
+                }, 100)
+            }
+            $(window).on("resize", resize), $(".sidebartoggler").on("click", resize);
+        });
+
+         {% endif %}
+
+
+            {% if form_company %}
+
+        $("#company-info #id_name").select2({
+            tags: true,
+            placeholder: 'Choose or enter new company name'
+        }).on("change", function(e) {
+            var existing_company = $(this).select2("data")[0].selected
+            $("#company-info #id_sector").prop("disabled", existing_company).val("");
+        }).on('select2:open', function(e) {
+            $('.select2-search__field').attr('placeholder', 'Choose or enter new company name');
+        });
+
+        $("#btn-toggle-follow-domain").click(function(e) {
+            const followed = $(this).hasClass('followed')
+            $.post(followed ? "{% url 'do-unfollow' %}" : "{% url 'do-follow' %}", {
+                domain: "{{ domain }}",
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            }, function(data) {}).done(function(data) {
+                $("#company-info").modal('hide');
+                location.reload();
+            }).fail(function(data) {
+                console.log(data)
+            })
+        })
+
+        $("#btn-update-company").click(function(event) {
+            event.preventDefault();
+            let data = {};
+            $("#form-update-domain").serializeArray().forEach(function(v) {
+                data[v.name] = v.value
+            })
+
+            existing_company = $("#company-info #id_name").select2("data")[0].selected;
+            data['existing_company'] = existing_company;
+
+            if (existing_company && !Number(data.name)) {
+                // alert('Company is required')
+                // return
+            }
+
+            $.post("{% url 'update-domain-info' %}", data, function(data) {}).done(function(data) {
+                console.log(data);
+                $("#company-info").modal('hide');
+                location.reload();
+            }).fail(function(data) {
+                console.log(data);
+                alert("Cannot update company data!");
+            });
+        });
+            {% endif %}
+
+    });
+
+</script>
+{% endblock extra_js %}

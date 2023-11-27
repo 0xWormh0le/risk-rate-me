@@ -1,0 +1,150 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-12 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Phihsing Awareness Training</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item ">Resources</li>
+            <li class="breadcrumb-item active">Phihsing Awareness Training</li>
+        </ol>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+
+
+<div class="row m-b-30">
+    <div class="col-12">
+        <div class="card m-b-0">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <div class="card-body bg-info h-100 p-r-0 text-center">
+                        <div class="p-t-30">
+                            <i class="mdi mdi-security fa-3x text-white p-t-30"></i>
+                            <h2 class="text-white font-weight-light">My Security <br><span class="font-bold">Action Plan</span>
+                            </h2>
+                        </div>
+                        <h2 class="text-white font-weight-light p-t-10">Step 4
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body p-0">
+                        <div class="message-box contact-box position-relative">
+                            <div class="message-widget contact-widget position-relative">
+                                <!-- Message -->
+                                <a href="{% url 'my-rating' %}" class="py-3 px-2 border-bottom d-block text-decoration-none">
+                                    <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">1</span>
+                                    </div>
+                                    <div class="mail-contnet d-inline-block align-middle">
+                                        <h5 class="my-1">Risk Report Remediation</h5> <span class="mail-desc font-12 d-block">Find and fix all issues to protect your organisation from common vulnerabilities </span>
+                                    </div>
+                                </a>
+                                <!-- Message -->
+                                <a href="{% url 'internal_assessment' %}" class="py-3 px-2 border-bottom d-block text-decoration-none">
+                                    <div class="user-img position-relative d-inline-block mr-3  ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">2</span>
+                                    </div>
+                                    <div class="mail-contnet d-inline-block align-middle">
+                                        <h5 class="my-1">Security Self Assessment</h5> <span class="mail-desc font-12  d-block">Identify weaknesses and generate a remediation plan to ensure essential cybersecurity measures are in place. </span>
+                                    </div>
+                                </a>
+                                <!-- Message -->
+                                <a href="{% url 'security_framework' %}" class="py-3 px-2 border-bottom d-block text-decoration-none">
+                                    <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">3</span>
+                                    </div>
+                                    <div class="mail-contnet d-inline-block align-middle">
+                                        <h5 class="my-1">Safeguard Your Assests </h5><span class="mail-desc font-12  d-block">Review, update, manage, develop policies and procedures to maintain your cyber security.</span>
+                                    </div>
+                                </a>
+                                <!-- Message -->
+                                <a href="{% url 'security_training' %}" class="py-3 px-2 d-block text-decoration-none" style="background: #f2f4f8;">
+                                    <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">4</span>
+
+                                    </div>
+                                    <div class="mail-contnet d-inline-block align-middle">
+                                        <h5 class="my-1">Security Awareness Education</h5> <span class="mail-desc font-12  d-block">Take preventive action against cyber risks with the deployment of staff awareness training.</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row  el-element-overlay">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">Phishing Awareness Training</h4>
+                <h6 class="card-subtitle">Phishing Simulation - Inbox Email Quiz. </h6>
+
+                <div class="row">
+                    <div class="col-lg-6">
+
+                        <p class="p-t-10"><strong>
+                            More than two thirds of organisations do not comply with Email Security Best Practices. It is no surprise then that over 91% of successful cyber attacks start with a simple phishing email.
+                        </strong></p>
+                        <p>
+                        This interactive phishing simulation duplicates an email client. Users are presented with a series of emails and have to classify them as either "phishing" or "genuine". Copies of actual phishing emails are used to safely expose users to them in a safe and controlled environment. Each email is fully explained with all phishing identifiers highlighted.</p>
+                <p>
+                    This lightweight, responsive application can be downloaded and hosted on your own network or intranet. It's an incredibly effective and very easy to deploy training solution. </p>
+<div class="text-center">
+
+                    </div></div>
+                    <div class="col-lg-6">
+
+                <img src="/static/images/Inbox_Quiz.png" width="100%" class="shadow" alt="Phihisng Simulation">
+
+</div></div>
+
+
+
+            </div>
+            <div class="card-footer text-center">
+                <button class="btn btn-info waves-effect waves-light m-r-10" type="button"><span class="btn-label"><i class="mdi mdi-magnify"></i></span>Demo</button>
+                   <button class="btn btn-info waves-effect waves-light" type="button"><span class="btn-label"><i class="mdi mdi-download"></i></span>Download</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">Phishing Defence Training</h4>
+                <h6 class="card-subtitle">Total Phishing Defence.Prevent Incidents, Protect Assets. </h6>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- End Page Content -->
+<!-- ============================================================== -->
+<!-- #location:dashboard/resources-security-framework -->
+{% endblock page_content %}
+{% block extra_js %}
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/jquery.magnific-popup-init.js' %}"></script>
+{% endblock extra_js %}

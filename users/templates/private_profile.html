@@ -1,0 +1,251 @@
+{% extends "private/base.html" %}
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Profile</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">My Profile</a></li>
+        </ol>
+    </div>
+</div>
+<!-- Row -->
+<div class="row">
+    <!-- Column -->
+    <div class="col-lg-12">
+        <div class="card">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs customtab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#user" role="tab" aria-controls="security" aria-selected="true">User Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#security" role="tab" aria-controls="account" aria-selected="false">Account Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#company" role="tab" aria-controls="company" aria-selected="false">Company Details</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="user" role="tabpanel">
+                  <div class="card-body">
+                    <form id="form-update-profile" action="{% url 'update-profile-user' %}" method="post">
+                      {% csrf_token %}
+                      <div class="form-group row">
+                        <label class="col-4">{{ form_user.first_name.label }}</label>
+                        <div class="col-8">
+                          {% render_field form_user.first_name class="form-control" value=request.user.first_name %}
+                        </div>
+                        <div>
+                          {{ form_user.first_name.errors }}
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4">{{ form_user.last_name.label }}</label>
+                        <div class="col-8">
+                          {% render_field form_user.last_name class="form-control" %}
+                        </div>
+                        <div>
+                          {{ form_user.last_name.errors }}
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4">{{ form_user.email.label }}</label>
+                        <div class="col-8">
+                          {% render_field form_user.email class="form-control" %}
+                        </div>
+                        <div>
+                          {{ form_user.email.errors }}
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-sm-12">
+                              <button id="update-profile" class="btn btn-success pull-right">Update Information</button>
+                          </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="tab-pane" id="security" role="tabpanel">
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col-2">
+                            Current plan : {{ plan.nickname }}
+                          </div>
+                          <div class="col-2">
+                            {% if plan.id == "plan_free01" %}
+                                <a class="btn btn-success pull-right" href="{% url 'subscribe' %}">Upgrade Plan</a>
+                            {% endif %}
+                          </div>
+                          <div class="col-8"></div>
+                      </div>
+
+                    <hr/>
+                    <form id="form-update-password" method="post">
+                      {% csrf_token %}
+                      <div class="form-group row">
+                        <label class="col-4">{{ form_password.old_password.label }}</label>
+                        <div class="col-8">
+                          {% render_field form_password.old_password class="form-control" %}
+                        </div>
+                        <div class="form-validate-errors">
+                          <ul id="errors-old-password"></ul>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4">{{ form_password.new_password1.label }}</label>
+                        <div class="col-8">
+                          {% render_field form_password.new_password1 class="form-control" %}
+                        </div>
+                        <div class="form-validate-errors">
+                          <ul id="errors-new-password1"></ul>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4">{{ form_password.new_password2.label }}</label>
+                        <div class="col-8">
+                          {% render_field form_password.new_password2 class="form-control" %}
+                        </div>
+                        <div class="form-validate-errors">
+                          <ul id="errors-new-password2"></ul>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="update-password-state">
+
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-sm-12">
+                              <button id="update-password" class="btn btn-success pull-right">Update Account</button>
+                          </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="tab-pane" id="company" role="tabpanel">
+                  <div class="card-body">
+                    <form id="form-update-company" action="{% url 'update-profile-company' %}" method="post">
+                      {% csrf_token %}
+                      <div class="form-group row">
+                        <label class="col-4">{{ form_company.name.label }}</label>
+                        <div class="col-8">
+                          {% render_field form_company.name class="form-control" %}
+                        </div>
+                        <div>
+                          {{ form_company.company_name.errors }}
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4">{{ form_company.website.label }}</label>
+                        <div class="col-8">
+                          {% if user.profile.on_trial_or_free_account %}
+                            {% render_field form_company.website class="form-control" value=request.user.profile.company.website disabled="disabled" %}
+                          {% else %}
+                            {% render_field form_company.website class="form-control" value=request.user.profile.company.website %}
+                          {% endif %}
+                        </div>
+                        <div>
+                          {{ form_company.website.errors }}
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4">{{ form_company.sector.label }}</label>
+                        <div class="col-8">
+                          {% render_field form_company.sector class="form-control" value=request.user.profile.company.sector.code %}
+                        </div>
+                        <div>
+                          {{ form_company.sector.errors }}
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4">{{ form_company.city.label }}</label>
+                        <div class="col-8">
+                          {% render_field form_company.city class="form-control" value=request.user.profile.company.city %}
+                        </div>
+                        <div>
+                          {{ form_company.city.errors }}
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4">{{ form_company.region.label }}</label>
+                        <div class="col-8">
+                          {% render_field form_company.region class="form-control" value=request.user.profile.company.region %}
+                        </div>
+                        <div>
+                          {{ form_company.region.errors }}
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4">{{ form_company.country.label }}</label>
+                        <div class="col-8">
+                          {% render_field form_company.country class="form-control" value=request.user.profile.company.country.code %}
+                        </div>
+                        <div>
+                          {{ form_company.country.errors }}
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-sm-12">
+                              <button class="btn btn-success pull-right" id="update-company">Update Company</button>
+                          </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #location:dashboard/my-profile -->
+{% endblock page_content %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $("#form-update-password").submit(function(event) {
+                event.preventDefault();
+                data = $("#form-update-password").serialize();
+                console.log(data);
+                $.post("{% url 'update-password' %}", data=data, function(data) {
+                    $("#errors-old-password").html("")
+                    $("#errors-new-password1").html("")
+                    $("#errors-new-password2").html("")
+                    $("#update-password-state").html("Saved!");
+                })
+                .done(function(response) {
+                    $("#errors-old-password").html("")
+                    $("#errors-new-password1").html("")
+                    $("#errors-new-password2").html("")
+                    $("#update-password-state").html("Saved!");
+                })
+                .fail(function(response) {
+                    var response = response.responseJSON;
+                    $("#errors-old-password").html("")
+                    $("#errors-new-password1").html("")
+                    $("#errors-new-password2").html("")
+                    $.each(response.errors.old_password, function(i, val) {
+                        $("#errors-old-password").append("<li>" + val + "</li>");
+                    });
+
+                    $.each(response.errors.new_password1, function(i, val) {
+                        $("#errors-new-password1").append("<li>" + val + "</li>");
+                    });
+
+                    $.each(response.errors.new_password2, function(i, val) {
+                        $("#errors-new-password2").append("<li>" + val + "</li>");
+                    });
+                });
+
+            });
+        });
+    </script>
+{% endblock extra_js %}

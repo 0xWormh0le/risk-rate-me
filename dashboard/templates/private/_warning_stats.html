@@ -1,0 +1,90 @@
+{% if report and report.count > 0 %}
+<!-- #component:dashboard/unsecure-stats:start -->
+<div class="row">
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>
+                            <i class="mdi mdi-email-outline"></i> {{ report.p_vuln_email|floatformat }}%
+                        </h3>
+                        <h6 class="card-subtitle">Vulnerable to Email Fraud</h6>
+                    </div>
+                    <div class="col-12">
+                        <div class="progress">
+                            <div class="progress-bar bg-danger" role="progressbar"
+                                 style="width: {{ report.p_vuln_email }}%; height: 6px;"
+                                 aria-valuenow='{{ report.p_vuln_email }}' aria-valuemin="0"
+                                 aria-valuemax='{{ report.count }}'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <h3><i class="mdi mdi-lock"></i> {{ report.p_vuln_websec|floatformat }}%</h3>
+                        <h6 class="card-subtitle">Insecure Sites</h6></div>
+                    <div class="col-12">
+                        <div class="progress">
+                            <div class="progress-bar bg-danger" role="progressbar"
+                                 style="width: {{ report.p_vuln_websec }}%; height: 6px;"
+                                 aria-valuenow='{{ report.p_vuln_websec }}' aria-valuemin="0"
+                                 aria-valuemax='{{ report.count }}'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <h3><i class="mdi mdi-web"></i> {{ report.p_vuln_webapp|floatformat }}%</h3>
+                        <h6 class="card-subtitle">Vulnerable Sites</h6></div>
+                    <div class="col-12">
+                        <div class="progress">
+                            <div class="progress-bar bg-danger" role="progressbar"
+                                 style="width: {{ report.p_vuln_webapp }}%; height: 6px;"
+                                 aria-valuenow='{{ report.p_vuln_webapp }}' aria-valuemin="0"
+                                 aria-valuemax='{{ report.count }}'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>
+                            <i class="mdi mdi-server-security"></i> {{ report.p_vuln_trust|floatformat }}%
+                        </h3>
+                        <h6 class="card-subtitle">Compromised or Vulnerable Hosts</h6>
+                    </div>
+                    <div class="col-12">
+                        <div class="progress">
+                            <div class="progress-bar bg-danger" role="progressbar"
+                                 style="width: {{ report.p_vuln_trust }}%; height: 6px;"
+                                 aria-valuenow="{{ report.p_vuln_trust }}" aria-valuemin="0" aria-valuemax='{{ report.count }}'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #component:dashboard/unsecure-stats:end -->
+{% endif %}

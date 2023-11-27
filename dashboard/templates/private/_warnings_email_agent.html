@@ -1,0 +1,12 @@
+{% if user.profile.on_trial_or_free_account %}
+    {% if report and report.email_security_score < 3 %}
+    <div class="alert alert-warning m-b-30  text-center">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <h3 class="text-warning">
+            <i class="fa fa-exclamation-triangle"></i>
+        </h3> Your email domain is not fully protected from phishing and scams such as CEO &amp; Invoice Fraud.
+    </div>
+    {% endif %}
+{% endif %}

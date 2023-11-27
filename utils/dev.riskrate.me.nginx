@@ -1,0 +1,27 @@
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name dev.riskrate.me;
+
+    return 302 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    include snippets/self-signed.conf;
+    include snippets/ssl-params.conf;
+
+    server_name dev.riskrate.me;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/riskrateme/riskrate.me;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;
+    }
+}

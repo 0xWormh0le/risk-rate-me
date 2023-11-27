@@ -1,0 +1,29 @@
+{% extends "public/base_login.html" %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load static %}
+{% load widget_tweaks %}
+{% block extra_css %}
+<link href="{% static 'css/public/registration.css' %}" rel="stylesheet" type="text/css">
+{% endblock extra_css %}
+
+{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+
+{% block page_content %}
+   <section class="login-register">
+    <div class="login-box card shadow">
+
+            <div class="card-header">
+                <h5 >Verify Your E-mail Address</h5>
+        </div>
+                <div class="card-body">
+                   <p>We have sent an e-mail to you for verification.<br/>
+                    Follow the link provided to finalise the signup process.
+                       Please <a href="{% url 'contact' %}" >contact us</a> if you do not receive it within a few minutes.</p>
+        </div>
+            </div>
+
+
+</section>
+
+{% endblock %}

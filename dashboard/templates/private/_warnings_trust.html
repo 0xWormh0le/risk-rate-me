@@ -1,0 +1,23 @@
+{% if user.profile.on_trial_or_free_account %}
+    {% if report and report.is_blacklisted %}
+    <div class="alert alert-danger m-b-30 text-center">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <h3 class="text-danger">
+            <i class="fa fa-exclamation-triangle"></i> Warning</h3> Your server has been identified as
+        potentially malicious or dangerous and could be compromised.
+    </div>
+    {% endif %}
+
+    {% if report and report.has_vulnerabilities %}
+    <div class="alert alert-warning  m-b-30  text-center">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <h3 class="text-warning">
+            <i class="fa fa-exclamation-triangle"></i> Warning
+        </h3> Your server has potential vulnerabilites
+    </div>
+    {% endif %}
+{% endif %}

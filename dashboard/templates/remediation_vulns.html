@@ -1,0 +1,58 @@
+{% extends "private/base.html" %}
+
+{% block extrajs %}{% endblock extrajs %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb  -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">CVE Vulnerabilities</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Remediations</a></li>
+            <li class="breadcrumb-item active">CVE Vulnerabilities </li>
+        </ol>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="entry-content article-content">
+                            <h3>CVE Vulnerabilities </h3>
+                            <p>CVE Vulnerabilites are identified by passive fingerprinitng of server software and version. The vulnerabilities are implied based on the software and version. This is a passive test and so the server may not be impacted by all of the issues detected. </p>
+
+                            <p>CVE stands for Common Vulnerabilities and Exposures. It is a program launched in 1999 by MITRE, a nonprofit that operates research and development centers sponsored by the federal government, to identify and catalog vulnerabilities in software or firmware into a free “dictionary” for organizations to improve their security.</p>
+                            <p>The dictionary’s main purpose is to standardize the way each known vulnerability or exposure is identified. Standard IDs allow security administrators to access technical information about a specific threat across multiple CVE-compatible information sources.</p>
+
+                            <h3>What is a vulnerability in computer security?</h3>
+
+                            <p>A vulnerability is a mistake in software code that provides an attacker with direct access to a system or network. It could allow an attacker to pose as a super-user or system administrator with full access privileges.</p>
+
+                            <h3>CVE Remediation</h3>
+
+                            <p><a href="https://nvd.nist.gov/">The US National Vulnerability Database (NVD)</a> includes a fix, scoring, and other information for identifiers on the CVE List. We provide a direct link to the corresponding CVE listing for each vulnerability identified. </p>
+
+                            <h3>ACTIVE Vulnerability Scan</h3>
+
+                            <p>We can provide an ACTIVE vulnerability scan performing over 6000 tests against a website. This service can be used to test a Web Site, Virtual Host and Web Server for known security vulnerabilities and mis-configurations. </p>
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+              {% include "private/_full_scan.html" %}
+        </div>
+</div>
+<!-- #location:dashboard/remediation-vulnerabilities -->
+{% endblock page_content %}

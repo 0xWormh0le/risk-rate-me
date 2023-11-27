@@ -1,0 +1,253 @@
+{% extends "private/base.html" %}
+{% block extra_css %}
+<link type="text/css" rel="stylesheet" href="/static/css/members/css-charts.css">
+<link type="text/css" rel="stylesheet" href="/static/css/members/icheck/square/orange.css">
+{% endblock extra_css %}
+{% block header_extra_js %}
+
+{% endblock header_extra_js %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Internal Controls Assessment</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Resources</a></li>
+            <li class="breadcrumb-item active">Internal Controls Assessment Template</li>
+        </ol>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+
+
+<div class="row m-b-30">
+    <div class="col-12">
+        {% include "private/_action_plan_ia.html" %}
+    </div>
+</div>
+
+<form action="{% url 'do_internal_assessment' %}" method="post">
+    {% csrf_token %}
+
+    <input type="hidden" name="type" value="{{ assessment_type }}" />
+
+    <div class="row">
+        <div class="col-lg-6 m-b-30">
+            <div class="card mb-0 h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div class="mb-4">
+                    {% if assessment_type == 'nist' %}
+                        <h4 class="card-title">Internal Security Controls Assessment</h4>
+                        <h6 class="card-subtitle m-b-40">
+                            Cybersecurity best practices for ensuring information asset confidentiality, integrity and availability
+                        </h6>
+
+                        <p>NIST’s Cybersecurity Framework consists of standards, guidelines, and practices to promote the protection of critical infrastructure. The prioritized, flexible, repeatable, and cost-effective approach of the Framework helps owners and operators of critical infrastructure to manage cybersecurity-related risk. It is one of the most widely adopted security frameworks across the globe.</p>
+
+                        <p>
+                          The framework establishes five core functions, which are proscriptive, proactive or reactive in nature: Identify, Protect, Detect, Respond and Recover.
+                        </p>
+                        <p>
+                            This assessment is based on the official NIST guidance and has been tailored to meet the needs of small companies so they can identify, assess and manage cybersecurity risks.
+                        </p>
+                       <small><strong> This tool is to be used only for guidance and does not imply approval by NIST and cannot be used to demonstrate NIST compliance.</strong></small>
+                    {% else %}
+                        <h4 class="card-title">Cyber Essential Assessment</h4>
+                        <h6 class="card-subtitle m-b-40">
+                            Cyber Essential
+                        </h6>
+                      <p>The Cyber Essentials scheme was developed by the National Cyber Security Centre (UK) to show organisations how to protect themselves against low-level “commodity threats.” It lists five technical controls (access control; boundary firewalls and Internet gateways; malware protection; patch management and secure configuration) that organisations should have in place.</p>
+                       <p>The vast majority of cyber attacks use relatively simple methods which exploit basic vulnerabilities in software and computer systems. There are tools and techniques openly available on the Internet which enable even low-skill actors to exploit these vulnerabilities. Properly implementing the Cyber Essentials scheme will protect against the vast majority of common internet threats.</p>
+
+                           <p>This short assessment identifies the implementation of the five technical controls and provides an action plan to remediate any issues</p>
+
+                        <small><strong> This tool is to be used only for guidance and does not imply approval by Cyber Essentials and cannot be used to demonstrate Cyber Essentials  compliance.</strong></small>
+
+                    {% endif %}
+                    </div>
+                    <div>
+                    {% if result %}
+                        {% if assessment_type == 'nist' %}
+                        <a href="{% url 'nist_assessment' %}" class="btn btn-info btn-block mt-3 assess-submit mx-auto">Retake Assessment</a>
+                        {% else %}
+                        <a href="{% url 'cyber_essentials_assessment' %}" class="btn btn-info btn-block mt-3 assess-submit mx-auto">Retake Assessment</a>
+                        {% endif %}
+                    {% else %}
+                        {% if has_result %}
+                            {% if assessment_type == 'nist' %}
+                                <a href="{% url 'nist_assessment_result' %}" class="btn btn-info btn-block mt-3 assess-submit mx-auto">View Result</a>
+                            {% else %}
+                                <a href="{% url 'cyber_essentials_assessment_result' %}" class="btn btn-info btn-block mt-3 assess-submit mx-auto">View Result</a>
+                            {% endif %}
+                        {% endif %}
+                        <button class="btn btn-info btn-block mt-3 assess-submit mx-auto">Submit</button>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 m-b-30">
+            <div class="card mb-0 h-100">
+                <div class="card-body d-flex flex-column">
+                {% if assessment_type == 'nist' %}
+                    <h4 class="text-center p-b-30">Assessment Score</h4>
+                {% else %}
+                    <h4 class="text-center  p-b-30">Assessment Score</h4>
+                {% endif %}
+                    <div class="position-relative my-auto p-3 text-center">
+                       {% if assessment_type == 'nist' %}
+                        <img src="/static/images/nist{{ nist_score|yesno:'.svg,-blank.svg' }}" class="assessment-img" />
+                        {% else %}
+                        <img src="/static/images/essentials{{ cyber_score|yesno:'.svg,-blank.svg' }}" class="assessment-img" />
+                        {% endif %}
+                        <span class="position-absolute text-muted display-3 m-auto assessment-score">
+                            <strong>{{ score }}%</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            {% for topic in topics %}
+            <div class="card expand-card m-b-10">
+                <a href="javasript:void();" data-toggle="collapse" data-target="#topic-{{ topic.0.id }}" aria-expanded="false" class="topic-{{ topic.0.id }}">
+                    <div class="card-header d-flex">
+                        <div class="m-r-20 align-self-center">
+                            <span class="round text-white d-inline-block text-center rounded-circle">
+                                <i class="mdi {{ topic.2 }} fa-2x"></i>
+                            </span>
+                        </div>
+                        <div {% if not topic.0.description %}class="d-flex align-items-center"{% endif %}>
+                            <h4 class="card-title my-0">{{ topic.0.name }}</h4>
+                        {% if topic.0.description %}
+                            <h6 class="card-subtitle my-2">{{ topic.0.description }}</h6>
+                        {% endif %}
+                        </div>
+                    </div>
+                </a>
+                <div id="topic-{{ topic.0.id }}" class="collapse p-30" aria-labelledby="heading3">
+                    <table class="custom table">
+                        <tbody>
+                        {% if result %}
+                            {% for question in topic.1 %}
+                                {% if question.0.recommendation %}
+                                <tr>
+                                    <td>
+                                        {{ question.0.recommendation|safe }}
+                                    </td>
+                                </tr>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            {% for question in topic.1 %}
+                            <tr>
+                                <td>{{ forloop.counter }}.</td>
+                                <td>
+                                    <p>{{ question.0.content }}</p>
+                                    <ul class="icheck-list">
+                                        {% if question.0.multiple %}
+                                        {% for answer in question.1 %}
+                                        <li>
+                                            <input type="checkbox" id="ans-{{ answer.id }}" name="q-{{ question.0.id }}[]" value="{{ answer.id }}" {{ answer.checked|yesno:"checked," }}>
+                                            <label for="ans-{{ answer.id }}">{{ answer.content }}</label>
+                                        </li>
+                                        {% endfor %}
+                                        {% else %}
+                                        {% for answer in question.1 %}
+                                        <li>
+                                            <input type="radio" id="ans-{{ answer.id }}" name="q-{{ question.0.id }}" value="{{ answer.id }}" {{ answer.checked|yesno:"checked," }}>
+                                            <label for="ans-{{ answer.id }}">{{ answer.content }}</label>
+                                        </li>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </ul>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div>
+    {% if result %}
+        {% if assessment_type == 'nist' %}
+        <a href="{% url 'nist_assessment' %}" class="btn btn-info btn-block mt-3 assess-submit mx-auto">Retake Assessment</a>
+        {% else %}
+        <a href="{% url 'cyber_essentials_assessment' %}" class="btn btn-info btn-block mt-3 assess-submit mx-auto">Retake Assessment</a>
+        {% endif %}
+    {% else %}
+        <button class="btn btn-info btn-block mt-3 assess-submit mx-auto">Submit</button>
+    {% endif %}
+    </div>
+
+</form>
+
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
+<!-- #location:dashboard/resources-internal-assessment -->
+{% endblock page_content %}
+
+
+{% block extra_js %}
+<script src="/static/js/jquery.steps.min.js"></script>
+<script src="/static/js/jquery.validate.min.js"></script>
+<script src="/static/js/icheck.js"></script>
+<script>
+    $(document).ready(function() {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-orange',
+            radioClass: 'iradio_square-orange',
+            increaseArea: '20%' // optional
+        });
+
+        const hot_radio = $("#ans-{{ first_cyber_anwer_id }}");
+        hot_radio.on('ifChanged', function (e) {
+            // Have one or more firewalls (or similar network device) been installed to protect the organisation’s internal network?
+            // If click No, then all questions in this topic would not be available, and move to next topic
+
+            handleHotRadioChange($(this), e.target.checked);
+        })
+
+        if (!hot_radio.prop("checked")) {
+            handleHotRadioChange(hot_radio, false);
+        }
+
+        function handleHotRadioChange(target, enable) {
+            const check_group = target.parents("tbody").find(".icheck-list")
+            if (enable) {
+                check_group.css('opacity', 1);
+                check_group.find('input').prop('disabled', false);
+            } else {
+                check_group.css('opacity', 0.5);
+                check_group.find('input').prop('disabled', true)
+
+                target.parents(".icheck-list").css("opacity", 1).find("input").prop("disabled", false);
+            }
+        }
+    });
+
+</script>
+
+
+{% endblock extra_js %}

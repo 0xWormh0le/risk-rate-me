@@ -1,0 +1,71 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block extrajs %}{% endblock extrajs %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb  -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">IP Reputation</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Remediations</a></li>
+            <li class="breadcrumb-item active">IP Reputation</li>
+        </ol>
+    </div>
+
+</div>
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+        <div class="col-12">
+            <div class="card ">
+                <div class="card-body">
+                    <div class="entry-content article-content">
+                        <h3>Dangerous IP addresses </h3>
+                        <p>These checks ensure that your IP address has not been identified as potentially malicious or
+                            dangerous. </p>
+                        <p>If your IP is flagged positivley we provide the following data:</p>
+                        <ul>
+                            <li>The last time the IP was flagged as dangerous (in Unix time or 0 if not listed
+                                recently)
+                            </li>
+                            <li>The category of activity detected (Spyeware, malware, bot etc..)</li>
+                            <li>The data source</li>
+                        </ul>
+
+                        <h3>Domain Name System Blackhole List (DNSBL) Checks </h3>
+                        <p>We currently check more than 150 blacklists. The blacklists we connect to are most commonly
+                            known as either a DNSBL (Domain Name System Blackhole List) or a RBL (Real-time Blackhole
+                            List). Most blacklists we check are geared towards blocking hosts involved with sending
+                            email spam, some are more specialized lists. These are a seperate category to the above
+                            checks and use seperate data feeds. </p>
+
+                        <p>If your IP or Domain is flagged positivley we provide the following data:</p>
+                        <ul>
+                            <li>The number of DNSBLs the host is listed on</li>
+                            <li>the name of the DNSBL</li>
+                            <li>the domain/hostname of the DNSBL</li>
+                            <li>The data source text-record</li>
+                        </ul>
+                        <h3>What do I do if listed?</h3>
+
+                        <p>These test could indicate an already comprimised host/website. Immediately each item should
+                            be investigated. We recommend you take immediate steps to resolve these issues. </p>
+
+                        <p>If you require additional assistance, we can provide a full in depth assessment that will
+                            help you identify and remediate any issues. This is an active assessment and is inherently
+                            invasive and intrusive. We require permission of the domain owner/controller to perform this
+                            assessment. </p>
+                    </div>
+                </div>
+            </div>
+           {% include "private/_full_scan.html" %}
+        </div>
+    </div>
+
+<!-- #location:dashboard/remediation-ip -->
+{% endblock page_content %}

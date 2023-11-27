@@ -1,0 +1,432 @@
+{% extends "private/base.html" %}
+{% load widget_tweaks %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Domain Analysis</h3>
+        <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Analyze Domain(s)</a></li>
+        </ol>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h2 class="card-title"><i class="fa fa-globe m-r-10"></i>Domain Analysis</h2>
+                        <h5 class="card-subtitle">Generate a new report for a given domain.</h5>
+                    </div>
+                </div>
+                <form id="form-analyze-domain" method="post" novalidate>
+                    {% csrf_token %}
+                    {% if form.non_field_errors %}
+                        <ul>
+                          {% for error in form.non_field_errors %}
+                            <li>{{ error }}</li>
+                          {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    {% for hidden_field in form.hidden_fields %}
+                        {% if hidden_field.errors %}
+                          <ul>
+                            {% for error in hidden_field.errors %}
+                              <li>(Hidden field {{ hidden_field.name }}) {{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                        {{ hidden_field }}
+                    {% endfor %}
+
+                    {% for field in form_s.visible_fields %}
+                        <div class="row">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            {{ field.label_tag }}
+                                            {{ field|add_class:'form-control' }}
+                                            {% for error in field.errors %}
+                                              <span class="help-block">{{ error }}</span>
+                                            {% endfor %}
+                                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" id="btn-analyze-domain" class="btn btn-success">
+                                Submit
+                            </button>
+                            <button type="submit" id="btn-reset-form" class="btn btn-success">
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h2 class="card-title"><i class="fa fa-globe m-r-10"></i>Bulk Report</h2>
+                        <h5 class="card-subtitle">Generate reports for multiple domains.</h5>
+                    </div>
+                </div>
+                <form id="form-analyze-domains" method="post" novalidate>
+                    {% csrf_token %}
+                    {% for field in form_m.visible_fields %}
+                        <div class="row">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            {{ field.label_tag }}
+                                            {{ field|add_class:'form-control' }}
+                                            {% for error in field.errors %}
+                                              <span class="help-block">{{ error }}</span>
+                                            {% endfor %}
+                                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" id="btn-analyze-domains" class="btn btn-success">
+                                Submit
+                            </button>
+                            <button type="submit" id="btn-reset-bulk-form" class="btn btn-success">
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    {% if user.is_superuser %}
+        <div class="card" id="bulk-upload">
+            <div class="card-body">
+                <form action='{% url "bulk-domain" %}' id="form-csv-upload" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12 m-b-10">
+                            <h2 class="card-title"><i class="fa fa-globe m-r-10"></i>Bulk Domain Upload</h2>
+                            <div class="d-flex justify-content-between">
+                                <span class="card-subtitle">
+                                    Choose CSV file in format of <strong><i>domain, company, sector, tag1, tag2, ...</i></strong>    for per record.
+                                </span>
+                                <span id="csv-upload-result" class="card-subtitle">{{ message }}<span>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                    {% render_field form_d.domain_csv class="custom-file-input" accept=".csv" %}
+                                    <label class="custom-file-label" for="id_domain_csv">Choose CSV file</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-success">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Assessment(s)</h4>
+                <div class="table-responsive m-t-20">
+                    <table id="assessments" data-source="/user/companies"
+                           class="table stylish-table datatable m-t-30" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Domain</th>
+                            <th>Progress</th>
+                            <th>Task</th>
+                            <th>Options</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #location:dashboard/domain-scan -->
+{% endblock page_content %}
+
+{% block extra_js %}
+{{ super }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.23/moment-timezone.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            function scan_domain(domain, csrf_token) {
+                post_data = $.param({
+                    "domain": domain,
+                    "csrfmiddlewaretoken": csrf_token,
+                })
+
+                $.post("{% url 'do-scan' %}", post_data, function(data) {
+                }).done(function(data) {
+                    var task = data["id"];
+                    if (task && task != "0") {
+                        table.row.add({
+                            status: "Pending",
+                            domain: domain,
+                            progress: 0,
+                            task: ""
+                        }).node().id = task;
+                        table.draw(false);
+                        update_status(task, domain);
+                    }
+                }).fail(function(data) {
+                    console.log(data);
+                });
+            }
+            
+            $("#btn-reset-form").click(function(event) {
+                $("#form-domain").val("");
+                $("#form-company").val("");
+                $("#form-tags").val("");
+            });
+
+            $(".remove").on('click', function () {
+                $(this).parent().parent().remove();
+            });
+
+            $("#form-analyze-domain").submit(function(event) {
+                event.preventDefault();
+                let domain = $("#id_domain").val();
+                let csrf_token = $("input[name=csrfmiddlewaretoken]").val();
+                scan_domain(domain, csrf_token);
+            });
+
+            $("#form-csv-upload").submit(function (event) {
+                event.preventDefault();
+
+                let csrf_token = $("input[name=csrfmiddlewaretoken]").val();
+                let form_data = new FormData();
+                
+                form_data.append("csrfmiddlewaretoken", csrf_token);
+                form_data.append("domain_csv", $("#id_domain_csv").get(0).files[0]);
+                
+                $.ajax({
+                    url: "{% url 'bulk-domain' %}",
+                    type: "POST",
+                    data: form_data,
+                    processData: false,
+                    contentType: false
+                })
+                .done(function (data) {
+                    $("#csv-upload-result")
+                        .removeClass("text-danger")
+                        .addClass("text-success")
+                        .html("CSV Upload Success! Currenty working on reports...");
+
+                    data.domains.forEach(function (domain) {
+                        scan_domain(domain, csrf_token);
+                    })
+                })
+                .fail(function () {
+                    $("#csv-upload-result")
+                        .removeClass("text-success")
+                        .addClass("text-danger")
+                        .html("CSV Format Invalid");
+                })
+            });
+
+            $("#form-analyze-domains").submit(function(event) {
+                event.preventDefault();
+                // Iterate through all domains
+                let domains = $("#id_domains").val().split("\n");
+                let csrf_token = $("input[name=csrfmiddlewaretoken]").val();
+
+                domains.forEach(function (domain) {
+                    scan_domain(domain, csrf_token);
+                })
+            });
+
+            function update_status(id, domain) {
+                // send GET request to status URL
+                $.getJSON("/dashboard/actions/status?id=" + id, function(data) {
+                    console.log(data);
+                    // update UI
+                    var percent = parseInt(data['current'] * 100 / data['total']);
+                    var state = data["status"];
+
+                    if (data['state'] == "COMPLETED" || data["state"] == "SUCCESS") {
+                        table.row("#"+id).data({
+                            status:"Completed",
+                            domain: domain,
+                            progress: 100,
+                            task: ""
+                        }).invalidate().draw(false);
+                    }
+                    else if (data["state"] == "FAILURE") {
+                        table.row("#"+id).data({
+                            status: "Error",
+                            domain: domain,
+                            progress: 100,
+                            task: ""
+                        }).invalidate().draw(false);
+                    } else {
+                        // rerun every 2 seconds
+                        setTimeout(function() {
+                            table.row("#"+id).data({
+                                status:"Running",
+                                domain: domain,
+                                progress: percent,
+                                task: state
+                            }).invalidate().draw(false);
+                            update_status(id, domain);
+                        }, 2000);
+                    }
+                });
+            }
+
+
+            // Data table for scans initiated
+            var table = $('#assessments').DataTable( {
+                searching: false,
+                paging: false,
+                "columns": [
+                    {
+                        "data": "status",
+                        "sortable": true
+                    },
+                    {
+                        "data": "domain",
+                        "sortable": true
+                    },
+                    {
+                        "data": "progress",
+                        "sortable": false,
+                        "render": function (data, type, full, row) {
+                            contents = "<div class='progress'><div class='progress-bar progress-bar-striped' role='progressbar' style='width: " + data + "%' aria-valuenow='" + data + "' aria-valuemin='0' aria-valuemax='100'></div></div>"
+                            contents += data;
+                            contents += " %";
+                            return contents;
+                        }
+                    },
+                    {
+                        "data": "task",
+                        "sortable": false
+                    },
+                    {
+                        "data": "domain",
+                        "sortable": false,
+                        render: function ( data, type, full, row ) {
+                            var contents;
+                            if (full.status == "COMPLETED" || full.status == "SUCCESS") {
+                                contents = "<a href='javascript:void(0)'><i class='mdi mdi-binoculars'></i></a>"
+                                contents += "<a href='javascript:void(0)' class=''><i class='mdi mdi-radar'></i></a>"
+                            } else {
+                                contents = "<a href='/dashboard/report/" + data + "'><i class='mdi mdi-binoculars'></i></a>"
+                                if (full.is_followed) {
+                                    contents += "<a href='javascript:void(0)' data-toggle='tooltip' title='You are following this organization' class='unfollow'><i class='mdi mdi-radar text-success'></i></a>";
+                                } else {
+                                    contents += "<a href='javascript:void(0)' data-toggle='tooltip' title='You are not following this organization' class='follow'><i class='mdi mdi-radar text-danger'></i></a>";
+                                }
+                                contents += "<a href='javascript:void(0)' class='remove'><i class='mdi multiply-box'></i></a>"
+                            }
+                            return contents;
+                        }
+                    }
+                   ]
+            });
+
+            $('#assessments tbody').on( 'click', '.unfollow', function () {
+                var row = table.row( $(this).parents('tr') );
+                var rowdata = row.data();
+                var domain = rowdata.domain;
+                unfollowDomain(domain, row, toggleFollow);
+            });
+
+            $('#assessments tbody').on( 'click', '.follow', function () {
+                var row = table.row( $(this).parents('tr') );
+                var rowdata = row.data();
+                var domain = rowdata.domain;
+                followDomain(domain, row, toggleFollow);
+            });
+
+            function toggleFollow(row, result) {
+                var rowdata = row.data();
+                rowdata.is_followed = result;
+                row.data(rowdata).draw();
+            }
+
+            function followDomain(domain, row, callback) {
+                $.post("{% url 'do-follow' %}", {domain: domain, csrfmiddlewaretoken: '{{ csrf_token }}'}, function(response) {
+                    if (callback) {
+                        callback(row, true);
+                    } else {
+                        return true;
+                    }
+                })
+                .fail(function(response) {
+                    $("#modal-info-title").html("Unable to track this domain");
+                    $("#modal-info-contents").html(response.responseJSON["message"]);
+                    $("#modal-info").modal('toggle');
+                    return false;
+                });
+            };
+
+            function unfollowDomain(domain, row, callback) {
+                $.post("{% url 'do-unfollow' %}", {domain: domain, csrfmiddlewaretoken: '{{ csrf_token }}'}, function(response) {
+                    if (callback) {
+                        callback(row, false);
+                    } else {
+                        return true;
+                    }
+                })
+                .fail(function(response) {
+                    $("#modal-info-title").html("Warning");
+                    $("#modal-info-contents").html(response.responseJSON["message"]);
+                    $("#modal-info").modal("toggle");
+                    return false;
+                });
+            };
+
+            $('#id_domain_csv').on('change',function(){
+                var fileName = $(this).val();
+                $(this).next('.custom-file-label').html(fileName);
+            })
+        });
+    </script>
+{% endblock extra_js %}

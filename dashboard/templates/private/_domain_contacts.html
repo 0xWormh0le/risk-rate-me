@@ -1,0 +1,34 @@
+<!-- #component:dashboard/my-contacts:start -->
+{% if user.plan.can_add_domain_contacts %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">My Contacts</h4>
+                <hr>
+                <div class="table-responsive m-t-20">
+                    <table id="domain-contacts" class="table stylish-table datatable" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th class="tb-actions">Options</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-create-contact">
+                    Add Contact Information
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% include "members/_modal_contact.html" %}
+<!-- #component:dashboard/my-contacts:end -->

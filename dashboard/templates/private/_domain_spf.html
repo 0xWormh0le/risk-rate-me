@@ -1,0 +1,91 @@
+<!-- #component:dashboard/domain-spf:start -->
+<div class="card expand-card">
+    <div class="card-header" id="heading2" style="border-bottom:0;">
+        <div class="d-flex">
+            <div class="m-r-20 align-self-center">
+                <h1>
+                    {% if report.spf_rating == "A" %}
+                    <i id="icon-spf-score" class="fas fa-check-circle text-passed"></i>
+                    {% elif report.spf_rating in "EF" %}
+                    <i id="icon-spf-score" class="fas fa-exclamation-circle text-danger"></i>
+                    {% else %}
+                    <i id="icon-spf-score" class="fas fa-exclamation-circle text-warning"></i>
+                    {% endif %}
+                </h1>
+            </div>
+            <div>
+                <h4 class="card-title">Sender Policy Framework (SPF)</h4>
+                <h6 class="card-subtitle">
+                    SPF identifies which mail servers are permitted to send email on behalf of your domain.
+                </h6>
+            </div>
+        </div>
+
+
+        <h5 class="mb-0">
+            <button class="btn btn-success collapsed" data-toggle="collapse" data-target="#div-domain-report-spf" aria-expanded="false"
+                    aria-controls="div-domain-report-spf" style="float:right;" is="dmx-button" value="" type="button">
+                View Results
+            </button>
+        </h5>
+    </div>
+    <div id="div-domain-report-spf" class="collapse" aria-labelledby="heading2">
+        <div class="table-responsive">
+            <table class="custom table">
+                <tbody>
+                {% for test in tests%}
+                    {% if test.definition.category == "email_security" and "spf" in test.definition.keywords and not test.state == 'not_available'  %}
+                        <tr>
+                            <td style="width: 35%">
+                                {{ test.definition.name }}
+                                <span data-toggle="tooltip" title="{{ test.definition.name }}" data-original-title="{{ test.definition.description }}">
+                                    <i class="mdi mdi-information-outline"></i>
+                                </span>
+                            </td>
+                            <td style="width: 10%; text-align: center">
+                                {% if test.has_succeed %}
+                                <span class="badge A">passed</span>
+                                {% elif test.has_partially_succeed %}
+                                <span class="badge C">partial</span>
+                                {% elif test.has_failed %}
+                                <span class="badge E">failed</span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td style="width: 55%">
+                                {{ test.message|safe }}
+                                {% if test.has_failed %}
+                                    <br><small><a href="{% url 'remediation-spf' %}"  target="_blank">remediation</a> </small>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% if test.data and test.data|length > 0 %}
+                            <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <ul>
+                                    {% if test.definition.label == "spfvoidlookupscount" %}
+                                        <li>Void Lookups: {{ test.info_void_lookups }}</li>
+                                    {% elif test.definition.label == "spfvalidlookupcount" %}
+                                        <li>Lookups: {{ test.info_lookups }}</li>
+                                    {% elif test.definition.label == "spfrecordnottoopermissive" %}
+                                        <li>Policy: {{ test.spf_policy }}</li>
+                                    {% elif test.definition.label == "spfrecordcount" %}
+                                            {% for record in test.spf_records %}
+                                                <li>{{ record }}</li>
+                                            {% endfor %}
+                                    {% endif %}
+                                </ul>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- #component:dashboard/domain-spf:end -->

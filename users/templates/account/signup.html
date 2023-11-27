@@ -1,0 +1,217 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block extra_css %}
+    <link href="{% static 'css/public/registration.css' %}" rel="stylesheet" type="text/css">
+{% endblock extra_css %}
+
+
+{% block page_content %}
+<section class="about-section">
+    <div class="auto-container">
+        <form class="signup" id="signup_form" method="post" action="{% url 'subscribe' %}">
+            {% csrf_token %}
+            <div class="icon-layer wow slideInLeft" data-wow-delay="400ms"></div>
+            <div class="row register">
+                <div class="content-column col-lg-6 col-md-12 col-sm-12">
+                    {% for plan in form.plan %}
+                        {% if plan.choice_label == "Professional" %}
+                        <div class="pricing-table style-two tagged  wow fadeInUp animated" data-wow-delay="400ms"
+                             style="margin-bottom:20px;">
+                            <div class="inner-box" style="top:0;padding:40px 20px;">
+                                <div class="corner-ribbon top-right orange shadow wow fadeIn animated" id="paid">Selected
+                                </div>
+                                <div class="title">Exceptional Value</div>
+                                <label class="custom-check">$149
+                                    {{ plan.tag }}
+                                    <span class="checkmark"></span>
+                                </label>
+                                <div class="price mb-5">
+                                    <span>annual subscription<br><br><br>Full Security & Trust Report, Remediation Guidelines,  <br>Monthly updates & alerts, Security Asset Library</span>
+                                </div>
+
+                                <div class="payment-cards">
+                                    <img src="{% static 'images/cc_visa.png' %}">
+                                    <img src="{% static 'images/cc_mc.png' %}">
+                                    <img src="{% static 'images/cc_aexp.png' %}">
+                                    <img src="{% static 'images/cc_paypal.png' %}">
+                                </div>
+                            </div>
+                        </div>
+                        {% elif plan.choice_label == "Free" %}
+                        <div class="pricing-table style-two wow fadeInUp animated" data-wow-delay="600ms"
+                             style="margin-bottom:20px;">
+                            <div class="inner-box" style="padding:40px 20px;">
+                                <div class="corner-ribbon top-right orange shadow hide wow fadeIn animated" id="free">
+                                    Selected
+                                </div>
+                                <label class="custom-check" style="color:#0e4082">
+                                    free
+                                    {{ plan.tag }}
+                                    <span class="checkmark"></span>
+                                </label>
+                                <div class="price">
+                                    <span>Security & Trust Rating</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% elif plan.choice_label == "Enterprise" %}
+                        <div class="wow fadeInUp animated text-center" data-wow-delay="800ms">
+                            <h5 class="mt-5 mb-5">
+                                <strong>Enterprise Plan</strong> -
+                                <a href="#contact">Contact us</a> for pricing based on your volume requirements.
+                            </h5>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="form-column col-lg-6 col-md-12 col-sm-12">
+                    <div class="inner-column wow fadeInRight animated"
+                         style="visibility: visible; animation-name: fadeInRight;">
+                        <div class="request-form">
+                            <div class="upper-box">
+                                <h3 class="mb-5">Get your Security & Trust Report!</h3>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fas fa-user"></i></div>
+                                        </div>
+                                        {% render_field form.first_name class="form-control" placeholder="First Name" %}
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                        </div>
+                                    {% render_field form.last_name class="form-control" placeholder="Last Name" %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row mb-3">
+                                <div class="col">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        {% render_field form.email class="form-control" placeholder="Email Address" %}
+                                    </div>
+                                    <div class="text-danger font-weight-bold">
+                                        {{ form.email.errors }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row  mb-3">
+                                <div class="col">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-globe" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        {% render_field form.domain class="form-control" placeholder="Your domain" %}
+                                    </div>
+                                    <div class="text-danger font-weight-bold">
+                                        {{ form.domain.errors }}
+                                    </div>
+                                    <div class="pull-right">This is the domain for the Security & Trust Report</div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-lock" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        {% render_field form.password1 class="form-control" placeholder="Password" %}
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-lock" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        {% render_field form.password2 class="form-control" placeholder="Confirm" %}
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="input-group mb-2">
+                                        <div class="text-danger font-weight-bold">
+                                            {{ form.password1.errors }}
+                                            {{ form.password2.errors }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row pb-3">
+                                <div class="col">
+                                    <input type="checkbox" id="terms" name="accepted_terms">
+                                    <label for="terms" style="display:inline;">
+                                        I accept the <a href="javacript:void(0)">terms and conditions</a>
+                                        for signing up to this service, and hereby confirm I have read the
+                                        <a href="javacript:void(0)">privacy policy.</a>
+                                    </label>
+                                    <div class="text-danger font-weight-bold">
+                                {% if form.accepted_terms.errors %}
+                                        <ul>
+                                            <li>You must agree to the terms and conditions to register.</li>
+                                        </ul>
+                                {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="register-status">
+                            </div>
+                            <div class="form-group text-center">
+                                <button class="theme-btn btn-style-one" type="submit">{% trans "Sign Up" %}</button>
+
+                                <p class="mt-3">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+                            </div>
+
+                            <div style="width: fit-content; margin: auto">
+                                {% render_field form.captcha %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock page_content %}
+
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#id_plan_0").click(function() {
+                document.getElementById('free').style.display ='none';
+                document.getElementById('paid').style.display ='block';
+                $("#signup_form").attr('action', '{% url "subscribe" %}');
+                $("#card-row").show();
+            });
+
+            $("#id_plan_1").click(function() {
+                document.getElementById('free').style.display ='block';
+                document.getElementById('paid').style.display ='none';
+                $("#signup_form").attr('action', '{% url "account_signup" %}');
+                $("#card-row").hide();
+            });
+        });
+    </script>
+
+{% endblock extra_js %}

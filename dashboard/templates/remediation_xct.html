@@ -1,0 +1,97 @@
+{% extends "private/base.html" %}
+
+{% block extrajs %}{% endblock extrajs %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">X-Content Type Header</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Remediations</a></li>
+            <li class="breadcrumb-item active">X-Content Type Header</li>
+        </ol>
+    </div>
+
+</div>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+  <div class="row">
+                    <div class="container-fluid">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <div class="entry-content article-content">
+                                        <h3> X-Content Type </h3>
+
+                                        <p>This header prevents "mime" based attacks. This header prevents Internet Explorer from MIME-sniffing a response away from the declared content-type as the header instructs the browser not to override the response content type. With the nosniff option, if the server says the content is text/html, the browser will render it as text/html. </p>
+
+
+                                        <p>MIME sniffing was, and still is, used by some web browsers, including notably Microsoft's Internet Explorer, in an attempt to help web sites which do not correctly signal the MIME type of web content display correctly. However, doing this opens up a serious security vulnerability, in which, by confusing the MIME sniffing algorithm, the browser can be manipulated into interpreting data in a way that allows an attacker to carry out operations that are not expected by either the site operator or user, such as cross-site scripting. Moreover, by making sites which do not correctly assign MIME types to content appear to work correctly in those browsers, it fails to encourage the correct labeling of material, which in turn makes content sniffing necessary for these sites to work, creating a vicious circle of incompatibility with web standards and security best practices.</p>
+
+                                        <div class="card m-t-30">
+                                            <div class="card-header">
+
+                                                <div class="card-actions">
+                                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                                </div>
+                                                <h4 class="card-title m-b-0">Implementing the X-Content Type Header</h4>
+                                            </div>
+
+                                            <div class="card-body collapse show">
+
+                                                <p>The recommended configuration is to set this header to the following value, which will enable the XSS protection and instruct the browser to block the response in the event that a malicious script has been inserted from user input, instead of sanitizing:</p>
+
+                                                <p>The x-content-type header is easy to implement and only requires a slight web server configuration change. </p>
+
+                                                <h3> Enable in Nginx</h3>
+                                                <p><code>add_header X-Content-Type-Options nosniff;</code></p>
+                                                <h3>Enable in Apache</h3>
+                                                <p><code>Header set X-Content-Type-Options "nosniff"</code></p>
+                                                <h3>Enable on IIS</h3>
+                                                <p>To enable on IIS simply add it to your site’s Web.config file.</p>
+
+                                                <code>
+                                                    &lt;system.webServer&gt;<br>
+                                                    ...<br><br>
+
+                                                    &lt;httpProtocol&gt;<br>
+                                                    &lt;customHeaders&gt;<br>
+                                                    &lt;add name=""X-Content-Type-Options" value="nosniff" /&gt;<br>
+                                                    &lt;/customHeaders&gt;<br>
+                                                    &lt;/httpProtocol&gt;<br><br>
+
+                                                    ...<br>
+                                                    &lt;/system.webServer&gt;
+
+                                                </code>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="m-l-10">
+                                            <h3>References</h3>
+                                            <a class="external external-icon" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5" rel="noopener">RFC 7231, section 3.1.1.5: Content-Type</a>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+<!-- #location:dashboard/remediation-headers-xct -->
+{% endblock page_content %}

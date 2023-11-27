@@ -1,0 +1,14 @@
+{% load account %}{% user_display user as user_display %}{% autoescape off %}
+Hello from Riskrate.me!
+
+Thanks for registering with Riskrate.me!! You're almost ready to get your rating. Just one more step! Please click on the link below to confirm your account:
+
+
+{{ activate_url }}
+
+{% endautoescape %}
+
+Thank you from Risk Rate Me!
+www.riskrate.me
+
+

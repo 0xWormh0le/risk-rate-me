@@ -1,0 +1,25 @@
+<!-- Rating Gauge -->
+<div class="card h-100 m-b-0">
+    <div class="card-body text-center  m-b-0 p-b-0">
+        <h3 class="card-title ">{{ chart_title }}</h3>
+        <div id="overall-rating-gage" style="width:100%;min-height:400px;" ></div>
+        {% if ratings %}
+            {% if report.overall_rating == "A" %}
+                <h3>EXCELLENT</h3>
+            {% elif report.overall_rating == "B" %}
+                <h3>GOOD</h3>
+            {% elif report.overall_rating == "C" %}
+                <h3>NEEDS IMPROVEMENT</h3>
+            {% elif report.overall_rating == "D" %}
+                <h3>POOR</h3>
+            {% elif report.overall_rating == "E" %}
+                <h3>VERY POOR</h3>
+            {% elif report.overall_rating == "F" %}
+                <h3>CRITICAL</h3>
+            {% else %}
+                <h3>N/A</h3>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+<!-- Rating Gauge End -->

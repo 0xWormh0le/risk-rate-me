@@ -1,0 +1,92 @@
+<!-- #component:dashboard/domain-mail-agents:start -->
+<div class="card expand-card">
+    <div class="card-header" id="heading1" style="border-bottom:0;">
+          <div class="d-flex">
+                <div class="m-r-20 align-self-center cat-icon-circle">
+                    <h1>
+                        {% if report.mail_agent_rating == "A"  %}
+                        <i id="icon-mail-agents-score" class="fas fa-check-circle text-passed"></i>
+                        {% elif report.mail_agent_rating in "EF" %}
+                        <i id="icon-mail-agents-score" class="fas fa-exclamation-circle text-danger"></i>
+                        {% else %}
+                        <i id="icon-mail-agents-score" class="fas fa-exclamation-circle text-warning"></i>
+                        {% endif %}
+                    </h1>
+                </div>
+                <div>
+            <h4 class="card-title">Mail Agents</h4>
+            <h6 class="card-subtitle">Ensure mail servers are configured correctly and email encryption in transit is implemented.</h6>
+             </div>
+            </div>
+             <button class="btn btn-success collapsed" type="button" data-toggle="collapse" data-target="#div-ma" aria-expanded="false" aria-controls="col1" style="float:right;">
+                View Results
+            </button>
+        </div>
+    <div id="div-ma" class="collapse" aria-labelledby="heading1">
+        <div class="table-responsive">
+            <table class="custom table">
+               <thead>
+               <th style="width: 35%">Test</th>
+               <th style="width: 10%; text-align: center">Result</th>
+               <th style="width: 55%">Info</th>
+               </thead>
+            </table>
+            <table class="custom table">
+                <tbody>
+                {% for test in tests %}
+                    {% if "mail-agent" in test.definition.keywords and not test.state == 'not_available'  %}
+                        <tr id="table-ma-row-{{ test.definition.label }}">
+                            <td style="width: 35%">
+                                {{ test.definition.name }}
+                                <span data-toggle="tooltip" title="" data-original-title="{{ test.definition.description }}">
+                                    <i class="mdi mdi-information-outline"></i>
+                                </span>
+                            </td>
+                            <td style="width: 10%; text-align: center">
+                                {% if test.has_succeed %}
+                                    <span class="badge A">passed</span>
+                                {% elif test.has_partially_succeed %}
+                                    <span class="badge C">partial</span>
+                                {% elif test.has_failed %}
+                                    <span class="badge E">failed</span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td style="width: 55%">
+                                {{ test.message|safe }}
+                                {% if test.has_failed %}
+                                <br>
+                                <small><a href="{% url 'remediation-smtp' %}"  target="_blank">remediation</a> </small>
+                                {% endif %}
+                            </td>
+                            </tr>
+
+                            {% if test.data and test.data|length > 0 %}
+                                {% for server in test.smtp_servers %}
+                                    <tr>
+                                        <td></td>
+                                        <td  class="" style="width: 10%; text-align: center">
+                                            {% if server.data == "success" %}
+                                                <span class="badge A ">passed</span>
+                                            {% elif server.data == "partial" %}
+                                                <span class="badge C ">partial</span>
+                                            {% elif server.data == "failed" %}
+                                                <span class="badge E ">failed</span>
+                                            {% else %}
+                                            -
+                                            {% endif %}
+                                        </td>
+                                        <td class="font-italic ">{{ server.host }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- #component:dashboard/domain-mail-agents:end -->

@@ -1,0 +1,88 @@
+<!-- #component:dashboard/domain-cves:start -->
+<div class="card expand-card">
+    <div class="card-header" id="heading11" style="border-bottom:0;">
+        <div class="d-flex">
+            <div class="m-r-20 align-self-center cat-icon-circle">
+                {% if report.cves_rating == "A" %}
+                <h1><i id="icon-cves-score" class="fas fa-check-circle text-passed" ></i></h1>
+                {% elif report.cves_rating in "EF" %}
+                <h1><i id="icon-cves-score" class="fas fa-exclamation-circle text-danger" ></i></h1>
+                {% else %}
+                <h1><i id="icon-cves-score" class="fas fa-exclamation-circle text-warning" ></i></h1>
+                {% endif %}
+            </div>
+            <div>
+                <h4 class="card-title">CVE Vulnerabilities</h4>
+                <h6 class="card-subtitle">Identifies potential vulnerabilities on hosting infrastructure.</h6>
+            </div>
+        </div>
+        <button class="btn btn-success" type="button" data-toggle="collapse"
+                data-target="#results-infra-cve" aria-expanded="false" aria-controls="results-infra-cve"
+                style="float:right;">
+            View Results
+        </button>
+    </div>
+    <div id="results-infra-cve" class="collapse" aria-labelledby="heading11">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th style="width: 35%">Test</th>
+                        <th style="width: 10%; text-align: center">Result</th>
+                        <th style="width: 55%">Info</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for test in tests %}
+                        {% if test.definition.category == "infrastructure" and "cves" in test.definition.keywords %}
+                            <tr>
+                                <td style="width: 35%">
+                                    {{ test.definition.name }}
+                                    <span data-toggle="tooltip" title="" data-original-title="{{ test.definition.description }}">
+                                            <i class="mdi mdi-information-outline"></i>
+                                        </span>
+                                </td>
+                                <td style="width: 10%; text-align: center">
+                                    {% if test.has_succeed %}
+                                    <span class="badge A">passed</span>
+                                    {% elif test.has_partially_succeed %}
+                                    <span class="badge C">partial</span>
+                                    {% elif test.has_failed %}
+                                    <span class="badge E">failed</span>
+                                    {% else %}
+                                    -
+                                    {% endif %}
+                                </td>
+                                <td style="width: 55%">
+                                    {{ test.message|safe }}
+                                    {% if test.has_failed %}
+                                    <br>
+                                    <small><a href="{% url 'remediation-vulns' %}"  target="_blank">remediation</a> </small>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% if test.data and test.data|length > 0 and not test.has_error %}
+                                <tr>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <ul>
+                                        {% for vuln in test.cves %}
+                                        <li>
+                                            <a href="https://nvd.nist.gov/vuln/detail/{{ vuln }}">{{ vuln }}</a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #component:dashboard/domain-cves:end -->

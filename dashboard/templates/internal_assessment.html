@@ -1,0 +1,178 @@
+{% extends "private/base.html" %}
+{% block extra_css %}
+<link type="text/css" rel="stylesheet" href="/static/css/members/css-charts.css">
+<link type="text/css" rel="stylesheet" href="/static/css/members/icheck/square/orange.css">
+{% endblock extra_css %}
+{% block header_extra_js %}
+
+{% endblock header_extra_js %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-12 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Internal Controls Assessment</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Resources</a></li>
+            <li class="breadcrumb-item active">Internal Controls Assessment</li>
+        </ol>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+
+
+<!-- Action Plan -->
+<div class="row m-b-30">
+    <div class="col-12">
+      <div class="card m-b-0">
+     <div class="row no-gutters">
+         <div class="col-md-4">
+             <div class="card-body bg-info h-100 p-r-0 text-center">
+                 <div class="p-t-30">
+                     <i class="mdi mdi-security fa-3x text-white p-t-30"></i>
+                     <h2 class="text-white font-weight-light">My Security <br><span class="font-bold">Action Plan</span>
+                     </h2>
+                 </div>
+                 <h2 class="text-white font-weight-light p-t-10">Step 2
+                 </h2>
+             </div>
+         </div>
+         <div class="col-md-8">
+             <div class="card-body p-0">
+                 <div class="message-box contact-box position-relative">
+                     <div class="message-widget contact-widget position-relative">
+                         <!-- Message -->
+                         <a href="{% url 'my-rating' %}" class="py-3 px-2 border-bottom d-block text-decoration-none">
+                             <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">1</span>
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Risk Report Remediation</h5> <span class="mail-desc font-12 d-block">Find and fix all issues to protect your organisation from common vulnerabilities </span>
+                             </div>
+                         </a>
+                         <!-- Message -->
+                         <a href="{% url 'internal_assessment' %}" class="py-3 px-2 border-bottom d-block text-decoration-none" style="background: #f2f4f8;">
+                             <div class="user-img position-relative d-inline-block mr-3  ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">2</span>
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Security Self Assessment</h5> <span class="mail-desc font-12  d-block">Identify weaknesses and generate a remediation plan to ensure essential cybersecurity measures are in place. </span>
+                             </div>
+                         </a>
+                         <!-- Message -->
+                         <a href="{% url 'security_framework' %}" class="py-3 px-2 border-bottom d-block text-decoration-none">
+                             <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">3</span>
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Safeguard Your Assests </h5><span class="mail-desc font-12  d-block">Review, update, manage, develop policies and procedures to maintain your cyber security.</span>
+                             </div>
+                         </a>
+                         <!-- Message -->
+                         <a href="{% url 'security_training' %}" class="py-3 px-2 d-block text-decoration-none" >
+                             <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">4</span>
+
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Security Awareness Education</h5> <span class="mail-desc font-12  d-block">Take preventive action against cyber risks with the deployment of staff awareness training.</span>
+                             </div>
+                         </a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Internal Assessments</h4>
+                <h6 class="card-subtitle">Cybersecurity best practices for ensuring information asset confidentiality, integrity and availability</h6>
+
+
+                    <p>Protecting any business should follow a logical, deliberate method. An assessment of the organisation’s current security posture is the beginning of this process. After you have established your Public Risk Rating an internal security assessment should be conducted.</p>
+
+                    <p>These self report assesments verify that basic cyber security controls are in place and functioning properly. These controls are low cost and effective, they help to protect your organisation against the most common cyber threats. </p>
+
+                    <p>Each assessment is based on existing cyber security frameworks and has been tailored to meet the needs of small companies so they can identify, assess and manage cybersecurity risks.</p>
+
+                <p>Once you have assessed your internal security you are in a better position to identify weaknesses and remediate them accordingly. NOTE: These assessments should be considered a guide only. They do not indicate compliance to the respective frameworks. More details on eah are provided on the respective pages.</p>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 col-md-6 mb-4 mb-md-0">
+        <div class="card mb-0 h-100">
+            <div class="card-body">
+                <h4 class="card-title text-center">Internal Assessment: Cyber Essentials</h4>
+                <div class="text-center my-5 position-relative">
+                    <img src="/static/images/essentials{{ cyber_score|yesno:"-blank.svg,.svg" }}" class="assessment-img"/>
+                    {% if cyber_score %}
+                        <span class="position-absolute display-4 m-auto assessment-score">{{ cyber_score }}%</span>
+                    {% endif %}
+                </div>
+                <hr/>
+                <p>
+                    This self report assessment verifies that basic cyber security controls are in place and functioning properly.
+                    It is based on the "Cyber Essentials" framework from National Cyber Security Centre (UK).
+                </p>
+                <div class="text-center">
+                    <a class="btn btn-info text-white" href="{% url 'cyber_essentials_assessment' %}">{{ cyber_score|yesno:"Retake,Take" }} Assessment</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="card mb-0 h-100">
+            <div class="card-body">
+                <h4 class="card-title text-center">Internal Assessment: NIST</h4>
+                <div class="text-center my-5 position-relative">
+                    <img src="/static/images/nist{{ nist_score|yesno:"-blank.svg,.svg" }}" class="assessment-img"/>
+                    {% if nist_score %}
+                        <span class="position-absolute display-4 m-auto assessment-score">{{ nist_score }}%</span>
+                    {% endif %}
+                </div>
+                <hr/>
+                <p>
+                    This self report assessment verifies that basic cyber security controls are in place and functioning properly.
+                    It is based on the National Institute of Standards and Technology (NIST) framework of the United States.
+                </p>
+                <div class="text-center">
+                    <a class="btn btn-info text-white" href="{% url 'nist_assessment' %}">{{ nist_score|yesno:"Retake,Take" }} Assessment</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
+<!-- #location:dashboard/resources-internal-assessment -->
+{% endblock page_content %}
+
+
+{% block extra_js %}
+<script src="/static/js/jquery.steps.min.js"></script>
+<script src="/static/js/jquery.validate.min.js"></script>
+
+{% endblock extra_js %}
+

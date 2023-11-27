@@ -1,0 +1,38 @@
+<!-- Actions -->
+<div class="card text-center h-100  d-table" style="width:100%">
+    <div class="card-body d-table-cell align-middle">
+
+        <h1><i class="fas fa-exclamation-triangle txt-{{report.overall_rating}}" style="font-size:40px;"></i>
+        </h1>
+        <h6>{{ report.count_failed_results }} Issues</h6>
+        <h3 class="card-title m-t-20  p-b-10">
+            {% if report.overall_rating == "A" %}
+            No Action Required
+            {% elif report.overall_rating == "B" %}
+            Improvements Recommended
+            {% elif report.overall_rating == "C" %}
+            Remediation Required
+            {% elif report.overall_rating == "D" %}
+            Immediate Remediation Required
+            {% elif report.overall_rating == "E" %}
+            Immediate Remediation Required
+            {% elif report.overall_rating == "F" %}
+            Immediate Remediation Required
+            {% endif %}
+        </h3>
+        <div class="text-center">
+
+            <a class="btn btn-success" type="button" id="btn-view-report" href="{% url 'data-view' domain=report.domain.domain %}">
+                <span class="btn-label">
+                    <i class="fas fa-wrench"></i>
+                </span>
+                <span class="btn-content">Fix Issues</span>
+            </a>
+            <br>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- Actions End -->

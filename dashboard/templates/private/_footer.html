@@ -1,0 +1,21 @@
+<footer class="footer">
+
+        Copyright © RiskRate.Me
+
+</footer>
+
+
+{% if messages %}
+
+{% for msg in messages %}
+{% if 'feedback_success' in msg.tags %}
+<div class="submit-feedback position-fixed" style="z-index: 999; right: 2em; top: 2em; opacity: .9; transition: opacity 3s ease">
+  <div class="d-flex align-items-center bg-success text-white p-3 rounded-lg">
+    <i class="fas fa-check-circle fa-2x mr-3" aria-hidden="true"></i>
+    Feedback Submitted
+  </div>
+</div>
+{% endif %}
+{% endfor %}
+
+{% endif %}

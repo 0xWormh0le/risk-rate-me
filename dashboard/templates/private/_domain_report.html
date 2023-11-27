@@ -1,0 +1,284 @@
+<!-- #component:dashboard/domain-report:start -->
+{% if report %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs customtab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active show" data-toggle="tab" href="#tab-email-security" role="tab"
+                       aria-selected="true">
+                        <span class="hidden-sm-up">
+                            <i class="mdi mdi-email-outline"></i>
+                        </span>
+                        <span class="hidden-xs-down">
+                            <i class="mdi mdi-email-outline"></i> Email Security
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-web-security" role="tab" aria-selected="false">
+                        <span class="hidden-sm-up">
+                            <i class="mdi mdi-web"></i>
+                        </span>
+                        <span class="hidden-xs-down">
+                            <i class="mdi mdi-lock"></i> Web Security
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-web-application" role="tab" aria-selected="false">
+                        <span class="hidden-sm-up">
+                            <i class="mdi mdi-web"></i>
+                        </span>
+                        <span class="hidden-xs-down">
+                            <i class="mdi mdi-web"></i> Web Application
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-reputation" role="tab" aria-selected="false">
+                        <span class="hidden-sm-up"><i class="mdi mdi-server-security"></i></span>
+                        <span class="hidden-xs-down"><i class="mdi mdi-server-security"></i> Infrastructure</span>
+                    </a>
+                </li>
+                <li style="position:absolute;right:15px;">
+                {% if user.profile.can_access_full_report %}
+                    <a class="btn btn-success pull-right m-t-10 m-b-10" type="button" style="color:#fff" href="{% url 'data-view' domain=report.domain.domain %}" target="_blank">
+                            <span class="btn-label"><i class="fas fa-file-alt"></i></span> Data View</a>
+                {% else %}
+                    <a class="btn btn-success pull-right m-t-10 m-b-10" type="button" style="color:#fff" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" >
+                        <span class="btn-label"><i class="fas fa-file-alt"></i></span> Data View</a>
+                {% endif %}
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- ============================================================== -->
+                <!-- Email Security Pane-->
+                <!-- ============================================================== -->
+                <div class="tab-pane active" id="tab-email-security" role="tabpanel">
+                    <div class="card-body">
+                        <!-- INFO -->
+
+                         {% if user.profile.on_trial_or_free_account %}
+                            {% include "private/_warnings_email_agent.html" %}
+                        {% endif %}
+                        <div class="tab-text">
+                            <h4 class="m-b-20 m-t-10">Can we trust that email communications are encrypted, private and
+                                secure?</h4>
+
+                            <p> 95% of all hacking attacks and data breaches involve email. Yet critically more than 67%
+                                of organisations have not fully implemented readily available email authentication
+                                solutions. <br><br>
+                                Businesses can help stop phishing and protect their brands, customers and partners by
+                                using low cost, readily available email authentication solutions.
+                                These authentication solutions help to:</p>
+                            <ul>
+                                <li>Prevent phishing on employees, customers and partners of your organisation</li>
+                                <li>Prevent brand abuse &amp; scams</li>
+                                <li>Prevent Malware and Ransomware attacks</li>
+                                <li>Protect employees from spear phishing, Invoice and CEO fraud</li>
+                            </ul>
+                            <p>In addition to these authentication solutions Email Encryption provides additional email
+                                security. Encryption in transit helps protect your emails from being snooped on while
+                                they travel between you and your intended recipients. Without encryption they present a
+                                prime target for eavesdropping and mass interception as they cross dozens of optical
+                                fibres and routers. <strong><u>Without encryption your messages are as open to snoopers
+                                    as a postcard in the mail.</u></strong></p>
+                            <p>Weak email security threatens your organisation and fails to protect the privacy and
+                                security of everyone in your digial ecosystem. </p>
+                            <br><br>
+                        </div>
+                        <!--INFO END-->
+                        {% if user.profile.can_access_full_report %}
+                            {% include "private/_domain_email.html" %}
+                            {% include "private/_domain_spf.html" %}
+                            {% include "private/_domain_dkim.html" %}
+                            {% include "private/_domain_dmarc.html" %}
+                        {% else %}
+                        <div class="m-t-30"><hr>
+                            Generate a full Cyber Security & Digital Trust Report for your domain to assess your
+                            security. Implement open security standards to publicly display your commitment to privacy,
+                            accountability and trustworthiness.
+                        </div>
+                        <div class="m-t-30">
+                            <a href="{% url 'pricing' %}" class="btn btn-warning">Upgrade Now!</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- ============================================================== -->
+                <!-- Web Security Pane-->
+                <!-- ============================================================== -->
+                <div class="tab-pane" id="tab-web-security" role="tabpanel">
+                    <div class="card-body">
+                        <div class="tab-text">
+                            {% if user.profile.on_trial_or_free_account %}
+                                {% include "private/_warnings_web_security.html" %}
+                            {% endif %}
+
+                            <h4 class="m-b-20 m-t-10">Can we trust the website to be encrypted protecting the privacy and security of visitors?</h4>
+                            <p>Sites that don’t use HTTPS judiciously are crippling the privacy controls you thought
+                                were protecting your data.</p>
+                            <p>Our communications travel across a complex network of networks in order to get from point
+                                A to point B. Throughout that journey they are susceptible to interception by unintended
+                                recipients who know how to manipulate the networks.</p>
+                            <p>Unencrypted websites can be used to do more than just steal sensitive information that a
+                                user might submit through their browser. An attacker can take advantage of the lack of
+                                encryption to inject malware into a website, which can lead to the complete compromise
+                                of a user’s computer and all of their data. </p>
+                            <p> When properly configured, an HTTPS connection guarantees three things:</p>
+                            <ul>
+                                <li>Confidentiality. The visitor’s connection is encrypted, obscuring URLs, cookies, and
+                                    other sensitive metadata.
+                                </li>
+                                <li>Authenticity. The visitor is talking to the “real” website, and not to an
+                                    impersonator or through a “man-in-the-middle”.
+                                </li>
+                                <li>Integrity. The data sent between the visitor and the website has not been tampered
+                                    with or modified.
+                                </li>
+                            </ul>
+                            <p> A plain HTTP connection can be easily monitored, modified, and impersonated. Whilst
+                                attacks against HTTPS connections are possible they are very difficult and require
+                                significant expense. </p>
+
+                            <br><br>
+                        </div>
+                        <!-- HTTPS Tests -->
+                        {% if user.profile.can_access_full_report %}
+                            {% include "private/_domain_https.html" %}
+                            {% include "private/_domain_dnssec.html" %}
+                        {% else %}
+                        <div class="m-t-30"><hr>
+                            Generate a full Cyber Security & Digital Trust Report for your domain to assess your
+                            security. Implement open security standards to publicly display your commitment to privacy,
+                            accountability and trustworthiness.
+                        </div>
+                        <div class="m-t-30">
+                            <a href="{% url 'pricing' %}" class="btn btn-warning">Upgrade Now!</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- ============================================================== -->
+                <!-- Web Application Pane-->
+                <!-- ============================================================== -->
+                <div class="tab-pane" id="tab-web-application" role="tabpanel">
+                    <div class="card-body">
+                        <div class="tab-text">
+                            {% if user.profile.on_trial_or_free_account %}
+                                {% include "private/_warnings_web_applications.html" %}
+                            {% endif %}
+                            <h4 class="m-b-20 m-t-10">Can we trust that the website is protected from common vulnerabilities??</h4>
+                            <p>HTTP security headers are a fundamental part of website security. Upon implementation,
+                                they protect you against the types of attacks that your site is most likely to come
+                                across. These headers protect against cross-site scripting (XSS), man-in-the-middle
+                                (MitM) attacks, clickjacking, cross-site request forgery and other threats.
+                            </p>
+                            <p>These threats are among those listed in the <b>"Ten Most Critical Web Application
+                                Security Risks"</b> published by The Open Web Application Security Project
+                                (OWASP). Security headers are essential in helping to protect your site, and your
+                                visitors from  easily preventable vulnerabilities.</p>
+
+
+                             <p>Cookies can contain sensitive data such as authentication information. These are sent over an HTTP/HTTPS connection and are stored in web browsers as plain text, and so can be targeted and be used by attackers to steal the information stored in it. To prevent such information exposure cookies are need to be secured.</p>
+                            <br><br>
+
+                            {% if user.profile.can_access_full_report %}
+                                {% include "private/_domain_headers.html" %}
+                                {% include "private/_domain_cookies.html" %}
+                            {% else %}
+                                <div class="m-t-30"><hr>
+                                    Generate a full Cyber Security & Digital Trust Report for your domain to assess your
+                                    security. Implement open security standards to publicly display your commitment to
+                                    privacy,
+                                    accountability and trustworthiness.
+                                </div>
+                                <div class="m-t-30">
+                                    <a href="{% url 'pricing' %}" class="btn btn-warning">Upgrade Now!</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================================== -->
+                <!-- Infrastructure Pane-->
+                <!-- ============================================================== -->
+                <div class="tab-pane" id="tab-reputation" role="tabpanel">
+                    <div class="card-body">
+                        <div class="tab-text">
+                            {% if user.profile.on_trial_or_free_account %}
+                                {% include "private/_warnings_trust.html" %}
+                            {% endif %}
+                            <h4 class="m-b-20 m-t-10">
+                                Is the public facing infrastructure already compromised or vulnerable to common security
+                                issues?
+                            </h4>
+                            <p>
+                                Infrastructure checks ensure that an organisations IP address and/or domain is not
+                                infected with malware nor is it sending unsolicited communications. It checks a
+                                webserver for common vulnerabilities that can easily be exploited.
+                            </p>
+
+                            <h5><u>Compromised Systems</u></h5>
+                            <p> For identifying malicious hosts, anonymous proxies, Tor, botnets, spammers and more that
+                                are
+                                the signs of an infected server we check for IP addresses that have been reported as
+                                potentially malicious or dangerous. We use multiple sources and continuously
+                                    collect data from across the Internet.</p>
+
+
+                            <h5><u>Unsolicited Communications.</u></h5>
+                            <p>More than 150 DNSBL (Domain Name System Blackhole List) and RBL (Real-time Blackhole
+                                List) are checked to ensure that your IP address/domain is not involved in propergating
+                                unsolicited communications.</p>
+
+                            <h5><u>CVE Vulnerabilities</u></h5>
+                            <p>CVE Vulnerabilites are identified by passive fingerprinitng of server software and
+                                version. </p>
+
+                              <h5><u>Open Ports</u></h5>
+                            <p>An open port is an attack surface. An important principle in security is reducing your attack surface, and ensure that servers have the minimum number of exposed services.</p>
+                                <h5><u>Data Leaks</u></h5>
+                            <p>Data leaks and breached accounts are a security risk. As many data breaches are historic in nature we include this for your reference only. </p>
+                                <br><br>
+                        </div>
+                        {% if user.profile.can_access_full_report %}
+                            {% include "private/_domain_reputation.html" %}
+                            {% include "private/_domain_cve.html" %}
+                            {% include "private/_domain_ports.html" %}
+                            {% include "private/_domain_leaks.html" %}
+                        {% else %}
+                        <div class="m-t-30"><hr>
+                            Generate a full Cyber Security & Digital Trust Report for your domain to assess your
+                            security. Implement open security standards to publicly display your commitment to privacy,
+                            accountability and trustworthiness.
+                        </div>
+                        <div class="m-t-30">
+                            <a href="{% url 'pricing' %}" class="btn btn-warning">Upgrade Now!</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="row vertical-middle">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body" style="padding:40px;">
+                No information is available for this domain yet.
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+<!-- #component:dashboard/domain-report:end -->

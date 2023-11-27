@@ -1,0 +1,260 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block extrajs %}{% endblock extrajs %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Content Security Policy Header</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0)">Remediations</a></li>
+             <li class="breadcrumb-item active">Content Security Policy Header </li>
+        </ol>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+   <div class="row">
+                    <div class="container-fluid">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <div class="entry-content article-content">
+                                        <h3> Content-Security-Policy </h3>
+
+                                        <p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. This header is designed to specify how content interacts with your website.</p>
+
+
+                                        <p>Modern websites are complex and load a variety of third-party components, styles and scripts. A script loaded from another domain runs in the context of the current page and can do whatever it likes. That social networking button could monitor visitors, hijack login cookies, change page content and more. Even if you trust the third-party site, you could become victim to a man-in-the-Middle attack where the script is changed before it reaches you. Alternatively, it could permit users to launch their own Cross Site Scripting attacks (XXS).</p>
+
+                                        <p>By default, browsers implement an anything-goes approach. Fortunately, it’s possible to apply restrictions using a Content Security Policy (CSP) which prevent unexpected security issues. A CSP tells the browser what’s permitted, e.g. run JavaScript at mysite.com but only from files and not inline script tags.</p>
+
+                                        Setting this directive to "allow 'self';" will prevent pages from loading any external JavaScript or running any inline JavaScript. Websites will be safer from XSS attacks as it becomes more difficult for an attacker to run JavaScript in the visitor’s browser through a framed page on our website or through a SQL injection.</p>
+
+                                        <p>There are a number of defined mechanisms that can be used for this header: </p>
+
+                                        <table class="table">
+
+                                            <tbody>
+                                                <tr>
+                                                    <th> Directive
+                                                    </th>
+                                                    <th> Description
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td> base-uri
+                                                    </td>
+                                                    <td> Define the base uri for relative uri.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> default-src
+                                                    </td>
+                                                    <td> Define loading policy for all resources type in case of a resource type dedicated directive is not defined (fallback).
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> script-src
+                                                    </td>
+                                                    <td> Define which scripts the protected resource can execute.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> object-src
+                                                    </td>
+                                                    <td> Define from where the protected resource can load plugins.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> style-src
+                                                    </td>
+                                                    <td> Define which styles (CSS) the user applies to the protected resource.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> img-src
+                                                    </td>
+                                                    <td> Define from where the protected resource can load images.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> media-src
+                                                    </td>
+                                                    <td> Define from where the protected resource can load video and audio.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> frame-src
+                                                    </td>
+                                                    <td> Deprecated and replaced by child-src. Define from where the protected resource can embed frames.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> child-src
+                                                    </td>
+                                                    <td> Define from where the protected resource can embed frames.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> frame-ancestors
+                                                    </td>
+                                                    <td> Define from where the protected resource can be embedded in frames.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> font-src
+                                                    </td>
+                                                    <td> Define from where the protected resource can load fonts.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> connect-src
+                                                    </td>
+                                                    <td> Define which URIs the protected resource can load using script interfaces.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> manifest-src
+                                                    </td>
+                                                    <td> Define from where the protected resource can load manifest.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> form-action
+                                                    </td>
+                                                    <td> Define which URIs can be used as the action of HTML form elements.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> sandbox
+                                                    </td>
+                                                    <td> Specifies an HTML sandbox policy that the user agent applies to the protected resource.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> script-nonce
+                                                    </td>
+                                                    <td> Define script execution by requiring the presence of the specified nonce on script elements.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> plugin-types
+                                                    </td>
+                                                    <td> Define the set of plugins that can be invoked by the protected resource by limiting the types of resources that can be embedded.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> reflected-xss
+                                                    </td>
+                                                    <td> Instructs a user agent to activate or deactivate any heuristics used to filter or block reflected cross-site scripting attacks, equivalent to the effects of the non-standard X-XSS-Protection header.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> block-all-mixed-content
+                                                    </td>
+                                                    <td> Prevent user agent from loading mixed content.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> upgrade-insecure-requests
+                                                    </td>
+                                                    <td> Instructs user agent to download insecure resources using HTTPS.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> referrer
+                                                    </td>
+                                                    <td> Define information user agent must send in Referer header.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> report-uri
+                                                    </td>
+                                                    <td> Specifies a URI to which the user agent sends reports about policy violation.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> report-to
+                                                    </td>
+                                                    <td> Specifies a group (defined in Report-To header) to which the user agent sends reports about policy violation.
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+
+
+                                        <div class="card m-t-30">
+                                            <div class="card-header">
+
+                                                <div class="card-actions">
+                                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                                </div>
+                                                <h4 class="card-title m-b-0">Implementing the Content-Security-Policy</h4>
+                                            </div>
+
+                                            <div class="card-body collapse show">
+
+                                                <p>The recommended configuration is to set this header to the following value, which will enable the XSS protection and instruct the browser to block the response in the event that a malicious script has been inserted from user input, instead of sanitizing:</p>
+
+                                                <h3> Enable in Nginx</h3>
+                                                <p><code>add_header X-Content-Type-Options nosniff;</code></p>
+                                                <h3>Enable in Apache</h3>
+                                                <p><code>Header set X-Content-Type-Options "nosniff"</code></p>
+                                                <h3>Enable on IIS</h3>
+                                                <p>To enable on IIS simply add it to your site’s Web.config file.</p>
+
+                                                <code>
+                                                    &lt;system.webServer&gt;<br>
+                                                    ...<br><br>
+
+                                                    &lt;httpProtocol&gt;<br>
+                                                    &lt;customHeaders&gt;<br>
+                                                    &lt;add name=""X-Content-Type-Options" value="nosniff" /&gt;<br>
+                                                    &lt;/customHeaders&gt;<br>
+                                                    &lt;/httpProtocol&gt;<br><br>
+
+                                                    ...<br>
+                                                    &lt;/system.webServer&gt;
+
+                                                </code>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="m-l-10">
+                                            <h3>References</h3>
+
+                                            Content Security Policy Level 3<br>
+                                            <a rel="nofollow" class="external free" href="https://www.w3.org/TR/CSP/">https://www.w3.org/TR/CSP/</a>
+                                            <br><br>
+
+                                            Content Security Policy (CSP) Quick Reference Guide <br>
+                                            <a rel="nofollow" class="external free" href="http://content-security-policy.com">http://content-security-policy.com</a>
+                                            <br><br>
+                                            <a rel="nofollow" class="external free" href="https://www.owasp.org/index.php/Content_Security_Policy">https://www.owasp.org/index.php/Content_Security_Policy</a>
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+{% endblock page_content %}

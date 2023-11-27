@@ -1,0 +1,200 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block extrajs %}{% endblock extrajs %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Domain Name System Security Extensions (DNSSEC) </h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Remediations</a></li>
+            <li class="breadcrumb-item active">Domain Name System Security Extensions (DNSSEC)</li>
+        </ol>
+    </div>
+
+</div>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="container-fluid">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="entry-content article-content">
+                        <h3> Domain Name System Security Extensions (DNSSEC) </h3>
+                        <p>DNSSEC is a suite of Internet Engineering Task Force (IETF) specifications for securing
+                            certain kinds of information provided by the Domain Name System (DNS) as used on Internet
+                            Protocol (IP) networks. It is a set of extensions to DNS which provide to DNS clients
+                            (resolvers) origin authentication of DNS data, authenticated denial of existence, and data
+                            integrity, but not availability or confidentiality.</p>
+
+                        <h4 class="m-t-30">DNS by itself is not secure</h4>
+                        <p> DNS was designed in the 1980s when the Internet was much smaller, and security was not a
+                            primary consideration in its design. As a result, when a recursive resolver sends a query to
+                            an authoritative name server, the resolver has no way to verify the authenticity of the
+                            response. The resolver can only check that a response appears to come from the same IP
+                            address where the resolver sent the original query. But relying on the source IP address of
+                            a response is not a strong authentication mechanism, since the source IPaddress of a DNS
+                            response packet can be easily forged, or spoofed. </p>
+                        <p>As DNS was originally designed, a resolver cannot easily detect a forged response to one of
+                            its queries. An attacker can easily masquerade as the authoritative server that a resolver
+                            originally queried by spoofing a response that appears to come from that authoritative
+                            server. In other words an attacker can redirect a user to a potentially malicious site
+                            without the user realizing it.</p>
+
+                        <h4>The DNS Security Extensions (DNSSEC)</h4>
+                        <p>Engineers in the Internet Engineering Task Force (IETF), the organization responsible for the
+                            DNS protocol standards, long realized the lack of stronger authentication in DNS was a
+                            problem. Work on a solution began in the 1990s and the result was the DNSSEC Security
+                            Extensions (DNSSEC).</p>
+                        <p>DNSSEC strengthens authentication in DNS using digital signatures based on public key
+                            cryptography. With DNSSEC, it's not DNS queries and responses themselves that are
+                            cryptographically signed, but rather DNSdata itself is signed by the owner of the data.</p>
+                        <p>Every DNS zone has a public/private key pair. The zone owner uses the zone's private key to
+                            sign DNS data in the zone and generate digital signatures over that data. As the name
+                            "private key" implies, this key material is kept secret by the zone owner. The zone's public
+                            key, however, is published in the zone itself for anyone to retrieve. Any recursive resolver
+                            that looks up data in the zone also retrieves the zone's public key, which it uses to
+                            validate the authenticity of the DNS data. The resolver confirms that the digital signature
+                            over the DNSdata it retrieved is valid. If so, the DNS data is legitimate and is returned to
+                            the user. If the signature does not validate, the resolver assumes an attack, discards the
+                            data, and returns an error to the user.</p>
+                        <p>DNSSEC adds two important features to the DNS protocol:</p>
+                        <p>• Data origin authentication allows a resolver to cryptographically verify that the data it
+                            received actually came from the zone where it believes the data originated.</p>
+                        <p>• Data integrity protection allows the resolver to know that the data hasn't been modified in
+                            transit since it was originally signed by the zone owner with the zone's private key.</p>
+
+
+                        <h4>Validating and Signing with DNSSEC</h4>
+                        <p>In order for the Internet to have widespread security, DNSSEC needs to be widely deployed.
+                            DNSSEC is not automatic: right now it needs to be specifically enabled by network operators
+                            at their recursive resolvers and also by domain name owners at their zone's authoritative
+                            servers. The operators of resolvers and of authoritative servers have different incentives
+                            to turn on DNSSEC for their systems, but when they do, more users are assured of getting
+                            authenticated answers to their DNS queries. Quite simply, a user can have assurance that
+                            they are going to end up at their desired online destination.</p>
+                        <p>Enabling DNSSEC validation in recursive resolvers is easy. In fact, it has been supported by
+                            nearly all common resolvers for many years. Turning it on involves changing just a few lines
+                            in the resolver's configuration file. From that point forward, when a user asks the resolver
+                            for DNS information that comes from zones that are signed, and that data has been tampered
+                            with, the user will (purposely) get no data back. DNSSEC protects the user from getting bad
+                            data from a signed zone by detecting the attack and preventing the user from receiving the
+                            tampered data.</p>
+
+
+                        <div class="card m-t-30">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0">Implementing DNSSEC</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+
+                                <p>Signing your domain with DNSSEC involves two components:</p>
+                                <p>1. The registrar of your domain name needs to be able to accept what are called
+                                    “Delegation Signor (DS)” records and be able to send those up to the
+                                    Top-Level-Domain (TLD) for your domain (ex. .com, .org, .net).</p>
+                                <p>2. The DNS hosting provider who operates the DNS name servers for your domain must
+                                    support DNSSEC and be able to sign (and re-sign) your DNS zone files.</p>
+                                <p>Now, sometimes both of these components might be part of one service offered by a
+                                    registrar. In other words, you might not even realize they are different – your
+                                    registrar may perform both roles for you. Other times, the DNS records for your
+                                    domain might be hosted at another provider – or you might host them yourself on your
+                                    own DNS servers.</p>
+
+                                <p>Some managed solutions, like CloudFlare, essentially allow DNSSEC to be enabled
+                                    through several clicks of a mouse for users who utilize its fully managed DNS
+                                    services. For self-managed nameservers, there is more to the configuration and setup
+                                    that may require specific information to correctly implement DNSSEC. While a
+                                    generalized setup is covered below in setting up DNSSEC, organizations should
+                                    contact their IT support teams and any 3rd-party services they've contracted to
+                                    manage domain services to understand exactly what the process will involve to
+                                    successfully enable DNSSEC.</p>
+
+                                <h3>Setting up DNSSEC</h3>
+                                <ul>
+                                    <li>Verify that your TLD supports DNS Security Extensions.</li>
+                                    <li>Speak to your IT department and 3rd-party domain service providers to obtain
+                                        DNSSEC-specific requirements.
+                                    </li>
+                                    <li>Generate the zone signing key (ZSK) and key signing key (KSK) for your domain's
+                                        DNS zone.
+                                    </li>
+                                    <li>Sign your DNS zone to generate signed zone records for your domain(s).</li>
+                                    <li>Generate the Declaration of Signing (DS) record, which contains hashed values
+                                        for the cryptographic keys used to sign your DNS zone.
+                                    </li>
+                                    <li>Import the DS record(s) for your domain(s) to the self-hosted or fully managed
+                                        nameserver, ensuring that the information obtained in step #2 is available, if
+                                        needed.
+                                    </li>
+                                    <li>(Optional) Use <a href="https://dnssec-debugger.verisignlabs.com/"
+                                                          target="_blank" rel="noopener noreferrer">Verisign Lab's
+                                        DNSSEC Debugger Tool</a> to check each link in the chain of trust to diagnose
+                                        any issues affecting the implementation of DNSSEC on your domain(s).
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                        <div class="m-l-10">
+                            <h3>References</h3>
+
+
+                            DNSSEC Basics - The Interent Society<br>
+                            <a href="https://www.internetsociety.org/deploy360/dnssec/basics/">https://www.internetsociety.org/deploy360/dnssec/basics/</a><br><br>
+
+                            Secure Domain Name System (DNS) Deployment Guide<br>
+                            <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-81-2.pdf">https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-81-2.pdf</a><br><br>
+
+                            <a href="https://www.dnssec-deployment.org/">https://www.dnssec-deployment.org/</a><br><br>
+
+
+                            <p>DNSSEC was originally specified in the following three RFCs:</p>
+                            <ul>
+                                <li><a href="http://tools.ietf.org/html/rfc4033" target="_blank">RFC 4033</a> – DNS
+                                    Security Introduction and Requirements
+                                </li>
+                                <li><a href="http://tools.ietf.org/html/rfc4034" target="_blank">RFC 4034</a> – Resource
+                                    Records for the DNS Security Extensions
+                                </li>
+                                <li><a href="http://tools.ietf.org/html/rfc4035" target="_blank">RFC 4035</a> – Protocol
+                                    Modifications for the DNS Security Extensions
+                                </li>
+                            </ul>
+                            <p>Subsequently, the following additional RFCs have been issued related to DNSSEC:</p>
+                            <ul>
+                                <li><a href="http://tools.ietf.org/html/rfc4470" target="_blank">RFC 4470</a> –
+                                    Minimally Covering NSEC Records and DNSSEC On-line Signing
+                                </li>
+                                <li><a href="http://tools.ietf.org/html/rfc4641" target="_blank">RFC 4641</a> –&nbsp;DNSSEC
+                                    Operational Practices
+                                </li>
+                                <li><a href="http://tools.ietf.org/html/rfc5155" target="_blank">RFC 5155</a> – DNS
+                                    Security (DNSSEC) Hashed Authenticated Denial of Existence
+                                </li>
+                                <li><a href="http://tools.ietf.org/html/rfc6014" target="_blank">RFC 6014</a> –
+                                    Cryptographic Algorithm Identifier Allocation for DNSSEC
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #location:dashboard/remediation-dnssec -->
+{% endblock page_content %}

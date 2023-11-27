@@ -1,0 +1,33 @@
+[{
+  "fields": {
+    "label": "spfrecordcount",
+    "name": "Single SPF Exists",
+    "description": "This test verifies if more than one SPF records exists for your domain.",
+    "category": "email_security",
+    "keywords": "email,dns,spf",
+    "weight": 1.0,
+    "passing_score": 0.0,
+    "failing_score": -1.0,
+    "score_success": 0.0,
+    "score_partial": 0.0,
+    "score_failed": -1.0,
+    "score_error": 0.0,
+    "score_na": 0.0,
+    "information_only": false,
+    "messages": {
+      "success": "A single SPF record is defined for your domain.",
+      "partial": "More than one (1) SPF record is defined for your domain.",
+      "failed": "More than one (1) SPF record is defined for your domain."
+    }
+  },
+  "models": "reports.TestDefinition",
+  "pk": 1
+},{
+  "fields": {
+    "label": "success",
+    "message": "A single SPF record is defined for your domain.",
+    "test": 1
+  },
+  "models": "reports.TestMessage",
+  "pk": 1
+}]

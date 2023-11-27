@@ -1,0 +1,3851 @@
+{% extends "private/base.html" %}
+{% block extra_css %}
+
+{% endblock extra_css %}
+{% block header_extra_js %}
+
+{% endblock header_extra_js %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Privacy Impact Report</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Privacy Impact Report</li>
+        </ol>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+
+
+
+
+     <div class="row">
+         <div class="col-lg-6  m-b-30">
+            <div class="card h-100 mb-0">
+             <div class="card-body d-flex flex-column p-b-0">
+
+                    <h4 class="text-center  p-b-30">Privacy Impact Score</h4>
+                <div id="privacy-rating-gage" style="width:100%;min-height:400px;" ></div>
+
+                    <div class="row text-center mt-3 pt-1">
+                                    <div class="col-lg-4 col-md-4">
+
+                                       <h2 class="mb-0 font-weight-strong text-danger">15</h2>
+                                        <small>Third Party Domains</small>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4">
+                                        <h2 class="mb-0 font-weight-strong text-danger">24</h2><small>Persistant Cookies</small>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4">
+                                        <h2 class="mb-0 font-weight-strong text-success">5</h2><small>Session Cookies</small>
+                                    </div>
+                                </div>
+                </div>
+             </div>
+         </div>
+        <div class="col-lg-6 m-b-30">
+            <div class="card mb-0 h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div class="mb-4">
+
+                        <h4 class="card-title m-b-40">Privacy Impact Report Summary</h4>
+
+                      <p><strong><u>Privacy Impact Score</u></strong> is a score reflecting overall cookie-related impact of the website relative to other websites, primarily taking into account the number of third-party domains it reports to and number of persistent cookies it sets.</p>
+                       <p><strong><u>Third-party domains</u></strong> is the count of organisations allowed by the webmaster to trace your interactions across the site. These cookies may be set for various purposes, like tracking ads displayed on the website, collection of statistics, targeted advertising etc. <strong>This website allows 15 other websites to track your activity.</strong></p>
+                        <p><strong><u>Persistent cookies</u></strong> are the cookies that are preserved through browser shutdowns. This means, even if you close this page today and ever return there in future, the website will know you're a returning visitor. This may be used for "remember me" features, as well as persistent user tracking. These cookies, especially if set by third party organisations, are powerful tool for monitoring your activities across all the websites you visit. This website sets 24 persistent cookies with average life-time of 326 days and longest 999 days.</p>
+                        <p><strong><u>Session cookies</u></strong> are cleared when you close your browser and allow the website to identify user's state — such as logged-in users. They are mostly considered harmless because they cannot be used for long-term user tracking. This site sets 5 session cookies.</p>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+          </div>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+
+
+
+        <div id="cookies">
+
+    <h3>Cookies and Privacy Attributes</h3>
+
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="i" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/i/311">i</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>OpenX advertising tracking cookie</p>
+
+            <a rel="external noopener" href="http://openx.com/legal/privacypolicy/">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/openx.net/138">openx.net</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>openx</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://disconnect.me/">disconnectme</a>
+
+                            </li>
+
+                            <li>Tracker <code>openx</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://www.eff.org/privacybadger">privacybadger</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 364 days
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>08b6b614-82fe-43ca-a9e4-1201aec15ec2|1575045367</pre>
+
+
+
+
+    <div class="alert alert-info" role="alert">This might be a Base64-encoded cookie.
+        Decoded value:
+        <pre>b'\xd3\xc6\xfao\xadx' … b'\xf3g\xde' … b'\xe3w\x1a' … b'k\xd7\xb8' … b'\xd7m5i\xe75\xe5\xe76'</pre>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 24 bytes (192 bits)</li>
+        <li>Information entropy: 4.33 bits (average bits per symbol)</li>
+        <li>Information content: 104.04 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="audience" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/audience/131947">audience</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>SpotXchange advertising tracking cookie</p>
+
+            <a rel="external noopener" href="http://www.spotxchange.com/">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/spotxchange.com/152">spotxchange.com</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>spotxchange</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://disconnect.me/">disconnectme</a>
+
+                            </li>
+
+                            <li>Tracker <code>spotxchange</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://www.eff.org/privacybadger">privacybadger</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 365 days
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>57e0a28f-12c6-11ea-ba73-16ae82d32006</pre>
+
+
+
+
+
+
+    <div class="alert alert-info" role="alert">This seems to be a
+        UUID (GUID), version: 1
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 36 bytes (288 bits)</li>
+        <li>Information entropy: 3.72 bits (average bits per symbol)</li>
+        <li>Information content: 133.85 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-warning">
+
+
+        <div id="_dbefe" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/_dbefe/1437158">_dbefe</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>CONTEXTWEB advertising tracking cookie</p>
+
+            <a rel="external noopener" href="http://www.contextweb.com/">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/bh.contextweb.com/7330">bh.contextweb.com</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>contextweb</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://www.eff.org/privacybadger">privacybadger</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                The cookie is only valid during current browser session and it will be deleted when you
+                close
+                browser
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>http://10.223.5.166:8080</pre>
+
+
+
+
+    <div class="alert alert-info" role="alert">This might be a Base64-encoded cookie.
+        Decoded value:
+        <pre>b'\x86\xdbi' … b'\xff\xfdt' … b'\xf3O4'</pre>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 9 bytes (72 bits)</li>
+        <li>Information entropy: 3.17 bits (average bits per symbol)</li>
+        <li>Information content: 28.53 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">session</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-default">
+
+
+        <div id="PHPSESSID" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/PHPSESSID/32">PHPSESSID</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>PHP generic session cookie</p>
+
+            <a rel="external noopener" href="http://php.net/manual/en/function.session-id.php">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/www.sfccmo.edu/2079570">www.sfccmo.edu</a></code>
+            </li>
+
+
+
+
+
+            <li class="list-group-item">
+
+                The cookie is only valid during current browser session and it will be deleted when you
+                close
+                browser
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>b523d7a3a355b6c674983977d50df82c</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="alert alert-info" role="alert">
+        This cookie seems to be a hexadecimal-encoded data.
+        Attempted decoded value:
+        <pre>b'\xb5#\xd7\xa3\xa3U\xb6\xc6t\x989w\xd5\r\xf8,'</pre>
+    </div>
+
+
+
+
+
+    <div class="alert alert-info" role="alert">This seems to be a MD5 hex-encoded cookie</div>
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 16 bytes (128 bits)</li>
+        <li>Information entropy: 3.88 bits (average bits per symbol)</li>
+        <li>Information content: 62.00 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">same-origin</span> <span class="badge">session</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="__io_cid" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/__io_cid/813796">__io_cid</a>
+            </code>
+        </div>
+
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/bfmio.com/1125397">bfmio.com</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>bfmio</code> (category <em>block</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://www.eff.org/privacybadger">privacybadger</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 365 days
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>82022d2f8377ea2b134f195cd58696101a644747</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="alert alert-info" role="alert">
+        This cookie seems to be a hexadecimal-encoded data.
+        Attempted decoded value:
+        <pre>b'\x82\x02-/\x83w\xea+\x13O\x19\\\xd5\x86\x96\x10\x1adGG'</pre>
+    </div>
+
+
+
+
+
+
+
+    <div class="alert alert-info" role="alert">This seems to be a SHA1 hex-encoded cookie</div>
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 20 bytes (160 bits)</li>
+        <li>Information entropy: 4.22 bits (average bits per symbol)</li>
+        <li>Information content: 84.44 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="__141_cid" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/__141_cid/1392010">__141_cid</a>
+            </code>
+        </div>
+
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/bfmio.com/1125397">bfmio.com</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>bfmio</code> (category <em>block</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://www.eff.org/privacybadger">privacybadger</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 365 days
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>B08932A9F248E15D42698D8002F29416</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="alert alert-info" role="alert">
+        This cookie seems to be a hexadecimal-encoded data.
+        Attempted decoded value:
+        <pre>b'\xb0\x892\xa9\xf2H\xe1]Bi\x8d\x80\x02\xf2\x94\x16'</pre>
+    </div>
+
+
+
+
+
+    <div class="alert alert-info" role="alert">This seems to be a MD5 hex-encoded cookie</div>
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 16 bytes (128 bits)</li>
+        <li>Information entropy: 3.88 bits (average bits per symbol)</li>
+        <li>Information content: 62.00 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="_cc_aud" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/_cc_aud/398">_cc_aud</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>Lotame tracking cookie</p>
+
+            <a rel="external noopener" href="https://www.lotame.com/legal/">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/crwdcntrl.net/175">crwdcntrl.net</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>lotame</code> (category <em>analytics</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://disconnect.me/">disconnectme</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 269 days
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>"ABR4nGNgYGCIfejxnQEOAB6SAn4="</pre>
+
+
+
+
+    <div class="alert alert-info" role="alert">This might be a Base64-encoded cookie.
+        Decoded value:
+        <pre>b'\x00\x14x\x9cc```\x88}\xe8\xf1\x9d\x01\x0e\x00\x1e\x92\x02~'</pre>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 20 bytes (160 bits)</li>
+        <li>Information entropy: 3.98 bits (average bits per symbol)</li>
+        <li>Information content: 79.68 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="_cc_cc" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/_cc_cc/400">_cc_cc</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>Lotame tracking cookie</p>
+
+            <a rel="external noopener" href="https://www.lotame.com/legal/">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/crwdcntrl.net/175">crwdcntrl.net</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>lotame</code> (category <em>analytics</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://disconnect.me/">disconnectme</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 269 days
+
+            </li>
+
+
+
+
+
+
+            <li class="list-group-item">
+                <code>sameSite</code> This flag prevents the cookie from being automatically sent by browser
+                at specific cross-site requests, protecting from a range of attacks against authentication
+                and authorization (for example CSRF)
+                <a href="/articles/3/what-is-a-samesite-http-cookie">»&nbsp;More...</a>
+                <span class="label label-success glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+            </li>
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>"ACZ4nGOQTzQ2S7JMSTU0SE4yMrIwTDOxMLEwSk02tTRNNTcwMWQAgtiHHt8ZEAAAS2QKyg=="</pre>
+
+
+
+
+    <div class="alert alert-info" role="alert">This might be a Base64-encoded cookie.
+        Decoded value:
+        <pre>b'\x00&amp;x\x9cc\x90O46K\xb2LI54HN22\xb20L3\xb10\xb10JM6\xb54M5701d\x00\x82\xd8\x87\x1e\xdf\x19\x10\x00\x00Kd\n\xca'</pre>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 52 bytes (416 bits)</li>
+        <li>Information entropy: 4.96 bits (average bits per symbol)</li>
+        <li>Information content: 257.67 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="_cc_id" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/_cc_id/401">_cc_id</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>Lotame tracking cookie</p>
+
+            <a rel="external noopener" href="https://www.lotame.com/legal/">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/crwdcntrl.net/175">crwdcntrl.net</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>lotame</code> (category <em>analytics</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://disconnect.me/">disconnectme</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 269 days
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>a36b9de10cb2281f48482ec595e7041</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="alert alert-info" role="alert">
+        This cookie seems to be a hexadecimal-encoded data.
+        Attempted decoded value:
+        <pre>b'6\xb9\xde\x10\xcb"\x81\xf4\x84\x82\xecY^pA'</pre>
+    </div>
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 15 bytes (120 bits)</li>
+        <li>Information entropy: 3.91 bits (average bits per symbol)</li>
+        <li>Information content: 58.60 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="_cc_dc" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/_cc_dc/391">_cc_dc</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>Lotame tracking cookie</p>
+
+            <a rel="external noopener" href="https://www.lotame.com/legal/">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/crwdcntrl.net/175">crwdcntrl.net</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>lotame</code> (category <em>analytics</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://disconnect.me/">disconnectme</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 269 days
+
+            </li>
+
+
+
+
+
+
+            <li class="list-group-item">
+                <code>sameSite</code> This flag prevents the cookie from being automatically sent by browser
+                at specific cross-site requests, protecting from a range of attacks against authentication
+                and authorization (for example CSRF)
+                <a href="/articles/3/what-is-a-samesite-http-cookie">»&nbsp;More...</a>
+                <span class="label label-success glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+            </li>
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>1</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 1 bytes (8 bits)</li>
+        <li>Information entropy: 0.00 bits (average bits per symbol)</li>
+        <li>Information content: 1.00 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="_ljtrtb_2" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/_ljtrtb_2/711">_ljtrtb_2</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>Lijit advertising platform cookies</p>
+
+            <a rel="external noopener" href="https://www.sovrn.com/about-our-cookies/">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/lijit.com/128">lijit.com</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>federated media</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://disconnect.me/">disconnectme</a>
+
+                            </li>
+
+                            <li>Tracker <code>federated media</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://www.eff.org/privacybadger">privacybadger</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 364 days
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>B08932A9F248E15D42698D8002F29416</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="alert alert-info" role="alert">
+        This cookie seems to be a hexadecimal-encoded data.
+        Attempted decoded value:
+        <pre>b'\xb0\x892\xa9\xf2H\xe1]Bi\x8d\x80\x02\xf2\x94\x16'</pre>
+    </div>
+
+
+
+
+
+    <div class="alert alert-info" role="alert">This seems to be a MD5 hex-encoded cookie</div>
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 16 bytes (128 bits)</li>
+        <li>Information entropy: 3.88 bits (average bits per symbol)</li>
+        <li>Information content: 62.00 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="ljt_reader" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/ljt_reader/257">ljt_reader</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>Lijit advertising platform cookies</p>
+
+            <a rel="external noopener" href="https://www.sovrn.com/about-our-cookies/">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/lijit.com/128">lijit.com</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>federated media</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://disconnect.me/">disconnectme</a>
+
+                            </li>
+
+                            <li>Tracker <code>federated media</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://www.eff.org/privacybadger">privacybadger</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 364 days
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>ba123c5b10f4bc8bdf75de18</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="alert alert-info" role="alert">
+        This cookie seems to be a hexadecimal-encoded data.
+        Attempted decoded value:
+        <pre>b'\xba\x12&lt;[\x10\xf4\xbc\x8b\xdfu\xde\x18'</pre>
+    </div>
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 12 bytes (96 bits)</li>
+        <li>Information entropy: 3.58 bits (average bits per symbol)</li>
+        <li>Information content: 43.02 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="anHistory" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/anHistory/8170">anHistory</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>Datonics advertising tracking cookie</p>
+
+            <a rel="external noopener" href="http://datonics.com/">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/pro-market.net/899">pro-market.net</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>datonics</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://disconnect.me/">disconnectme</a>
+
+                            </li>
+
+                            <li>Tracker <code>datonics</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://www.eff.org/privacybadger">privacybadger</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 29 days
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>"-1axebw6tvy1ud+2+!#7%.%f!aOU"</pre>
+
+
+
+
+    <div class="alert alert-info" role="alert">This might be a Base64-encoded cookie.
+        Decoded value:
+        <pre>b'\xd5\xac^o\x0e\xad\xbf-nw\xed\xbe'</pre>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 12 bytes (96 bits)</li>
+        <li>Information entropy: 3.58 bits (average bits per symbol)</li>
+        <li>Information content: 43.02 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="anProfile" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/anProfile/1458">anProfile</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>Datonics advertising tracking cookie</p>
+
+            <a rel="external noopener" href="http://datonics.com/">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/pro-market.net/899">pro-market.net</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>datonics</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://disconnect.me/">disconnectme</a>
+
+                            </li>
+
+                            <li>Tracker <code>datonics</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://www.eff.org/privacybadger">privacybadger</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 179 days
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>"-1axebw6tvy1ud+1+1f=1+1g=2+1j=1+rs=s+rt=4E2EC5A3+s2=(q1qos6)+vm=24-B08932A9F248E15D42698D8002F29416:53-CAESEKGzybeTX8r23v6Os9i2s34"</pre>
+
+
+
+
+    <div class="alert alert-info" role="alert">This might be a Base64-encoded cookie.
+        Decoded value:
+        <pre>b'\xfa\xf9' … b'\x07O=\xdf`=\x17n&lt;\x13^C\xe3n\xbd\xf0?4\xd3av\xf7\x8dz'</pre>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 26 bytes (208 bits)</li>
+        <li>Information entropy: 4.55 bits (average bits per symbol)</li>
+        <li>Information content: 118.21 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="IDE" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/IDE/2750">IDE</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>Google advertising domain</p>
+
+            <a rel="external noopener" href="https://policies.google.com/technologies/types">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/doubleclick.net/49">doubleclick.net</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>google</code> (category <em>disconnect</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://disconnect.me/">disconnectme</a>
+
+                            </li>
+
+                            <li>Tracker <code>google</code> (category <em>disconnect</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://www.eff.org/privacybadger">privacybadger</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 729 days
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <code>httpOnly</code> This cookie is not readable by client-side JavaScript code
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                <span class="label label-success glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>AHWqTUkBVHb4JG6KwPH_BfzAwFrWK-ctKhfMD8S7XZEejK-f22dR-KapE_g-etxU</pre>
+
+
+
+
+    <div class="alert alert-info" role="alert">This might be a Base64-encoded cookie.
+        Decoded value:
+        <pre>b'r\xd2\xa1|\xc0\xfcK\xb5\xd9\x11\xe8\xca' … b')\xaaD' … b'z\xdcT'</pre>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 18 bytes (144 bits)</li>
+        <li>Information entropy: 4.17 bits (average bits per symbol)</li>
+        <li>Information content: 75.06 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="ud" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/ud/130">ud</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>eXelate advertising tracking cookie</p>
+
+            <a rel="external noopener" href="http://exelate.com/">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/exelator.com/58">exelator.com</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>exelate</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://disconnect.me/">disconnectme</a>
+
+                            </li>
+
+                            <li>Tracker <code>exelate</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://www.eff.org/privacybadger">privacybadger</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 119 days
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>"eJxrXxzq6XKLQSE1ydAgzSA10TglJcXMyDwpLSkt2cDSKDnV0szSMDElbXFZatGCpaXFqSlJh5ZU5JTkNK0uiw91jHdz9PX0iVzullmUmpZfsQIsFuYatMjMYEl%2BUWb6IhfXxUUpaQyLSopPBW%2BPYQYACdMrCg%3D%3D"</pre>
+
+
+
+
+    <div class="alert alert-info" role="alert">This might be a Base64-encoded cookie.
+        Decoded value:
+        <pre>b'\xd8\x15\x16o\xa2!}|TR\x96\x90\xc8\xb4\xa8\xa4\xf0V'</pre>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 18 bytes (144 bits)</li>
+        <li>Information entropy: 4.17 bits (average bits per symbol)</li>
+        <li>Information content: 75.06 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="EE" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/EE/66108">EE</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>eXelate advertising tracking cookie</p>
+
+            <a rel="external noopener" href="http://exelate.com/">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/exelator.com/58">exelator.com</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>exelate</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://disconnect.me/">disconnectme</a>
+
+                            </li>
+
+                            <li>Tracker <code>exelate</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://www.eff.org/privacybadger">privacybadger</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 119 days
+
+            </li>
+
+
+
+
+
+
+            <li class="list-group-item">
+                <code>sameSite</code> This flag prevents the cookie from being automatically sent by browser
+                at specific cross-site requests, protecting from a range of attacks against authentication
+                and authorization (for example CSRF)
+                <a href="/articles/3/what-is-a-samesite-http-cookie">»&nbsp;More...</a>
+                <span class="label label-success glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+            </li>
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>"eb10f0ea3ddd627bfbfc092ce9691adf"</pre>
+
+
+
+
+    <div class="alert alert-info" role="alert">This might be a Base64-encoded cookie.
+        Decoded value:
+        <pre>b'y\xbdt\x7fG\x9a\xdd\xd7]\xebn\xdb}\xb7\xdc\xd3\xdd\x9c{\xde\xbd\xd5\xa7_'</pre>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 24 bytes (192 bits)</li>
+        <li>Information entropy: 4.42 bits (average bits per symbol)</li>
+        <li>Information content: 106.04 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="IQver" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/IQver/1892">IQver</a>
+            </code>
+        </div>
+
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/intentiq.com/1210">intentiq.com</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>intentiq</code> (category <em>allow</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://www.eff.org/privacybadger">privacybadger</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 729 days
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>1.9</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 3 bytes (24 bits)</li>
+        <li>Information entropy: 1.58 bits (average bits per symbol)</li>
+        <li>Information content: 4.75 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="ab" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/ab/155">ab</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>Automattic analytical cookie used in A/B testing of new website features</p>
+
+            <a rel="external noopener" href="https://automattic.com/cookies/">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/agkn.com/56">agkn.com</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>ak</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://disconnect.me/">disconnectme</a>
+
+                            </li>
+
+                            <li>Tracker <code>ak</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://www.eff.org/privacybadger">privacybadger</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 365 days
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>0001:U5H1EpMHKPHVrVfmz/5vsF4A5bIt7Uvw</pre>
+
+
+
+
+    <div class="alert alert-info" role="alert">This might be a Base64-encoded cookie.
+        Decoded value:
+        <pre>b'\xd3M5' … b'S\x91\xf5\x12\x93\x07(\xf1\xd5\xadW\xe6\xcf\xfeo\xb0^\x00\xe5\xb2-\xedK\xf0'</pre>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 27 bytes (216 bits)</li>
+        <li>Information entropy: 4.75 bits (average bits per symbol)</li>
+        <li>Information content: 128.38 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="uid_syncd" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/uid_syncd/710">uid_syncd</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>Simpli.fi advertising tracking cookie</p>
+
+            <a rel="external noopener" href="http://www.simpli.fi/">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/simpli.fi/112">simpli.fi</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>simpli.fi</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://disconnect.me/">disconnectme</a>
+
+                            </li>
+
+                            <li>Tracker <code>simpli.fi</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://www.eff.org/privacybadger">privacybadger</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 2 days
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>true</pre>
+
+
+
+
+    <div class="alert alert-info" role="alert">This might be a Base64-encoded cookie.
+        Decoded value:
+        <pre>b'\xb6\xbb\x9e'</pre>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 3 bytes (24 bits)</li>
+        <li>Information entropy: 1.58 bits (average bits per symbol)</li>
+        <li>Information content: 4.75 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-warning">
+
+
+        <div id="siteimproveses" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/siteimproveses/15773">siteimproveses</a>
+            </code>
+        </div>
+
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/66358486.global.siteimproveanalytics.io/2079571">66358486.global.siteimproveanalytics.io</a></code>
+            </li>
+
+
+
+
+
+            <li class="list-group-item">
+
+                The cookie is only valid during current browser session and it will be deleted when you
+                close
+                browser
+
+            </li>
+
+
+
+
+            <li class="list-group-item">
+                <code>Secure</code> The cookie sets the Secure flag but is itself set on a non-TLS (plaintext
+                HTTP) website. New browsers will ignore such cookies under the <a href="/articles/2/strict-secure-cookies-arrive-into-chrome">Strict
+                    Secure cookie policy</a>
+            </li>
+
+
+
+            <li class="list-group-item">
+                <code>sameSite</code> This flag prevents the cookie from being automatically sent by browser
+                at specific cross-site requests, protecting from a range of attacks against authentication
+                and authorization (for example CSRF)
+                <a href="/articles/3/what-is-a-samesite-http-cookie">»&nbsp;More...</a>
+                <span class="label label-success glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+            </li>
+
+
+            <li class="list-group-item">
+
+                <code>httpOnly</code> This cookie is not readable by client-side JavaScript code
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                <span class="label label-success glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>c6e15e03-714d-4e74-9d7b-8898a32d0c54</pre>
+
+
+
+
+
+
+    <div class="alert alert-info" role="alert">This seems to be a
+        UUID (GUID), version: 4
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 36 bytes (288 bits)</li>
+        <li>Information entropy: 3.86 bits (average bits per symbol)</li>
+        <li>Information content: 139.10 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">session</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="uid" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/uid/149">uid</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>Generic AddThis tracking cookie</p>
+
+            <a rel="external noopener" href="http://www.addthis.com/privacy/privacy-policy/">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/simpli.fi/112">simpli.fi</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>simpli.fi</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://disconnect.me/">disconnectme</a>
+
+                            </li>
+
+                            <li>Tracker <code>simpli.fi</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://www.eff.org/privacybadger">privacybadger</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 365 days
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>qTKJsF3hSPKAjWlCFpTyAg==</pre>
+
+
+
+
+    <div class="alert alert-info" role="alert">This might be a Base64-encoded cookie.
+        Decoded value:
+        <pre>b'\xa92\x89\xb0]\xe1H\xf2\x80\x8diB\x16\x94\xf2\x02'</pre>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 16 bytes (128 bits)</li>
+        <li>Information entropy: 3.88 bits (average bits per symbol)</li>
+        <li>Information content: 62.00 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-warning">
+
+
+        <div id="nmstat" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/nmstat/11139">nmstat</a>
+            </code>
+        </div>
+
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/www.sfccmo.edu/2079570">www.sfccmo.edu</a></code>
+            </li>
+
+
+
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 999 days
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>1575045462052</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 13 bytes (104 bits)</li>
+        <li>Information entropy: 2.62 bits (average bits per symbol)</li>
+        <li>Information content: 41.00 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">same-origin</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="uuid2" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/uuid2/122">uuid2</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>AppNexus advertising tracking cookie</p>
+
+            <a rel="external noopener" href="http://www.appnexus.com/">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/adnxs.com/54">adnxs.com</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>appnexus</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://disconnect.me/">disconnectme</a>
+
+                            </li>
+
+                            <li>Tracker <code>appnexus</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://www.eff.org/privacybadger">privacybadger</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 89 days
+
+            </li>
+
+
+
+
+
+
+            <li class="list-group-item">
+                <code>sameSite</code> This flag prevents the cookie from being automatically sent by browser
+                at specific cross-site requests, protecting from a range of attacks against authentication
+                and authorization (for example CSRF)
+                <a href="/articles/3/what-is-a-samesite-http-cookie">»&nbsp;More...</a>
+                <span class="label label-success glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+            </li>
+
+
+            <li class="list-group-item">
+
+                <code>httpOnly</code> This cookie is not readable by client-side JavaScript code
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                <span class="label label-success glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>6622079756326712142</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 19 bytes (152 bits)</li>
+        <li>Information entropy: 2.86 bits (average bits per symbol)</li>
+        <li>Information content: 63.00 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="anj" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/anj/131">anj</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>User tracking cookie that contains data denoting whether a cookie ID is synced with AppNexus partners.</p>
+
+            <a rel="external noopener" href="https://www.appnexus.com/cookie-policy">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/adnxs.com/54">adnxs.com</a></code>
+            </li>
+
+
+
+
+                <div class="alert alert-warning" role="alert">
+                    A number of privacy protection projects maintain lists of known web trackers. These trackers
+                    will be in most cases effectively blocked by their browser extensions:
+                    <ul>
+
+                            <li>Tracker <code>appnexus</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://disconnect.me/">disconnectme</a>
+
+                            </li>
+
+                            <li>Tracker <code>appnexus</code> (category <em>advertising</em>)
+                                will be blocked by
+
+                                    <a rel="external noopener nofollow" href="https://www.eff.org/privacybadger">privacybadger</a>
+
+                            </li>
+
+                    </ul>
+                </div>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 89 days
+
+            </li>
+
+
+
+
+
+
+            <li class="list-group-item">
+                <code>sameSite</code> This flag prevents the cookie from being automatically sent by browser
+                at specific cross-site requests, protecting from a range of attacks against authentication
+                and authorization (for example CSRF)
+                <a href="/articles/3/what-is-a-samesite-http-cookie">»&nbsp;More...</a>
+                <span class="label label-success glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+            </li>
+
+
+            <li class="list-group-item">
+
+                <code>httpOnly</code> This cookie is not readable by client-side JavaScript code
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                <span class="label label-success glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>dTM7k!M4/8Erk#WF']wIg2IlkIW!Cp!@wnf-Te9(&gt;wL5Li+A!-!4d:B7tgUd</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 60 bytes (480 bits)</li>
+        <li>Information entropy: 5.13 bits (average bits per symbol)</li>
+        <li>Information content: 307.78 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-danger">
+
+
+        <div id="__cfduid" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/__cfduid/20">__cfduid</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>Generic CloudFlare functional cookie</p>
+
+            <a rel="external noopener" href="https://www.cloudflare.com/cookie-policy/">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/siteimproveanalytics.com/127987">siteimproveanalytics.com</a></code>
+            </li>
+
+
+
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 29 days
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <code>httpOnly</code> This cookie is not readable by client-side JavaScript code
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                <span class="label label-success glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>d5a5bd9ac1c9ab1bce5ba7b42cc3893d81575045364</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="alert alert-info" role="alert">
+        This cookie seems to be a hexadecimal-encoded data.
+        Attempted decoded value:
+        <pre>b'Z[\xd9\xac\x1c\x9a\xb1\xbc\xe5\xba{B\xcc8\x93\xd8\x15u\x04Sd'</pre>
+    </div>
+
+
+
+
+
+
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 21 bytes (168 bits)</li>
+        <li>Information entropy: 4.39 bits (average bits per symbol)</li>
+        <li>Information content: 92.24 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">third-party</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+
+    <div class="panel panel-default">
+
+
+        <div id="_gat" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/_gat/4">_gat</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>Google Analytics tracking cookie</p>
+
+            <a rel="external noopener" href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/sfccmo.edu/1360932">sfccmo.edu</a></code>
+            </li>
+
+
+
+
+
+            <li class="list-group-item">
+
+                The cookie is only valid during current browser session and it will be deleted when you
+                close
+                browser
+
+            </li>
+
+
+
+
+
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>1</pre>
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 1 bytes (8 bits)</li>
+        <li>Information entropy: 0.00 bits (average bits per symbol)</li>
+        <li>Information content: 1.00 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">same-origin</span> <span class="badge">session</span></div>
+
+
+
+    </div>
+
+
+    <div class="panel panel-default">
+
+
+        <div id="_gid" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/_gid/850594">_gid</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>Google Universal Analytics short-time unique user tracking identifier</p>
+
+            <a rel="external noopener" href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/sfccmo.edu/1360932">sfccmo.edu</a></code>
+            </li>
+
+
+
+            <li class="list-group-item">
+
+                The cookie is only valid during current browser session and it will be deleted when you
+                close
+                browser
+
+            </li>
+
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+
+
+
+
+
+                            Sample value:
+
+<pre>GA1.2.1043025151.1575045362</pre>
+
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 27 bytes (216 bits)</li>
+        <li>Information entropy: 3.22 bits (average bits per symbol)</li>
+        <li>Information content: 86.90 bits</li>
+    </ul>
+
+</div>
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">same-origin</span> <span class="badge">session</span></div>
+
+
+
+    </div>
+
+    <div class="panel panel-warning">
+
+
+        <div id="_ga" class="panel-heading">
+            <code class="panel-title">
+                <a rel="external noopener" href="/cookie/http/_ga/3">_ga</a>
+            </code>
+        </div>
+
+
+        <div class="panel-body">
+            <p>Google Universal Analytics long-time unique user tracking identifier</p>
+
+            <a rel="external noopener" href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage">»&nbsp;More...</a>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item">Type: HTTP Cookie</li>
+            <li class="list-group-item">Domain: <code><a href="/cookie/domain/sfccmo.edu/1360932">sfccmo.edu</a></code>
+            </li>
+
+
+            <li class="list-group-item">
+
+                This cookie expires in 729 days
+
+            </li>
+
+            <li class="list-group-item">
+
+                <span class="text-muted">
+                    <code><s>httpOnly</s></code> This cookie can be read by client-side JavaScript
+                    which might increase chances of stealing it in case of a successful
+                    Cross-Side Scripting attack. It's recommended that cookies storing authentication-related
+                    session token are protected by the flag
+                    <a href="/articles/7/what-is-a-httponly-cookie">»&nbsp;More...</a>
+                </span>
+
+            </li>
+
+
+                <li class="list-group-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                          Sample value:
+
+<pre>GA1.2.1728472581.1575045362</pre>
+
+<div class="alert alert-info" role="alert">
+    <ul class="list-unstyled">
+        <li>Length: 27 bytes (216 bits)</li>
+        <li>Information entropy: 3.37 bits (average bits per symbol)</li>
+        <li>Information content: 90.87 bits</li>
+    </ul>
+
+</div>
+
+
+                    </div>
+                </div>
+                </li>
+
+        </ul>
+
+
+        <div class="panel-footer">Cookie classification: <span class="badge">same-origin</span> <span class="badge">persistent</span></div>
+
+
+
+    </div>
+
+
+
+</div>
+   </div>
+        </div>
+</div>
+</div>
+
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
+<!-- #location:dashboard/resources-internal-assessment -->
+{% endblock page_content %}
+
+
+{% block extra_js %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.min.js"></script>
+<script>
+    $(document).ready(function() {
+
+         var privacy = echarts.init(document.getElementById("privacy-rating-gage"));
+        var option = {
+            toolbox: {
+                show: false
+            },
+            series: [
+                {
+                name: "Rating",
+                type: "gauge",
+                detail: {
+                            formatter:"F",
+                            fontSize: 80,
+                            fontWeight: "900",
+                            fontFamily: "Poppins, sans-serif",
+                            offsetCenter: [0, "100%"]
+                        },
+                data: [{value: 25 }],
+                itemStyle: {
+                    color: "#000"
+                },
+                title: {
+                    offsetCenter: [0, "40%"],
+                    fontSize: 10,
+                    color: "#99abb4",
+                    fontWeight: "lighter"
+                },
+                splitNumber: 6,
+                axisLine: {
+                    lineStyle: {
+                        color: [
+                            [0.333, "#ff3728"],
+                            [0.666, "#ffb22b"],
+                            [1, "#a1bc2b"]
+                        ],
+                        width: 30
+                    }
+                },
+                splitLine: {
+                    show: true,
+                    lineStyle: {
+                        width: 3,
+                        color: "#fff"
+                    }
+                },
+                axisLabel: false,
+                axisTick: false,
+                pointer: {
+                    length: "90%",
+                },
+
+        }]
+        };
+
+        privacy.setOption(option, true), $(function() {
+            function resize() {
+                setTimeout(function() {
+                    privacy.resize();
+                }, 100)
+            }
+            $(window).on("resize", resize), $(".sidebartoggler").on("click", resize);
+        });
+
+    });
+
+</script>
+
+
+{% endblock extra_js %}

@@ -1,0 +1,422 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block extrajs %}{% endblock extrajs %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb  -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Hyper Text Transfer Protocol Secure (HTTPS) </h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Remediations</a></li>
+            <li class="breadcrumb-item active">Hyper Text Transfer Protocol Secure (HTTPS)</li>
+        </ol>
+    </div>
+
+</div>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="container-fluid">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+
+                    <div class="entry-content article-content">
+                        <h2>Hyper Text Transfer Protocol Secure (HTTPS) </h2>
+
+
+                        <p><strong>HTTPS prevents attackers from reading and modifying data sent between your site and
+                            browsers. <u>HTTPS should be considered a minimum security requirement for all websites.</u></strong>
+                        </p>
+
+                        <h3>Using HTTPS</h3>
+                        <p>All pages should use HTTPS to prevent attacks and protect the privacy of your visitors. When
+                            a browser loads a URL via HTTP, the data is sent unprotected: attackers can read and modify
+                            all data being sent without anyone knowing. Attackers can steal passwords and personal
+                            information, inject malware and ads into pages, redirect visitors to malicious sites and
+                            more. An unencrypted HTTP request reveals not just the body of the request, but the full
+                            URL, query string, and various HTTP headers about the client and request.</p>
+
+                        <p>HTTPS adds encryption to the data sent between your website and browsers to stop attackers
+                            from reading or tampering with communications. How you enable HTTPS is specific to the
+                            server or hosting service you’re using. Once set up, you should make sure all http:// page
+                            requests are redirected to https:// URLs.</p>
+
+                        <p> HTTPS is especially important over insecure networks (such as public Wi-Fi access points),
+                            as anyone on the same local network can packet-sniff and discover sensitive information not
+                            protected by HTTPS. Additionally, many free to use and paid WLAN networks engage in packet
+                            injection in order to serve their own ads on webpages. However, this can be exploited
+                            maliciously in many ways, such as injecting malware onto webpages and stealing users'
+                            private information. </p>
+
+                        <p>It is recommended to use HTTP Strict Transport Security (HSTS) with HTTPS to protect users
+                            from man-in-the-middle attacks, especially SSL stripping. HSTS instruct compliant browsers
+                            to assume HTTPS going forward. This reduces insecure redirects, and protects users against
+                            attacks that attempt to downgrade connections to plain HTTP.</p>
+
+                        <h3>How difficult is it to attack an HTTPS connection?</h3>
+                        <p>Attacks on HTTPS connections generally fall into 3 categories:</p>
+                        <p>• Compromising the quality of the HTTPS connection, through cryptanalysis or other protocol
+                            weaknesses.</p>
+                        <p>• Compromising the client computer, such as by installing a malicious root certificate into
+                            the system or browser trust store.</p>
+                        <p>• Obtaining a “rogue” certificate trusted by major browsers, generally by manipulating or
+                            compromising a certificate authority.</p>
+                        <p>These are all possible, but for most attackers they are very difficult and require
+                            significant expense. Importantly, they are all targeted attacks, and are not feasible to
+                            execute against any user connecting to any website.</p>
+                        <p>By contrast, plain HTTP connections can be easily intercepted and modified by anyone involved
+                            in the network connection, and so attacks can be carried out at large scale and at low
+                            cost.</p>
+
+
+                        <div class="card m-t-30">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0" id="SmtpBannerCheck">Implementing HTTPS</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+
+                                <p>Websites use certificates to create an HTTPS connection. When signed by a trusted
+                                    certificate authority (CA), certificates give confidence to browsers that they are
+                                    visiting the “real” website.</p>
+                                <p>Technically, a certificate is a file that contains:</p>
+                                <p>• The domain(s) it is authorized to represent.</p>
+                                <p>• A numeric “public key” that mathematically corresponds to a “private key” held by
+                                    the website owner.</p>
+                                <p>• A cryptographic signature by a certificate authority (CA) that vouches for the
+                                    relationship between the keypair and the authorized domain(s).</p>
+                                <p>• Other technical information, such as when the certificate expires, what algorithm
+                                    the CA used to sign it, and how extensively the domain was validated.</p>
+                                <p>• Optionally, information about a person or organization that owns the domain(s).</p>
+                                <p>Web browsers are generally set to trust a pre-selected list of certificate
+                                    authorities (CAs), and the browser can verify that any signature it sees comes from
+                                    a CA in that list. The list of trusted CAs is set either by the underlying operating
+                                    system or by the browser itself.</p>
+                                <p>When a website presents a certificate to a browser during an HTTPS connection, the
+                                    browser uses the information and signature in the certificate to confirm that a CA
+                                    it trusts has decided to trust the information in the certificate.</p>
+                                <h3>Certificates</h3>
+                                <p>There are many kinds of certificates in use, the right one to choose depends on a
+                                    system’s technical architecture or an organisation's business policies.</p>
+                                <p>In general:</p>
+                                <p>• “Domain Validation” (DV) certificates are usually less expensive and more amenable
+                                    to automation than “Extended Validation” (EV) certificates. EV certificates
+                                    generally result in the domain owner’s name appearing in the browser URL bar
+                                    visitors see.</p>
+                                <p>• Certificates can be valid for anywhere from years to days. In general,
+                                    shorter-lived certificates offer a better security posture, since the impact of key
+                                    compromise is less severe. Automating the issuance and renewal of certificates is an
+                                    overall best practice, and can make the adoption of shorter-lived certificates more
+                                    practical.</p>
+
+                                <h3>Installation</h3>
+                                <p>Many hosting providers offer a "one click" easy install of paid certificates. Paying
+                                    a Certificate Authority (or your hosting company) will often give you the benefits
+                                    of technical support.</p>
+                                <p>Many provides - Cpanel hosting accounts for example - are moving towards a free
+                                    AutoSSL feature. This is a simple automated process for securing your site.</p>
+                                <p>Intermediate users can generate their own free SSL certificate using services such as
+                                    Certbot and Let's Encrypt.</p>
+
+                                <h3>SSL in the Cloud</h3>
+                                <p>Many cloud providers, such as Content Delivery Networks (CDNs) and Website
+                                    Application Firewalls (WAFs) solutions, offer SSL at no additional charge.</p>
+                                <p>These services are a proxy between the visitor and your website. By changing your
+                                    domain records to point to their servers, they can cache your content to make your
+                                    website faster and filter out malicious traffic. This also means that the browser
+                                    recognizes which server IPs are connected to your domain, allowing for the use of DV
+                                    certificates.</p>
+
+                                <h3>Generating your own free SSL certificate</h3>
+                                <p>Given the breadth of choices available and differing systems and requirements we
+                                    recommend following to process on certbot. This will Automatically enable HTTPS on
+                                    your website, deploying Let's Encrypt certificates. Visit their site here:</p>
+
+                                <p><a href="https://certbot.eff.org/">https://certbot.eff.org/</a></p>
+                                <p>Let’s Encrypt a free, automated, and open Certificate Authority: <a
+                                        href="https://letsencrypt.org/">https://letsencrypt.org/</a></p>
+
+                                <h3>Check for Mixed Content Warnings</h3>
+                                <p>When your site is available on HTTPS, you might still have resources linked to your
+                                    website that load over HTTP. This includes things like images, videos, and external
+                                    resources.</p>
+                                <p>Browsers will block this content as “unsafe”, which can also cause broken
+                                    functionality of your site and security warnings in browsers. You should plan to go
+                                    through your sites content to make sure that all resources load over https.
+                                    Developer debug tools in most browser will help you to do this. There are plugins
+                                    and extensions available that can automate the process of rewriting URLS using HTTP
+                                    to HTTPS (i.e. Really Simple SSL for WordPress).</p>
+
+                                <h3>Force HTTPS</h3>
+                                <p>See "Implementing HTTPS redirection" below to ensure that visitors can only access
+                                    your site via HTTPS. </p>
+
+
+                            </div>
+                        </div>
+
+                        <div class="card m-t-30">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0" id="SmtpBannerCheck">Implementing HTTPS redirection</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+                                <p>When an SSL certificate is installed on the server, the website is not available via
+                                    a secure HTTPS connection by default. It is necessary to add “https” to a URL every
+                                    time one needs to be securely connected. The best way to achieve maximum security
+                                    for website visitors is to enable an automatic redirect from HTTP to HTTPS.</p>
+
+                                <h4>Enabling Apache Redirect</h4>
+                                <p>There are several methods of enabling an Apache redirect http to https:</p>
+                                <p>1.Enable the redirect in the Virtual Host file for the necessary domain.</p>
+                                <p>2. Use the mod_rewrite rule in the Virtual Host file.</p>
+                                <p>3. Use it in the .htaccess file to force HTTPS.</p>
+                                <h4>Enable Apache Redirect in the Virtual Host</h4>
+                                <p>Enabling the redirect in the Virtual Host file is safer and simpler than other
+                                    options, as the configuration will be similar for all systems. Usually, there are
+                                    two Virtual Host files on Apache if an SSL certificate is installed: one is for the
+                                    non-secure port 80, and the other is for the secure port 443. The redirect to HTTPS
+                                    can be enabled in the virtual host for port 80. </p>
+                                <p><code>
+
+
+                                    &lt;VirtualHost *:80&gt;<br>
+                                    ServerName www.yourdomain.com <br>
+                                    Redirect permanent / https://www.yourdomain.com/ <br>
+                                    &lt;/VirtualHost&gt;<br> <br>
+
+                                    &lt;VirtualHost _default_:443&gt; <br>
+                                    ServerName www.yourdomain.com <br>
+                                    DocumentRoot /usr/local/apache2/htdocs <br>
+                                    SSLEngine On <br>
+                                    ... <br>
+                                    &lt;/VirtualHost&gt;
+
+                                </code></p>
+
+                                <h4>Use Apache Rewritecond - mod_rewrite Rule</h4>
+                                <p>Using the mod_rewrite rule is recommended for experienced users, as the exact
+                                    configuration can be different on different systems.</p>
+
+                                <p><code> RewriteEngine On <br>
+                                    RewriteCond %{HTTPS} !=on <br>
+                                    RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]</code></p>
+
+
+                                <h4> Use .htaccess to Redirect to HTTPS</h4>
+                                <p>As an alternative, you can modify the .htaccess file. The following directive can be
+                                    used in the .htaccess file placed in the document root folder of the website to
+                                    secure certain pages of the website:</p>
+
+                                <p><code>Redirect permanent /secure https://www.yourdomain.com/secure </code></p>
+
+
+                            </div>
+                        </div>
+
+                        <h4 class="card-title m-b-0 p-l-20"><a href="/remediation/HSTS.php">Implementing HTTP Strict
+                            Transport Security (HSTS) - part of Security Headers remediation</a></h4>
+
+                        <hr class="m-t-30">
+
+                        <h3 class="m-b-30 m-l-10">HTTPS Troubleshooting</h3>
+
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0" id="SmtpBannerCheck">HTTPS is Configured</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+
+                                <p>This error indicate that your site does not offer a https connection. Follow the
+                                    guide above to implement HTTPS for your site. </p>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0" id="HttpsCertificateIsValid">Certificate is Valid</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+
+                                <table class="table m-t-30">
+                                    <tr>
+                                        <td>Expired certificates</td>
+                                        <td> Make sure your certificate is always up to date.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Certificate registered to incorrect website name</td>
+                                        <td> Check that you have obtained a certificate for all host names that your
+                                            site serves. For example, if your certificate only covers www.example.com, a
+                                            visitor who loads your site using just example.com (without the "www."
+                                            prefix) will be blocked by a certificate name mismatch error.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Missing Server name indication (SNI) support</td>
+                                        <td>Make sure your web server supports SNI and that your audience uses supported
+                                            browsers, generally. While SNI is supported by all modern browsers, you'll
+                                            need a dedicated IP if you need to support older browsers.
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0" id="HttpsCertificateCipherStrength">Certificate Cipher
+                                    Strength</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+
+                                <p>SSL/TLS is a collection of protocols. Weaknesses have been identified with earlier
+                                    SSL protocols, including SSLv2 and SSLv3, hence SSL versions 1, 2, and 3 should not
+                                    longer be used. The best practice for transport layer protection is to only provide
+                                    support for the TLS protocols - TLS 1.0, TLS 1.1 and TLS 1.2. This configuration
+                                    will provide maximum protection against skilled and determined attackers and is
+                                    appropriate for applications handling sensitive data or performing critical
+                                    operations.</p>
+                                <p>Nearly all modern browsers support at least TLS 1.0. As of February 2014,
+                                    contemporary browsers (Chrome v20+, Firefox v27+, IE v8+, Opera v10+, and Safari
+                                    v5+) support TLS 1.1 and TLS 1.2. You should provide support for TLS 1.1 and TLS 1.2
+                                    to accommodate clients that support these protocols. The client and server (usually)
+                                    negotiate the best protocol that is supported on both sides.</p>
+                                <p>TLS 1.0 is still widely used as the 'best' protocol by a lot of browsers that are not
+                                    patched to the very latest version. It suffers from CBC Chaining attacks and Padding
+                                    Oracle attacks. TLSv1.0 should only be used after risk analysis and acceptance. PCI
+                                    DSS 3.2 prohibits the use of TLS 1.0 after June 30, 2018 (earlier requirements to do
+                                    so by June 30, 2016 were postponed).</p>
+                                <p>Support the extension 'TLS_FALLBACK_SCSV' to prevent all unnecessary fallbacks from a
+                                    higher to a lower protocol version, see <a
+                                            href="https://tools.ietf.org/html/rfc7507">RFC7507.</a></p>
+                                <p>Under no circumstances either SSLv2 or SSLv3 should be enabled as a protocol
+                                    selection:</p>
+                                <p>The SSLv2 protocol is broken and does not provide adequate transport layer
+                                    protection.</p>
+                                <p>SSLv3 had been known for weaknesses which severely compromise the channel's security
+                                    long before the 'POODLE'-Bug finally stopped to tolerate this protocol by October
+                                    2014. Switching off SSLv3 terminates the support of legacy browsers like IE6/XP and
+                                    elder (in their default configuration).</p>
+
+
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0" id="#SmtpStartTlsIsEnabled">HTTPS Redirection</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+
+                                <p>A HTTPS connection was established but the HTTP version is still available. When a
+                                    visitor accesses http://www.example.com they should be a server side redirected to
+                                    https://www.example.com </p>
+                                <p>Implementing HTTPS is of no use if regular visitors are not using it. Even though the
+                                    server supports HTTPS, users will often unknowingly try to access it over HTTP. This
+                                    is partly due to how today’s web browsers work, but the user might also click on a
+                                    link where HTTP is specified. The solution is called Forced HTTPS, where users are
+                                    directly redirected to HTTPS if they try to access the site over HTTP. Such requests
+                                    should be 301 redirect requests made server-side.</p>
+                                <p>See above for HTTPS redirection implementation instructions.</p>
+
+                            </div>
+                        </div>
+
+
+                        <hr class="m-t-30">
+
+                        <div class="m-l-10">
+                            <h3>References</h3>
+
+                            <p>
+                                Guidelines for the Selection, Configuration, and Use of Transport Layer Security (TLS)
+                                Implementations (PDF)<br>
+                                <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-52r1.pdf">https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-52r1.pdf</a>
+                            </p>
+
+                            <p>
+                                Certificate Transparency<br>
+                                <a href="https://tools.ietf.org/html/rfc6962">https://tools.ietf.org/html/rfc6962</a>
+                            </p>
+
+                            <p>
+                                The Transport Layer Security (TLS) Protocol Version 1.2<br>
+                                <a href="https://tools.ietf.org/html/rfc5246">https://tools.ietf.org/html/rfc5246</a>
+                            </p>
+
+
+                            <p>
+                                The Secure Sockets Layer (SSL) Protocol Version 3.0<br>
+                                <a href="https://tools.ietf.org/html/rfc6101">https://tools.ietf.org/html/rfc6101</a>
+                            </p>
+
+                            <p>
+                                HTTP Over TLS<br>
+                                <a href="https://tools.ietf.org/html/rfc2818">https://tools.ietf.org/html/rfc2818</a>
+                            </p>
+
+                            <p>
+                                HTTPS Everywhere<br>
+                                <a href="https://www.eff.org/https-everywhere/faq">https://www.eff.org/https-everywhere/faq</a>
+                            </p>
+
+                            <p>
+                                cerbot<br>
+                                <a href="https://certbot.eff.org/">https://certbot.eff.org/</a>
+                            </p>
+
+                            <p>
+                                Let's Encrypt<br>
+                                <a href="https://letsencrypt.org/">https://letsencrypt.org/</a>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #location:dashboard/remediation-https -->
+{% endblock page_content %}

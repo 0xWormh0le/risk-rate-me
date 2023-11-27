@@ -1,0 +1,523 @@
+{% extends "private/base.html" %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Remediation</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Remediation</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Email Security</a></li>
+            <li class="breadcrumb-item active">Sender Policy Framework</li>
+        </ol>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="container-fluid">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="entry-content article-content">
+                        <h2>The Sender Policy Framework (SPF)</h2>
+                        <p class="text-primary"><strong>SPF is an email authentication method designed to detect forged
+                            sender addresses in emails (email spoofing), a technique often used in phishing and email
+                            spam.</strong></p>
+                        <p class="text-primary"><strong>SPF allows the receiver to check that an email claiming to come
+                            from a specific domain comes from an IP address authorized by that domain's administrators.
+                            The list of authorized sending hosts and IP addresses for a domain is published in the DNS
+                            records for that domain.</strong></p>
+
+                        <p>One of the original problems of SMTP was that it allows (and still does allow) attackers to
+                            use any domain in the sender’s mail address. In other words, anyone can start up their own
+                            email server at home, log into it and spoof emails using, for example the “microsoft.com”
+                            domain. Such tactics are used in social engineering attacks such as phishing, CEO and
+                            Invoice Fraud. </p>
+
+                        <p>SPF attempts to solve the lack of validation in the MAIL FROM and HELO commands of the SMTP
+                            protocol by validating the source IP of the email received with the domain of the sender.
+                            The receiving email server will check the SPF record and confirm if the IP linked to the
+                            email is authorized to use this domain. SPF is therefore a path-based authentication system
+                            because it is tied solely to the path the message took to get from its origin to its
+                            destination. </p>
+
+                        It’s defined in <a href="https://tools.ietf.org/html/rfc4408">RFC 4408</a>, and clarified by <a
+                            href="https://tools.ietf.org/html/rfc7208">RFC 7208</a>.
+                        <br><br>
+
+
+                        <div class="card m-t-30">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h3 class="card-title m-b-0" id="#Spf">Implementing SPF</h3>
+                            </div>
+
+                            <div class="card-body collapse show">
+
+                                <p>To implement SPF, a network administrator must create new DNS TXT record. This record
+                                    specifies which Internet Protocol (IP) addresses, mail records and/or domains are
+                                    allowed to send mail and which ones are not. </p>
+
+                                <p>SPF records are defined as a single string of text. Here’s an example record:</p>
+
+                                <p><code> company.com. TXT “v=spf1 ip4:192.0.2.128 -all” </code></p>
+
+                                <p>"v=" defines the version of SPF used. Right now the version should always be spf1 as
+                                    this is the most common version of SPF that is understood by mail exchanges.
+                                    Following this are the mechanisms that define the hosts permitted to send email for
+                                    this domain. </p>
+
+
+                                <p>A mail server will compare the IP address of the sender against the IP addresses
+                                    defined in the mechanisms. If the IP address matches one of the mechanisms in the
+                                    SPF record then SPF will PASS. There are a number of defined mechanisms that can be
+                                    used.</p><br><br>
+
+                                <table class="table">
+                                    <tbody>
+
+                                    <tr>
+                                        <td valign="top">A</td>
+                                        <td>The A or AAAA IP address in the domains DNS record. <br>
+                                            <code>"v=spf1 a -all"</code><br>
+                                            If domain is not specified, the current-domain is used otherwise:<br>
+                                            <code>"v=spf1 a:company.com -all"</code><br>
+                                            Specifying the domain will lookup the A records accordingly.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top">MX</td>
+                                        <td>All the A records for all the MX records for domain are tested in order of
+                                            MX priority. If the client IP is found among them, this mechanism matches.
+                                            If domain is not specified, the current-domain is used.<br>
+                                            <code>"v=spf1 mx -all"</code><br>
+                                            <code>"v=spf1 mx:company.com -all"</code>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top">IP4</td>
+                                        <td>Single IPv4 or IPv4 address range.<br>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top">IP6</td>
+                                        <td>Single IPv6 or IPv6 address range.
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td valign="top">PTR</td>
+                                        <td>Resolving address of the PTR record for the domain. <strong
+                                                class="text-danger">This is slow and unreliable, some receivers may skip
+                                            a SPF record using the PTR mechanism. PTR should not be used.</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top">INCLUDE</td>
+                                        <td>Allows you to authorize hosts outside of your administration by specifying
+                                            their SPF records. eg: <br>
+                                            <code>"include:_spf.google.com"</code><br>
+                                            If the originating IP of an email is a Google’s IP, it will result in a
+                                            match as you have authorized google to send on your behalf and the sending
+                                            IP is found inside of the “include” mechanism.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top">ALL</td>
+                                        <td>The all mechanism matches any address. This is usually used as the last
+                                            mechanism which defines how to handle any sender IP that did not match the
+                                            previous mechanisms.
+                                            Examples:
+
+                                            "v=spf1 mx -all"
+
+                                            Allow domain's MXes to send mail for the domain, prohibit all others.
+                                            "v=spf1 -all"
+
+                                            The domain sends no mail at all.
+                                            "v=spf1 +all"
+
+                                            The domain owner thinks that SPF is useless and/or doesn't care.
+
+                                        </td>
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+
+                                <br><br>
+                                <p>Each mechanism can be combined with one of four qualifiers. These qualifiers
+                                    determine the action to take if the previous mechanisms did not match.</p>
+                                <ul>
+                                    <li><b><code>+</code></b> for a PASS result.</li>
+                                    <li><b><code>?</code></b> for a NEUTRAL result interpreted like NONE (no policy).
+                                    </li>
+                                    <li><b><code>~</code></b> (tilde) for SOFTFAIL, a debugging aid between NEUTRAL and
+                                        FAIL.
+                                    </li>
+                                    <li><b><code>-</code></b> (minus) for FAIL, the mail should be rejected.</li>
+                                </ul>
+
+
+                                <br><br>
+
+
+                                <p><code>-all</code> means that any senders not listed in the SPF record should be
+                                    treated as a "hardfail", ie. they are unauthorised and emails from them should be
+                                    discarded. In this case only the IP address 192.168.0.1 is authorized to send
+                                    emails:
+                                    <code> v=spf1 ip4:192.168.0.1 -all</code>
+                                </p>
+
+                                <p><code>~all</code> means that any servers not listed in this SPF record should be
+                                    treated as a "softfail", ie. mail can be allowed through but should be tagged as
+                                    spam or suspicious. In this case the include:spf.protection.outook.com authorizes
+                                    Office 365 to send emails. Any emails originating from different servers should be
+                                    marked as spam by the receivers:
+                                    <code>v=spf1 include:spf.protection.outlook.com ~all</code>
+                                </p>
+
+                                <p><code>?all</code> mechanism matches any IP address sending on your behalf and
+                                    therefore should not be used. There would be no reason to have an SPF record if the
+                                    +all mechanism is to be used. </p>
+
+                                <p><code>+all</code> mechanism matches any IP address sending on your behalf and
+                                    therefore should not be used. There would be no reason to have an SPF record if the
+                                    +all mechanism is to be used. </p>
+
+                            </div>
+                        </div>
+
+                        <hr class="m-t-30">
+
+                        <h3 class="m-b-30 m-l-10">SPF Troubleshooting</h3>
+
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0" id="SpfMultipleRecords">Multiple Records</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+                                <p>As per <a href="https://tools.ietf.org/html/rfc7208">RFC 7208</a>, multiple SPF
+                                    records should not be added to DNS as SPF check will fail returning a "PERMERROR".
+                                    For example, if you have two SPF records in DNS such as:</p>
+
+                                <p>
+                                    <code> company.com. TXT “v=spf1 ip4:192.0.2.128 -all” </code><br>
+                                    <code> company.com. TXT “v=spf1 include:spf.protection.outlook.com -all” </code>
+                                </p>
+
+
+                                <p>This will return PERMERROR. Both of the records need to be combined into one such
+                                    as:</p>
+
+
+                                <p><code> company.com. TXT “v=spf1 ip4:192.0.2.128 include:spf.protection.outlook.com
+                                    -all” </code></p>
+
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0" id="SpfRecordNotDeprecatedCheck">Deprecated Record
+                                    Type</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+                                <p>The use of alternative DNS RR types that was formerly supported during the
+                                    experimental phase of SPF was discontinued in 2014. SPF records must now only be
+                                    published as a DNS TXT Resource Record. For example:</p>
+
+                                <p><code> company.com. TXT “v=spf1 ip4:192.0.2.128 include:spf.protection.outlook.com
+                                    -all” </code></p>
+
+                                <p>Deprecated records are no longer valid and must be replaced. See <a
+                                        href="https://tools.ietf.org/html/rfc7208">RFC 7208</a></p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0" id="SpfValidLookupCount">Valid Lookup Count</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+                                <p>The SPF specification limits the number of DNS lookups to 10. This limit helps reduce
+                                    the amount of resources used by mailbox providers when checking SPF records. If your
+                                    SPF record results to more than 10 DNS lookups then SPF will fail. </p>
+
+                                <p>The SPF mechanisms counted towards DNS lookups are: a, ptr, mx, include, redirect and
+                                    exists. The mechanisms which do not count towards the limit are "ip4", "ip6" and
+                                    "all".</p>
+
+                                <p>When evaluating the mx mechanism, the number of MX records queried is included in the
+                                    overall limit of DNS lookups. Each mx mechanism must not result in querying more
+                                    than 10 address records.</p>
+
+
+                                <h3>Reducing the lookup count:</h3>
+
+                                <h4>Avoid unnecessary include statements</h4>
+
+                                <p>An include statement is a mechanism in your SPF record that redirects the DNS lookup
+                                    to another domain’s SPF record to verify any of their authorized IPs. Each include
+                                    statement, in the original SPF record and in any of the SPF records redirected to,
+                                    is counted toward the limit of 10.</p>
+
+
+                                <p>In order to not exceed the limit of 10, ensure each include statement in your SPF
+                                    record is necessary and could not be replaced with another mechanism, such as the
+                                    ip4 and ip6 mechanisms.</p>
+
+
+                                <h4>Use ip4 and ip6 mechanisms</h4>
+
+                                <p>One way to reduce the amount of DNS lookups is to replace your include statement with
+                                    the ip4 or ip6 mechanism, when you have the option. The ip4 and ip6 mechanisms are
+                                    used to list a static IP range in your SPF record. This eliminates the a need for an
+                                    include statement that references another domain’s SPF record.</p>
+
+                                <p>For example, here is an SPF record with an include statement:</p>
+
+                                <p>company.com</p>
+
+                                <p>
+                                    <code>v=spf1 ip4:192.168.0.1/16 include:mail.company.com ~all</code>
+                                </p>
+
+                                <p>mail.company.com</p>
+
+                                <p>
+                                    <code>v=spf1 ip4:198.155.0.1/24 ~all</code>
+                                </p>
+
+                                <p>In this example, mail.company.com’s SPF record contains a static IP range
+                                    (198.155.0.1/24). This range is not going to be constantly changing so the SPF
+                                    record for company.com does not need the include statement at all. And it can be
+                                    replaced with the ip4 mechanism.</p>
+
+                                <p>See the difference below:</p>
+
+                                <p>company.com</p>
+
+                                <p>
+                                    <code>v=spf1 ip4:192.168.0.1/16 ip4:198.155.0.1/24 ~all</code>
+                                </p>
+
+                                <p>The new SPF record does zero lookups because it no longer has the include
+                                    statement. </p>
+
+                                <h3>Remove legacy partner and vendor domains</h3>
+
+                                <p> You should remove any include statements that redirect the SPF check to a vendors or
+                                    partners’ SPF record who no longer send email on your behalf. Removing these
+                                    eliminates unnecessary DNS lookups.</p>
+
+                                <p> Senders use include statements to redirect the SPF check to a vendor or partner’s
+                                    SPF record whose IPs often change. Using the include statement of a partner or
+                                    vendor means the sender does not have to consistently update those changing IP
+                                    ranges in their own SPF record.</p>
+
+                                <h3>Reference only actively sending domains</h3>
+
+                                <p>You should also make sure that any domains you reference resolve to an active SPF
+                                    record otherwise they should be removed.</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0" id="SpfSyntaxIsValid">Valid Syntax</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+                                <p>
+                                    As soon as a recipient detects a syntax error in a sender policy the evaluation is
+                                    aborted with result PERMERROR. Check your SPF record closely for invalid characters,
+                                    sometimes they may be hard to spot.</p>
+
+                                <p> Here are some common SPF record syntax errors:</p>
+
+                                <ul>
+                                    <li>Make sure there are no extra spaces before the start of the string (v=spf1).
+                                    </li>
+                                    <li>Make sure there are no extra spaces after the end of the string (~all).</li>
+                                    <li>Check for misspellings in any of the mechanisms such as include, ip4, and
+                                        more.
+                                    </li>
+                                    <li>Check for misspellings in any of the referenced domains.</li>
+                                    <li>Remove the capitalization from the ip4 or ip6 mechanisms. (It is recommended to
+                                        remove all upper case characters.)
+                                    </li>
+                                    <li>Remove any extra dashes prior to the hard fail mechanism. For example, change
+                                        --all with –all.
+                                    </li>
+                                    <li>Make sure there are no commas and only one space in between each mechanism.</li>
+                                    <li>Make sure your string starts with the type of TXT record it is. For example,
+                                        make sure it starts with v=spf1 instead of beginning it with a different
+                                        mechanisms such as ip4.
+                                    </li>
+                                </ul>
+                                <p>If none of these common errors are in your SPF record and you are still having
+                                    issues, you should try copying and pasting the syntax into a non-formatting document
+                                    tool such as Notepad. Sometimes unintended formatting issues occur when the syntax
+                                    is copied and pasted into a DNS record. This helps ensure there are no rare
+                                    formatting mechanisms or unique characters that are unrecognizable by the mailbox
+                                    provider’s server.</p>
+
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0" id="#SpfRecordDontUsePtr">PTR Mechanism</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+                                <p> A PTR record is the opposite of an A record. Instead of resolving a domain name to
+                                    an IP address, it resolves an IP address to a domain name. The procedure of
+                                    resolving a PTR record in SPF is as follows:</p>
+
+                                <ul>
+                                    <li>The connecting IP address is taken and a reverse-mapping for it is made in
+                                        “in-addr.arpa” format for IPv4 and in “ip6.arpa.” for IPv6 to find any domain
+                                        names.
+                                    </li>
+
+                                    <li>For each domain name (has to be exact match or a subdomain of the target domain)
+                                        returned a forward lookup is made to find it’s IP address.
+                                    </li>
+
+                                    <li>If the connecting IP address is among the returned IP addresses from the lookup
+                                        then the domain name results in a match.
+                                        As it can be seen this mechanism is slow and not as reliable as other
+                                        mechanisms. Therefore it should not be used as per RFC:
+                                        https://tools.ietf.org/html/rfc7208#section-5.5
+                                    </li>
+                                </ul>
+
+                                <p>Other mechanisms should be used instead, such as: "A", "MX", "iP4", "iP6",
+                                    "include".</p>
+
+                                <p>NOTE: Apart from being slow and unreliable some receivers may decide to skip a ptr
+                                    mechanism or skip the whole SPF record which may lead to failures. Therefore, the
+                                    ptr mechanism should not be used.</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0" id="SpfRecordNotTooPermissive">SPF Too Permissive</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+                                <p>If the SPF record is too permissive it will not prevent unrestricted use of the
+                                    domain (email spoofing). A record should use the <code>~all</code> 'softfail' or
+                                    <code>-all</code> 'hardfail' </p>
+                                <p><code>+all</code> or <code>?all</code> do not adequately offer any protection against
+                                    email spoofing. </p>
+
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0" id="SpfRecordExpectedTerminator">Trailing Data</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+                                <p>The SPF record should end with the 'all' mechanism. Make sure that there is no
+                                    trailing data after 'all'. </p>
+
+
+                                <p>
+                                    incorrect: <code>"v=spf1 ip4:192.168.0.1/16 ~all ip4:198.155.0.1/24"</code>
+                                </p>
+
+                                <p>
+                                    correct: <code>"v=spf1 ip4:192.168.0.1/16 ip4:198.155.0.1/24 ~all"</code>
+                                </p>
+
+                            </div>
+                        </div>
+
+
+                        <hr class="m-t-30">
+
+                        <div class="m-l-10">
+                            <h3>References</h3>
+
+                            <p>
+                                Sender Policy Framework (SPF) for Authorizing Use of Domains in Email, Version 1 - IETF
+                                Tools. <br>
+                                <a href="https://tools.ietf.org/html/rfc7208">https://tools.ietf.org/html/rfc7208</a>
+
+
+                            </p>
+
+                            <p>
+                                Sender Policy Framework<br>
+                                <a href="http://www.openspf.org">http://www.openspf.org</a>
+                            </p>
+
+                            <p>
+                                A Sender Policy Framework (SPF) Primer for Exchange Administrators.&quot; Practical 365.<br>
+                                <a href="https://practical365.com/exchange-server/a-sender-policy-framework-spf-primer-for-exchange-administrators/">https://practical365.com/exchange-server/a-sender-policy-framework-spf-primer-for-exchange-administrators/</a>
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!-- #location:dashboard/remediation-spf -->
+{% endblock page_content %}

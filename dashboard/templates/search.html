@@ -1,0 +1,438 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block page_content %}
+
+
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Security & Trust Ratings</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Search</a></li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="m-b-30">Search by Domain</h4>
+                <form id="search-by-domain-form" novalidate>
+                    <div class="form-group">
+
+                        <input type="text" maxlength="255" id="search-domain" name="domain" aria-describedby="help-search-domain"  class="form-control" placeholder="domain.com">
+                        <small id="help-search-domain" class="form-text text-muted">Provide a high-level domain to look for, e.g. example.com</small>
+                    </div>
+                    <button type="submit" id="btn-search-domain" class="btn btn-info" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Searching...">
+                        Search
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4  class="m-b-30">Search for a Company</h4>
+                <form id="search-by-company-form" novalidate>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+
+                                <input type="text" maxlength="255" id="search-company" name="company" aria-describedby="help-search-company" class="form-control" placeholder="Company Name">
+                                <small id="help-search-company" class="form-text text-muted">Provide the full or partial name of the company to search for.</small>
+                            </div>
+                        </div>
+                    </div>
+                    {% if "admin" in user.roles %}
+                    <!-- #component:advanced-search-options:start -->
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="search-sector">Sector</label>
+                                <select id="search-sector" name="sector" class="form-control">
+                                    <option value="">Any</option>
+                                {% for sector in sectors %}
+                                    <option value="{{ sector }}">{{ sector }}</option>
+                                {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="search-tags">Tags</label>
+                                <input type="text" maxlength="255" id="search-tags" name="tags" aria-describedby="help-search-tags" class="form-control" placeholder="eg: China, SGX">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="search-score-rating" for="search-score-category">Ratings</label>
+                            <select id="search-score-category" name="score_category" class="form-control">
+                                <option value="" selected></option>
+                                <option value="overall">Overall Score</option>
+                                <option value="email_security">Email Security</option>
+                                <option value="web_security">Web Security</option>
+                                <option value="infrastructure">Infrastructure</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-check m-t-40">
+                                <input class="form-check-input" type="checkbox" id="rating-a" name="ratings" value="A">
+                                <label class="form-check-label" for="rating-a">A</label>
+
+                                <input class="form-check-input" type="checkbox" id="rating-b" name="ratings" value="B">
+                                <label class="form-check-label" for="rating-b">B</label>
+
+                                <input class="form-check-input" type="checkbox" id="rating-c" name="ratings" value="C">
+                                <label class="form-check-label" for="rating-c">C</label>
+
+                                <input class="form-check-input" type="checkbox" id="rating-d" name="ratings" value="D">
+                                <label class="form-check-label" for="rating-d">D</label>
+
+                                <input class="form-check-input" type="checkbox" id="rating-e" name="ratings" value="E">
+                                <label class="form-check-label" for="rating-e">E</label>
+
+                                <input class="form-check-input" type="checkbox" id="rating-f" name="ratings" value="F">
+                                <label class="form-check-label" for="rating-f">F</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- #component:advanced-search-options:end -->
+                    {% endif %}
+                    <div class="row m-t-30">
+                        <div class="col-4">
+                            <button type="submit" id="btn-search-info" class="btn btn-info" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Searching...">
+                                Search
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="row-no-result" class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">No result matching your query.</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="row-search-results" class="row" style="display: none">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Search Results</h4>
+                <div class="table-responsive m-t-20">
+                    <table id="search-results" class="table stylish-table datatable"  style="width:100%">
+                        <thead>
+                            <tr>
+                                <th >Rating</th>
+                                <th class="tb-cat"><i class="mdi mdi-email"></i></th>
+                                <th class="tb-cat"><i class="mdi mdi-lock"></i></th>
+                                 <th class="tb-cat"><i class="mdi mdi-web"></i></th>
+                                <th class="tb-cat"><i class="mdi mdi-server-security"></i></th>
+                                <th>Company</th>
+                                <th>Sector</th>
+                                <th>Tags</th>
+                                <th>Date</th>
+                                <th class="tb-actions">Options</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #location:dashboard/search -->
+
+{% endblock page_content %}
+
+{% block extra_js %}
+{{ super }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.23/moment-timezone.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
+
+
+    <script type="text/javascript">
+     $(document).ready(function() {
+
+        var table = $('#search-results').DataTable( {
+            processing: false,
+            serverSide: false,
+            searching: false,
+            columnDefs: [ {
+                "targets": [1, 2, 3, 4],
+                "createdCell": function (td, cellData, rowData, row, col) {
+                  if ( cellData < 0.33 ) {
+                    $(td).addClass('cat-fail')
+                  } else if ( cellData < 0.65 ) {
+                    $(td).addClass('cat-warn')
+                  } else if ( cellData < 1.1 ) {
+                    $(td).addClass('cat-success')
+                  }
+                }
+            } ],
+            "columns": [
+                {
+                    "data": "overall_rating",
+                    "sort": "overall_rating",
+                    "sClass": "tb-rating",
+                    render: function ( data, type, row ) {
+                     return type === "display" || type === "filter" ?
+                        "<div class='round " + data + "'>" + data + "</div>": data;
+                    }
+                },
+                {
+                    "data": "email_security_rating",
+                    "sort": "email_security_rating",
+                    "sClass": "tb-cat",
+                    render: function ( data, type, row ) {
+                        return type === "display" || type === "filter" ?
+                        "<span class='" + data + "'><i class='mdi mdi-email' data-score='" + data + "'></i></span>" : data;
+                    }
+                },
+                {
+                    "data": "web_security_rating",
+                    "sort": "web_security_rating",
+                    "sClass": "tb-cat",
+                    render: function ( data, type, row ) {
+                        return type === "display" || type === "filter" ?
+                        "<span class='" + data + "'><i class='mdi mdi-lock' data-score='" + data + "'></i></span>" : data;
+                    }
+                }, {
+                "data": "web_application_rating",
+                "sort": "web_application_rating",
+                "sClass": "tb-cat",
+                render: function ( data, type, row ) {
+                    return type === "display" || type === "filter" ?
+                    "<span class='" + data + "'><i class='mdi mdi-web' data-score='" + data + "'></i></span>" : data;
+                }
+            },
+                {
+                    "data": "infrastructure_rating",
+                    "sort": "infrastructure_rating",
+                    "sClass": "tb-cat",
+                     render: function ( data, type, row ) {
+                        return type === "display" || type === "filter" ?
+                        "<span class='" + data + "'><i class='mdi mdi-server-security' data-score='" + data + "'></i></span>" : data;
+                    }
+                },
+                {
+                    "data": "company_name",
+                    "sort": "company_name",
+                    "searchable": true,
+                    "sClass": "tb-name",
+                    render: function ( data, type, full, meta ) {
+                        return type === "display" || type === "filter" ?
+                        "<h6><a href='/dashboard/domain?domain=" + full.domain + "'>" + full.company_name + "</a></h6><small><a class='text-muted' href='http://" + full.domain + "'>" + full.domain + "</a></small>" : full.company_name;
+                    }
+                },
+                {
+                    "data": "company_sector",
+                    "sort": "company_sector",
+                    "sClass": "tb-sector",
+                    render: function ( data, type, row ) {
+                        var sector = encodeURIComponent(data);
+                        return "<a href='/dashboard/sector/" + sector + "'><span class='tag label label-light-sector'>" + data + "</span></a> ";
+                    }
+                },
+                {
+                    "data": "company_tags",
+                    "sClass": "tb-tags",
+                    render: function ( data, type, row ) {
+                        var contents = "";
+                        $.each(data, function( index, value ) {
+                            contents += "<a href='/dashboard/tag/"+value+"'><span class='tag label label-light-tag'>" + value.trim() + "</span></a> ";
+                        });
+                        return contents;
+                    }
+                },
+                {
+                    "data": "updated",
+                    "sort": "updated",
+                    "sClass": "tb-data",
+                    render: function ( data, type, row ) {
+                    var dateSplit = data.split('T');
+                    return type === "display" || type === "filter" ?
+                        dateSplit[0]  :
+                        data;
+                    }
+                },
+                {
+                    "data": "domain",
+                    "sClass": "tb-actions",
+                    "sortable": false,
+                    render: function ( data, type, full, meta  ) {
+                        var contents;
+                        contents = "<a href='/dashboard/report/" + data + "'><i class='mdi mdi-binoculars'></i></a>   ";
+                        if (full.is_followed) {
+                            contents += "<a href='javascript:void(0)' data-toggle='tooltip' title='You are following this organization' class='unfollow'><i class='mdi mdi-radar text-success'></i></a>";
+                         } else {
+                            contents += "<a href='javascript:void(0)' data-toggle='tooltip' title='You are not following this organization' class='follow'><i class='mdi mdi-radar text-danger'></i></a>";
+                         }
+                        return contents;
+                    }
+                }
+            ],
+        });
+
+        $("#btn-search-domain").click(function(event) {
+          event.preventDefault();
+          // disable button
+          $(this).prop("disabled", true);
+          // add spinner to button
+          $(this).html(
+            `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Searching...`
+          );
+          $("#search-by-domain-form").submit();
+        });
+
+        $("#search-by-domain-form").submit(function(event) {
+            event.preventDefault();
+            var domain = $("#search-domain").val()
+
+            if (domain.trim().length > 0) {
+                data = $("#search-by-domain-form").serialize();
+                table.clear().draw();
+                $.get("{% url 'do-search' %}", data, function(data) {
+
+                }).done(function(data) {
+                    console.log(data);
+                    table.rows.add(data).draw();
+                    $("#row-no-result").hide();
+                    $("#row-search-results").show();
+                }).fail(function(data) {
+                    $("#row-no-result").show();
+                    $("#row-search-results").hide();
+                });
+            } else {
+
+            }
+
+            $("#btn-search-domain").prop("disabled", false);
+            $("#btn-search-domain").html("Search");
+        });
+
+        $("#btn-search-info").click(function(event) {
+          event.preventDefault();
+          // disable button
+          $(this).prop("disabled", true);
+          // add spinner to button
+          $(this).html(
+            `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Searching...`
+          );
+          $("#search-by-company-form").submit();
+        });
+
+        $("#search-by-company-form").submit(function(event) {
+            event.preventDefault();
+            $("body").css("cursor", "progress");
+            var company = $("#search-company").val()
+            var sector = $("#search-sector").val()
+            var tags = $("#search-tags").val()
+
+            if ((company.trim().length > 0) || (sector.trim().length > 0) || (tags.trim().length > 0)) {
+                data = $("#search-by-company-form").serialize();
+                table.clear().draw();
+                $.get("{% url 'do-search' %}", data, function(data) {
+
+                }).done(function(data) {
+                    table.rows.add(data).draw();
+                    $("#row-no-result").hide();
+                    $("#row-search-results").show();
+                }).fail(function(data) {
+                    $("#row-no-result").show();
+                    $("#row-search-results").hide();
+                });
+            } else {
+
+            }
+            $("body").css("cursor", "default");
+            $("#btn-search-info").prop("disabled", false);
+            $("#btn-search-info").html("Search");
+        });
+
+        $('#search-results tbody').on( 'click', '.unfollow', function () {
+            var row = table.row( $(this).parents('tr') );
+            var rowdata = row.data();
+            var domain = rowdata.domain;
+            unfollowDomain(domain, row, toggleFollow);
+        });
+
+        $('#search-results tbody').on( 'click', '.follow', function () {
+            var row = table.row( $(this).parents('tr') );
+            var rowdata = row.data();
+            var domain = rowdata.domain;
+            followDomain(domain, row, toggleFollow);
+        });
+
+        function toggleFollow(row, result) {
+            var rowdata = row.data();
+            rowdata.is_followed = result;
+            row.data(rowdata).draw();
+        }
+
+        function followDomain(domain, row, callback) {
+            $.post("{% url 'do-follow' %}", {domain: domain, csrfmiddlewaretoken: '{{ csrf_token }}'}, function(response) {
+                if (callback) {
+                    callback(row, true);
+                } else {
+                    return true;
+                }
+            })
+            .fail(function(response) {
+                $("#modal-info-title").html("Unable to track this domain");
+                $("#modal-info-contents").html(response.responseJSON["message"]);
+                $("#modal-info").modal('toggle');
+                return false;
+            });
+        };
+
+
+        function followDomain(domain, row, callback) {
+            $.post("{% url 'do-follow' %}", {domain: domain, csrfmiddlewaretoken: '{{ csrf_token }}'}, function(response) {
+                if (callback) {
+                    callback(row, true);
+                } else {
+                    return true;
+                }
+            })
+            .fail(function(response) {
+                $("#modal-info-title").html("Unable to track this domain");
+                $("#modal-info-contents").html(response.responseJSON["message"]);
+                $("#modal-info").modal('toggle');
+                return false;
+            });
+        };
+
+        function unfollowDomain(domain, row, callback) {
+            $.post("{% url 'do-unfollow' %}", {domain: domain, csrfmiddlewaretoken: '{{ csrf_token }}'}, function(response) {
+                if (callback) {
+                    callback(row, false);
+                } else {
+                    return true;
+                }
+            })
+            .fail(function(response) {
+                $("#modal-info-title").html("Warning");
+                $("#modal-info-contents").html(response.responseJSON["message"]);
+                $("#modal-info").modal("toggle");
+                return false;
+            });
+        };
+     });
+</script>
+{% endblock extra_js %}

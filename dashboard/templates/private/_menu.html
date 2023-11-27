@@ -1,0 +1,338 @@
+<!-- #component:dashboard/menu:start -->
+<aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav" class="in">
+                <li>
+                    <a class="waves-effect waves-dark" href="{% url 'dashboard' %}" aria-expanded="false">
+                        <i class="mdi mdi-gauge"></i>
+                        <span class="hide-menu">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-devider"></li>
+                <li class="nav-small-cap">Ratings</li>
+                <li>
+                    <a class="waves-effect waves-dark" href='{% url "my-rating" %}' aria-expanded="false">
+                        <i class="mdi mdi-chart-line"></i>
+                        <span class="hide-menu">My Rating</span>
+                    </a>
+                </li>
+                <li>
+                    {% if request.user.profile.on_trial_or_free_account %}
+                    <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">
+                        <i class="mdi mdi-account-check"></i><span class="hide-menu">Internal Assessment</span>
+                    </a>
+                    {% else %}
+                    <a class="waves-effect waves-dark" href='{% url "nist_assessment" %}' aria-expanded="false">
+                        <i class="mdi mdi-account-check"></i><span class="hide-menu">Internal Assessment</span>
+                    </a>
+                    {% endif %}
+                </li>
+                <li>
+                    {% if not request.user.profile.on_trial_or_free_account %}
+                    <a class="waves-effect waves-dark" href='{% url "my-companies" %}' aria-expanded="false">
+                        <i class="mdi mdi-security-network"></i>
+                        <span class="hide-menu">My Companies</span>
+                    </a>
+                    {% endif %}
+                </li>
+
+                {% if user.is_superuser %}
+                <li>
+                    <a class="waves-effect waves-dark" href="{% url 'report-search' %}" aria-expanded="false">
+                        <i class="mdi mdi-search-web"></i>
+                        <span class="hide-menu">New Search</span>
+                    </a>
+                </li>
+                {% endif %}
+
+                <li>
+                    {% if not request.user.profile.on_trial_or_free_account %}
+
+                    <a class="waves-effect waves-dark" href="{% url 'domain-scan' %}" aria-expanded="false">
+                        <i class="mdi mdi-eye-outline"></i>
+                        <span class="hide-menu">Domain Scan</span>
+                    </a>
+                    {% endif %}
+                </li>
+
+
+
+                <li class="nav-devider"></li>
+                <li class="nav-small-cap">CyberSecurity Starter Pack</li>
+                <li>
+                    {% if request.user.profile.on_trial_or_free_account %}
+                    <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">
+                        <i class="mdi mdi-laptop-mac"></i><span class="hide-menu">Security Framework</span>
+                    </a>
+                    {% else %}
+                    <a class="waves-effect waves-dark" href='{% url "security_framework" %}' aria-expanded="false">
+                        <i class="mdi mdi-laptop-mac"></i><span class="hide-menu">Security Framework</span>
+                    </a>
+                    {% endif %}
+                </li>
+                <li>
+                    {% if request.user.profile.on_trial_or_free_account %}
+                    <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">
+                        <i class="mdi mdi-clipboard-check"></i> <span class="hide-menu">InfoSec Guidelines</span>
+                    </a>
+                    {% else %}
+                    <a class="waves-effect waves-dark" href='{% url "infosec_guidelines" %}' aria-expanded="false">
+                        <i class="mdi mdi-clipboard-check"></i> <span class="hide-menu">InfoSec Guidelines</span>
+                    </a>
+                    {% endif %}
+                </li>
+                <li>
+                    {% if request.user.profile.on_trial_or_free_account %}
+                    <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">
+                        <i class="mdi mdi-ambulance"></i><span class="hide-menu">Incident Response</span>
+                    </a>
+                    {% else %}
+                    <a class="waves-effect waves-dark" href='{% url "incident_response" %}' aria-expanded="false">
+                        <i class="mdi mdi-ambulance"></i><span class="hide-menu">Incident Response</span>
+                    </a>
+                    {% endif %}
+                </li>
+                 <li>
+                    {% if request.user.profile.on_trial_or_free_account %}
+                    <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">
+                        <i class="mdi mdi-book-open"></i><span class="hide-menu">High Level Policies</span>
+                    </a>
+                    {% else %}
+                    <a class="waves-effect waves-dark" href="{% url 'policies_high_level' %}" aria-expanded="false">
+                        <i class="mdi mdi-book-open"></i><span class="hide-menu">High Level Policies</span>
+                    </a>
+                    {% endif %}
+                </li>
+                <li>
+                    <a class="waves-effect waves-dark" href="{% url 'policies' %}">
+                        <i class="mdi mdi-book-open-variant"></i><span class="hide-menu">Employee Policies</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0);" aria-expanded="false">
+                        <i class="mdi mdi-school"></i>
+                        <span class="hide-menu">Security Training</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">Bite Sized Security</a>
+                            {% else %}
+                            <a href='{% url "security_bite_sized" %}'>Bite Sized Security</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">Phishing Training</a>
+                            {% else %}
+                            <a href='{% url "security_phishing" %}'>Phishing Training</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">Awareness Material</a>
+                            {% else %}
+                            <a href='{% url "awareness_material" %}'>Awareness Material</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">FULL TRAINING</a>
+                            {% else %}
+                            <a href='{% url "awareness_material" %}'>FULL TRAINING</a>
+                            {% endif %}
+                        </li>
+
+                    </ul>
+                </li>
+
+
+                <li class="nav-devider"></li>
+                <li class="nav-small-cap">Remediations</li>
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false" href="javascript:void(0)">
+                        <i class="mdi mdi-email-outline"></i><span class="hide-menu">Email Security</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">Overview</a>
+                            {% else %}
+                            <a href='{% url "remediation-email" %}'>Overview</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">SPF</a>
+                            {% else %}
+                            <a href='{% url "remediation-spf" %}'>SPF</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">DKIM</a>
+                            {% else %}
+                            <a href='{% url "remediation-dkim" %}'>DKIM</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">DMARC</a>
+                            {% else %}
+                            <a href='{% url "remediation-dmarc" %}'>DMARC</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">Mail Agents</a>
+                            {% else %}
+                            <a href='{% url "remediation-smtp" %}'>Mail Agents</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false" href="javascript:void(0)">
+                        <i class="mdi mdi-lock"></i><span class="hide-menu">Web Security</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">HTTPS</a>
+                            {% else %}
+                            <a href="{% url 'remediation-https' %}">HTTPS</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">DNSSEC</a>
+                            {% else %}
+                            <a href="{% url 'remediation-dnssec' %}">DNSSEC</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false" href="javascript:void(0)">
+                        <i class="mdi mdi-web"></i><span class="hide-menu">Web Application</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">Strict-Transport-Security</a>
+                            {% else %}
+                            <a href="{% url 'remediation-hsts' %}">Strict-Transport-Security</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">X-XSS-Protection</a>
+                            {% else %}
+                            <a href="{% url 'remediation-xxss' %}">X-XSS-Protection</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">X-Frame-Options</a>
+                            {% else %}
+                            <a href="{% url 'remediation-xframe' %}">X-Frame-Options</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">X-Content-Type</a>
+                            {% else %}
+                            <a href="{% url 'remediation-xct' %}">X-Content-Type</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">Content Security Policy</a>
+                            {% else %}
+                            <a href="{% url 'remediation-csp' %}">Content Security Policy</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">Referrer-Policy</a>
+                            {% else %}
+                            <a href="{% url 'remediation-referrer' %}">Referrer-Policy</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">Feature-Policy</a>
+                            {% else %}
+                            <a href="{% url 'remediation-feature' %}">Feature-Policy</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">Server-Header</a>
+                            {% else %}
+                            <a href="{% url 'remediation-servhead' %}">Server-Header</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">X-Powered-By</a>
+                            {% else %}
+                            <a href="{% url 'remediation-xpower' %}">X-Powered-By</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">COOKIES</a>
+                            {% else %}
+                            <a href="{% url 'remediation-cookies' %}">COOKIES</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false" href="javascript:void(0)">
+                        <i class="mdi mdi-server-security"></i><span class="hide-menu">Infrastructure</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">IP Health</a>
+                            {% else %}
+                            <a href="{% url 'remediation-ip' %}">IP Health</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">Open Ports</a>
+                            {% else %}
+                            <a href="{% url 'remediation-ports' %}">Open Ports</a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if request.user.profile.on_trial_or_free_account %}
+                            <a class="waves-effect waves-dark" href="javascript:void(0);" data-toggle="modal" data-target="#modal-upgrade" aria-expanded="false">Vulnerabilities</a>
+                            {% else %}
+                            <a href="{% url 'remediation-vulns' %}">Vulnerabilities</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+
+    <div class="sidebar-footer">
+        <a href="{% url 'profile' %}" class="link" data-toggle="tooltip" title="go to your profile" data-original-title="Profile"><i class="ti-user"></i></a>
+        <a href="{% url 'contact-us' %}" class="link" data-toggle="tooltip" title="contact support" data-original-title="Support"><i class="mdi mdi-help-circle-outline"></i></a>
+        <a href="{% url 'account_logout' %}" class="link" data-toggle="tooltip" title="logout of this session" data-original-title="Logout"><i class="mdi mdi-power"></i></a>
+    </div>
+
+</aside>
+<!-- #component:dashboard/menu:end -->

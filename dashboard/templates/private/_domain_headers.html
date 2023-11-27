@@ -1,0 +1,88 @@
+<!-- #component:dashboard/domain-headers:start -->
+<div class="card expand-card">
+    <div class="card-header" id="heading9" style="border-bottom:0;">
+        <div class="d-flex">
+            <div class="m-r-20 align-self-center  cat-icon-circle">
+                {% if report.http_headers_rating == "A" %}
+                    <h1><i id="icon-headers-score" class="fas fa-check-circle text-passed"></i></h1>
+                {% elif report.http_headers_rating in "EF" %}
+                    <h1><i id="icon-headers-score" class="fas fa-exclamation-circle text-danger"></i></h1>
+                {% else %}
+                    <h1><i id="icon-headers-score" class="fas fa-exclamation-circle text-warning"></i></h1>
+                {% endif %}
+            </div>
+            <div>
+                <h4 class="card-title">Application Headers</h4>
+                <h6 class="card-subtitle">
+                    Response headers improve the security of web applications and websites.
+                </h6>
+            </div>
+        </div>
+        <button class="btn btn-success" type="button" data-toggle="collapse"
+                data-target="#col9" aria-expanded="false" aria-controls="col9"
+                style="float:right;">View Results
+        </button>
+    </div>
+        <div id="col9" class="collapse" aria-labelledby="heading9">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="custom table">
+                        <thead>
+                        <th style="width: 35%">Test</th>
+                        <th style="width: 10%; text-align: center">Result</th>
+                        <th style="width: 55%">Info</th>
+                        </thead>
+                    </table>
+                    <table class="custom table">
+                        <tbody>
+                        {% for test in tests %}
+                            {% if test.definition.category == "web_application" and "headers" in test.definition.keywords %}
+                            <tr>
+                                <td style="width: 35%">
+                                    {{ test.definition.name }}
+                                    <span data-toggle="tooltip" title="" data-original-title="{{ test.definition.description }}">
+                                        <i class="mdi mdi-information-outline"></i>
+                                    </span>
+                                </td>
+                                <td style="width: 10%; text-align: center" class="{{ test.definition }}">
+                                    {% if test.has_succeed %}
+                                    <span class="badge A">passed</span>
+                                    {% elif test.has_partially_succeed %}
+                                    <span class="badge C">partial</span>
+                                    {% elif test.has_failed %}
+                                    <span class="badge E">failed</span>
+                                    {% else %}
+                                    -
+                                    {% endif %}
+                                </td>
+                                <td style="width: 55%">
+                                    {{ test.message|safe }}
+                                    {% if test.has_failed %}
+                                    <br>
+                                    <small><a href="/dashboard/remediation/headers/{{ test.definition }}"  target="_blank">remediation</a> </small>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                                {% if test.data and test.data|length > 0 %}
+                                    <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <ul>
+
+                                            <li>{{ test.data }}</li>
+
+                                        </ul>
+                                    </td>
+                                </tr>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</div>
+<!-- #component:dashboard/domain-headers:end -->
+

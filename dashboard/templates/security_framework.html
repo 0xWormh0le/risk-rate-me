@@ -1,0 +1,357 @@
+{% extends "private/base.html" %}
+
+{% block extrajs %}{% endblock extrajs %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Cyber Security Framework</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+            <li class="breadcrumb-item ">Resources</li>
+            <li class="breadcrumb-item active">Cyber Security Framework</li>
+        </ol>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row m-b-30">
+    <div class="col-12">
+      <div class="card m-b-0">
+     <div class="row no-gutters">
+         <div class="col-md-4">
+             <div class="card-body bg-info h-100 p-r-0 text-center">
+                 <div class="p-t-30">
+                     <i class="mdi mdi-security fa-3x text-white p-t-30"></i>
+                     <h2 class="text-white font-weight-light">My Security <br><span class="font-bold">Action Plan</span>
+                     </h2>
+                 </div>
+                 <h2 class="text-white font-weight-light p-t-10">Step 3
+                 </h2>
+             </div>
+         </div>
+         <div class="col-md-8">
+             <div class="card-body p-0">
+                 <div class="message-box contact-box position-relative">
+                     <div class="message-widget contact-widget position-relative">
+                         <!-- Message -->
+                         <a href="{% url 'my-rating' %}" class="py-3 px-2 border-bottom d-block text-decoration-none">
+                             <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">1</span>
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Risk Report Remediation</h5> <span class="mail-desc font-12 d-block">Find and fix all issues to protect your organisation from common vulnerabilities </span>
+                             </div>
+                         </a>
+                         <!-- Message -->
+                         <a href="{% url 'internal_assessment' %}" class="py-3 px-2 border-bottom d-block text-decoration-none">
+                             <div class="user-img position-relative d-inline-block mr-3  ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">2</span>
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Security Self Assessment</h5> <span class="mail-desc font-12  d-block">Identify weaknesses and generate a remediation plan to ensure essential cybersecurity measures are in place. </span>
+                             </div>
+                         </a>
+                         <!-- Message -->
+                         <a href="{% url 'security_framework' %}" class="py-3 px-2 border-bottom d-block text-decoration-none" style="background: #f2f4f8;">
+                             <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">3</span>
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Safeguard Your Assests </h5><span class="mail-desc font-12  d-block">Review, update, manage, develop policies and procedures to maintain your cyber security.</span>
+                             </div>
+                         </a>
+                         <!-- Message -->
+                         <a href="{% url 'security_training' %}" class="py-3 px-2 d-block text-decoration-none" >
+                             <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">4</span>
+
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Security Awareness Education</h5> <span class="mail-desc font-12  d-block">Take preventive action against cyber risks with the deployment of staff awareness training.</span>
+                             </div>
+                         </a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+
+    </div>
+</div>
+
+<div class="row m-b-30">
+    <div class="col-md-8">
+        <div class="card h-100 m-b-0">
+            <div class="card-body">
+             <h4 class="card-title">Five Steps to Reduce Cyber Risks</h4>
+                <h6 class="card-subtitle">A framework to achieve a minimal level of cyber security compliance. </h6>
+
+                <p >This resource is for SMEs to quickly and cost effectively address cybersecurity threats. These simple, low cost steps are based on NIST guidance and have been tailored to meet the needs of small companies so they can identify, assess and manage cybersecurity risks.</p>
+                <p>For many SMEs, the security of information, systems, and networks is not the highest priority, but a cybersecurity incident can be detrimental to the business, customers, or suppliers. It's important that SMEs understand and manage the risk and establish a cybersecurity protocol to protect critical assets. In conjunction with the <a href="{% url 'security_framework' %}">Infromation Security Policies &amp; Technical Guidelines</a>  you have everything you need to achieve a robust security profile.</p>
+                <p>The <a href="{% url 'internal_assessment' %}">Internal Security Assessments</a> provide a quick and effective way for you to review your implementation of these steps. It will enable you to identify areas that require improvement. </p>
+            </div>
+            <div class="card-footer"><a href="#" class="btn btn-secondary" data-toggle="tooltip" title="" data-original-title="Download policy (docx)"><span class="btn-label"><i class="mdi mdi-download"></i></span> Download</a> </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100  m-b-0 bg-dark ">
+
+                            <div class="card-body card-inverse social-profile d-flex ">
+                                <div class="align-self-center"> <img src="/static/images/eye.svg" style="width:100px;" class="m-b-20">
+                                    <h4 class="card-title">Security Consultancy</h4>
+                                    <h6 class="card-subtitle">contact@riskrate.me</h6>
+                                    <p class="text-white">Relieve the burden of managing cyber security internally and get direct access to a specialist team of cyber security experts. </p>
+                                </div>
+                            </div> <div class="card-footer text-center social-profile"><a href="#" class="btn btn-secondary">Contact Us</a> </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row p-b-30">
+    <div class="col-12">
+        <div class="card-deck-custom">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Management Policy Templates</h4>
+                    <p class="card-text">Defines acceptable use of equipment and computing services, and the appropriate employee security measures to protect the organization’s corporate resources and proprietary information.</p>
+
+                </div>
+                <div class="card-footer"><a href="#" class="btn btn-info"><span class="btn-label"><i class="mdi mdi-download"></i></span> View All</a> </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Technical Guidelines</h4>
+                    <p class="card-text">Defines the requirements for proper use of the company email system and make users aware of what is considered acceptable and unacceptable use of its email system.</p>
+                </div>
+                <div class="card-footer"><a href="#" class="btn btn-info" data-toggle="tooltip" title="" data-original-title="Download policy (docx)"><i class="mdi mdi-download"></i></a> <a href="#" data-toggle="tooltip" title="" data-original-title="View policy" class="btn btn-info"><i class="mdi mdi-magnify"></i></a></div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">InfoSec Spreadsheets</h4>
+                    <p class="card-text">Defines the requirements for proper use of the company’s internet connection, network and equipment. </p>
+                </div>
+                <div class="card-footer"><a href="#" class="btn btn-info" data-toggle="tooltip" title="" data-original-title="Download policy (docx)"><i class="mdi mdi-download"></i></a> <a href="#" data-toggle="tooltip" title="" data-original-title="View policy" class="btn btn-info"><i class="mdi mdi-magnify"></i></a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row p-b-30">
+    <div class="col-12">
+        <div class="card-deck-custom">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Incident Response Plans</h4>
+                    <p class="card-text">Defines acceptable use of equipment and computing services, and the appropriate employee security measures to protect the organization’s corporate resources and proprietary information.</p>
+
+                </div>
+                <div class="card-footer"><a href="#" class="btn btn-info" data-toggle="tooltip" title="" data-original-title="Download policy (docx)"><i class="mdi mdi-download"></i></a> <a href="#" data-toggle="tooltip" title="" data-original-title="View policy" class="btn btn-info"><i class="mdi mdi-magnify"></i></a></div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Employee Policy Templates</h4>
+                    <p class="card-text">Defines the requirements for proper use of the company email system and make users aware of what is considered acceptable and unacceptable use of its email system.</p>
+                </div>
+                <div class="card-footer"><a href="#" class="btn btn-info" data-toggle="tooltip" title="" data-original-title="Download policy (docx)"><i class="mdi mdi-download"></i></a> <a href="#" data-toggle="tooltip" title="" data-original-title="View policy" class="btn btn-info"><i class="mdi mdi-magnify"></i></a></div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Security Training Resources</h4>
+                    <p class="card-text">Defines the requirements for proper use of the company’s internet connection, network and equipment. </p>
+                </div>
+                <div class="card-footer"><a href="#" class="btn btn-info" data-toggle="tooltip" title="" data-original-title="Download policy (docx)"><i class="mdi mdi-download"></i></a> <a href="#" data-toggle="tooltip" title="" data-original-title="View policy" class="btn btn-info"><i class="mdi mdi-magnify"></i></a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+
+        <div class="card">
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs customtab p-t-10" role="tablist">
+                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#identify" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down"><strong>IDENTIFY</strong></span></a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#protect" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down"><strong>PROTECT</strong></span></a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#detect" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down"><strong>DETECT</strong></span></a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#respond" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down"><strong>RESPOND</strong></span></a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#recover" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down"><strong>RECOVER</strong></span></a> </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content tabcontent-border">
+                <div class="tab-pane active" id="identify" role="tabpanel">
+                    <div class="p-20">
+                        <p>Develop an organizational understanding to manage cybersecurity risk to systems, people, assets, data, and capabilities.</p>
+
+                        <hr>
+
+                        <h4 class="p-t-20">Create an appropriate cyber security governance processes.</h4>
+                        <ul class="my-list">
+                            <li> There shall be clear lines of responsibility and accountability to named individuals for the security of sensitive information and key operational services. </li>
+                            <li>There shall be appropriate management policies and processes in place to direct the organisations overall approach to cyber security. </li>
+                            <li> Organisations shall identify and manage the significant risks to sensitive information and key operational services. </li>
+                            <li> Organisations shall understand and manage security issues that arise because of dependencies on external suppliers or through their supply chain. This includes ensuring that the standards defined are met by the suppliers of 3rd party services. </li>
+                            <li> Organisations shall ensure that senior accountable individuals receive appropriate training and guidance on cyber security and risk management and should promote a culture of awareness and education about cyber security across the Department. </li>
+                        </ul>
+                        <hr>
+                        <h4 class="p-t-20 p-b-10">Identify and catalogue sensitive information.</h4>
+                        <h5>Organisations should know and record: </h5>
+                        <ul class=" my-list">
+                            <li> What sensitive information they hold or process </li>
+                            <li> Why they hold or process that information </li>
+                            <li> Where the information is held </li>
+                            <li> Which computer systems or services process it </li>
+                            <li> The impact of its loss, compromise or disclosure </li>
+                        </ul>
+                        <hr>
+                        <h4 class="p-t-20  p-b-10">Identify and catalogue the key operational services. </h4>
+                        <h5>Organisations should know and record: </h5>
+                        <ul class="my-list">
+
+                            <li> What their key operational services are </li>
+                            <li> What technologies and services their operational services rely on to remain available and secure </li>
+                            <li> What other dependencies the operational services have (power, cooling, data, people etc.) <ul>
+                                    <li> The impact of loss of availability of the service </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <hr>
+                        <h4 class="p-t-20">The need for users to access sensitive information or key operational services shall be understood and continually managed. </h4>
+                        <ul class=" my-list">
+
+                            <li> Users shall be given the minimum access to sensitive information or key operational services necessary for their role. </li>
+                            <li>Access shall be removed when individuals leave their role or the organisation. Periodic reviews should also take place to ensure appropriate access is maintained. </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-pane  p-20" id="protect" role="tabpanel">
+                    <div class="p-20">
+                        <p> Develop and implement appropriate safeguards to ensure delivery of critical services.</p>
+
+                        <hr>
+                        <h4 class="card-title p-t-20">Access to sensitive information and key operational services shall only be provided
+                            to identified, authenticated and authorised users or systems.
+                        </h4>
+                        <ul class="my-list">
+                            <li>Access to sensitive information and services shall only be provided to authorised, known and individually referenced users or systems. </li>
+                            <li>Users and systems shall always be identified and authenticated prior to being provided access to information or services. Depending on the sensitivity of the information or criticality of the service, you may also need to authenticate and authorise the device being used for access. </li>
+                        </ul>
+                        <hr>
+                        <h4>Systems which handle sensitive information or key operational services shall be protected from exploitation of known vulnerabilities. </h4>
+
+                        <h5 class="p-b-20">This section covers four main areas of technology.</h5>
+
+                        <h5>1. Protect your enterprise technology</h5>
+
+                        <ul class="my-list">
+                            <li>Track and record all hardware and software assets and their configuration
+                            <li>Ensure that any infrastructure is not vulnerable to common cyber-attacks. This should be through secure configuration and patching, but where this is not possible, then other mitigations (such as logical separation) shall be applied. </li>
+                            <li>Validate that through regular testing for the presence of known vulnerabilities or common configuration errors. </li>
+
+                            <li>Ensure that changes to your authoritative DNS entries can only be made by strongly authenticated and authorised administrators. </li>
+                            <li>Understand and record Organisation IP ranges. </li>
+                            <li>Where services are outsourced (for example by use of cloud infrastructure or services), you shall understand and accurately record which security related responsibilities remain with the Organisation and which are the supplier’s responsibility. </li>
+                        </ul>
+
+                        <h5>2. Protect your end user devices</h5>
+                        <ul class="my-list">
+                            <li>Identify and account for all end user devices and removable media. </li>
+                            <li>Manage devices which have access to sensitive information, or key operational services, such that technical policies can be applied and controls can be exerted over software that interacts with sensitive information. </li>
+                            <li>Be running operating systems and software packages which are patched regularly, and as a minimum in vendor support. </li>
+                            <li>Encrypt data at rest where the Organisation cannot expect physical protection, such as when a mobile device or laptop is taken off-site or on removable media. </li>
+                            <li>Have the ability to remotely wipe and/or revoke access from an end user device. </li>
+                        </ul>
+
+                        <h5>3. Protect email</h5>
+                        <ul class="my-list">
+                            <li>Support Transport Layer Security Version 1.2 (TLS v1.2) for sending and receiving email securely. </li>
+                            <li>Have Domain-based Message Authentication Reporting and Conformance (DMARC), DomainKeys Identified Mail (DKIM) and Sender Policy Framework (SPF) records in place for their domains to make email spoofing difficult. </li>
+                            <li>Implement spam and malware filtering, and enforce DMARC on inbound email. </li>
+                        </ul>
+
+                        <h5>4. Protect digital services </h5>
+                        <ul class="my-list">
+                            <li>Ensure the web application is not susceptible to common security vulnerabilities, such as described in the top ten Open Web Application Security Project (OWASP) vulnerabilities . </li>
+                            <li>Ensure the underlying infrastructure is secure, including verifying that the hosting environment is maintained securely and that you have appropriately exercised your responsibilities for securely configuring the infrastructure and platform. </li>
+                            <li>Protect data in transit using well-configured TLS v1.2. </li>
+                            <li>Regularly test for the presence of known vulnerabilities and common configuration errors. </li>
+                        </ul>
+                        <hr>
+
+
+                        <h4>Highly privileged accounts should not be vulnerable to common cyberattacks
+                        </h4>
+
+                        <ul class="my-list">
+                            <li>Users with wide-ranging or extensive system privilege shall not use their highly privileged accounts for high-risk functions, in particular reading email and web browsing. </li>
+                            <li>Multi-factor authentication shall be used where technically possible, such as where administrative consoles provide access to manage cloud based infrastructure, platforms or services. Multi-factor authentication shall be used for access to enterprise level social media accounts. </li>
+                            <li>Passwords for highly privileged system accounts, social media accounts and infrastructure components shall be changed from default values and shall not be easy to guess. Passwords which would on their own grant extensive system access, should have high complexity. </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-pane p-20" id="detect" role="tabpanel">
+                    <div class="p-20">
+                        <p> Develop and implement appropriate activities to identify the occurrence of a cybersecurity event.</p>
+                        <hr>
+                        <h4 class="card-title p-t-20">Detect common cyberattacks</h4>
+                        <ul class="my-list">
+                            <li>As a minimum, Organisations should capture events that could be combined with common threat intelligence sources e.g. Cyber Security Information Sharing Partnership (CISP) to detect known threats.</li>
+                            <li>Organisations should have a clear definition of what must be protected and why (based upon Standard 1), which in turn influences and directs the monitoring solution to detect events which might indicate a situation the organisation wishes to avoid.
+                            <li>Any monitoring solution should evolve with the organisation’s business and technology changes, as well as changes in threat. </li>
+                            <li>Attackers attempting to use common cyber-attack techniques should not be able to gain access to data or any control of technology services without being detected. </li>
+                            <li>Digital services that are attractive to cyber criminals for the purposes of fraud should implement transactional monitoring techniques from the outset. </li>
+                        </ul>
+                        <hr>
+                    </div>
+                </div>
+                <div class="tab-pane  p-20" id="respond" role="tabpanel">
+                    <div class="p-20">
+                        <p> Develop and implement appropriate activities to take action regarding a detected cybersecurity incident.</p>
+                        <hr>
+                        <h4 class="card-title p-t-20">Organisations should have a defined, planned and tested response to cyber security incidents that impact sensitive information or key operational services</h4>
+
+                        <ul class="my-list">
+                            <li>Develop an incident response and management plan, with clearly defined actions, roles and responsibilities. A copy of all incidents shall be recorded regardless of the need to report them. </li>
+                            <li>Have a communication plans in the event of an incident which includes notifying (for example) the relevant supervisory body, senior accountable individuals, the organisation's press office, or law enforcement as applicable (not exhaustive). </li>
+                            <li>In the event of an incident that involves a personal data breach Departments shall comply with any legal obligation to report the breach to the relevant authorities. Further information on this can be found here. </li>
+                            <li>The incident response and management plan should be tested at regular intervals to ensure all parties understand their roles and responsibilities as part of the plan. Post testing findings should inform the immediate future technical protection of the system or service, to ensure identified issues cannot arise in the same way again. Systemic vulnerabilities identified shall be remediated. </li>
+                            <li>On discovery of an incident, mitigating measures shall be assessed and applied at the earliest opportunity, drawing on expert advice where necessary (e.g. a Cyber Incident Response (CIR) company). </li>
+                            <li>Post incident lessons shall be assessed and lessons implemented into future iterations of the incident management plan. </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-pane  p-20" id="recover" role="tabpanel">
+                    <div class="p-20">
+                        <p> Develop and implement appropriate activities to maintain plans for resilience and to restore any capabilities or services that were impaired due to a cybersecurity incident.</p>
+                        <hr>
+
+                        <h4 class="card-title p-t-20">Organisations should have well-defined and tested processes in place to ensure the continuity of key operational services in the event of failure or compromise. </h4>
+                        <ul class="my-list">
+                            <li> Identify and test contingency mechanisms to continue to deliver essential services in the event of any failure, forced shutdown, or compromise of any system or service. This may include the preservation of out of band or manual processes for essential services or CNI. </li>
+                            <li>Restoring the service to normal operation should be a well-practised scenario. </li>
+                            <li>Post incident recovery activities shall inform the immediate future technical protection of the system or service, to ensure the same issue cannot arise in the same way again. Systemic vulnerabilities identified shall be remediated. </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- End Page Content -->
+<!-- ============================================================== -->
+<!-- #location:dashboard/resources-security-framework -->
+{% endblock page_content %}

@@ -1,0 +1,184 @@
+@charset "UTF-8";/*!
+
+/*
+
+File: scss
+*/
+
+
+
+.cssp-header-img {
+    background-image:url(/static/images/Scene-3.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: contain;
+}
+
+@media only screen and (max-width: 992px){
+	.cssp-header-img {
+		background-image:none;
+
+	}
+}
+
+.call-to-action-five{
+	position: relative;
+	padding: 60px 0;
+	background: rgb(39,105,191);
+	background: -moz-linear-gradient(left, rgba(39,105,191,1) 0%, rgba(57,139,245,1) 100%);
+	background: -webkit-linear-gradient(left, rgba(39,105,191,1) 0%,rgba(57,139,245,1) 100%);
+	background: linear-gradient(to right, rgba(39,105,191,1) 0%,rgba(57,139,245,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2769bf', endColorstr='#398bf5',GradientType=1 );
+}
+
+.call-to-action-five .icon-layer{
+	position: absolute;
+	top: -55px;
+	left: 50%;
+	margin-left: -100px;
+	height: 360px;
+	width: 293px;
+	background-image: url(../images/icons/icon-3.png);
+	background-size: cover;
+	content: "";
+	opacity: .05;
+}
+
+.call-to-action-five .title-column{
+	position: relative;
+	float: left;
+	max-width: 700px;
+}
+
+.call-to-action-five .title-column .inner{
+	position: relative;
+	padding-left: 60px;
+}
+
+.call-to-action-five .title-column .icon{
+	position: absolute;
+	left: 0;
+	top: 0;
+	font-size: 48px;
+	color: #f8e751;
+	font-weight: 400;
+}
+
+.call-to-action-five .title-column h3{
+	position: relative;
+	display: block;
+	font-size: 28px;
+	line-height: 36px;
+	color: #ffffff;
+	font-weight: 600;
+}
+
+.call-to-action-five .btn-column{
+	position: relative;
+	float: right;
+}
+
+.call-to-action-five .btn-column .btn-box{
+	position: relative;
+	padding: 10px 0;
+}
+
+.call-to-action-five .btn-column .theme-btn{
+	position: relative;
+	display: inline-block;
+	font-size: 16px;
+	line-height: 30px;
+	color: #ffffff;
+	font-weight: 600;
+	padding: 11px 40px;
+	border: 1px solid #ffffff;
+}
+
+.call-to-action-five .btn-column .theme-btn i{
+	line-height: 30px;
+	float: left;
+	margin-right: 10px;
+}
+
+.call-to-action-five .btn-column .theme-btn:hover{
+	color: #3781e0;
+	background-color:#ffffff;
+}
+
+.usage {
+    color: #fff;
+    font-size: 120px;
+}
+
+/*  ribbons */
+
+.corner-ribbon{
+  width: 200px;
+  background: #e43;
+  position: absolute;
+  top: 25px;
+  left: -50px;
+  text-align: center;
+  line-height: 50px;
+  letter-spacing: 1px;
+  color: #f0f0f0;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+/* Custom styles */
+
+.corner-ribbon.sticky{
+  position: fixed;
+}
+
+.corner-ribbon.shadow{
+  box-shadow: 0 0 3px rgba(0,0,0,.3);
+}
+
+/* Different positions */
+
+.corner-ribbon.top-left{
+  top: 25px;
+  left: -50px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.corner-ribbon.top-right{
+  top: 25px;
+  right: -50px;
+  left: auto;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.corner-ribbon.bottom-left{
+  top: auto;
+  bottom: 25px;
+  left: -50px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.corner-ribbon.bottom-right{
+  top: auto;
+  right: -50px;
+  bottom: 25px;
+  left: auto;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+/* Colors */
+
+.corner-ribbon.white{background: #f0f0f0; color: #555;}
+.corner-ribbon.black{background: #333;}
+.corner-ribbon.grey{background: #999;}
+.corner-ribbon.blue{background: #39d;}
+.corner-ribbon.green{background: #2c7;}
+.corner-ribbon.turquoise{background: #1b9;}
+.corner-ribbon.purple{background: #95b;}
+.corner-ribbon.red{background: #e43;}
+.corner-ribbon.orange{background: #e82;}
+.corner-ribbon.yellow{background: #ec0;}

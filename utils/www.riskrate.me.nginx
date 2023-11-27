@@ -1,0 +1,14 @@
+server {
+    listen 80;
+    server_name www.riskrate.me riskrate.me;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/riskrateme/riskrate.me;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;
+    }
+}

@@ -1,0 +1,102 @@
+<!-- #component:dashboard/domain-reputation:start -->
+<div class="card expand-card">
+    <div class="card-header" id="heading7" style="border-bottom:0;">
+        <div class="d-flex">
+            <div class="m-r-20 align-self-center  cat-icon-circle">
+                {% if report.reputation_rating == "A" %}
+                <h1><i id="icon-reputation-score" class="fas fa-check-circle text-passed" ></i></h1>
+                {% elif report.reputation_rating in "EF" %}
+                <h1><i id="icon-reputation-score" class="fas fa-exclamation-circle text-danger" ></i></h1>
+                {% else %}
+                <h1><i id="icon-reputation-score" class="fas fa-exclamation-circle text-warning"></i></h1>
+                {% endif %}
+            </div>
+            <div>
+                <h4 class="card-title">IP Reputation</h4>
+                <h6 class="card-subtitle">Checks for compromised IP addresses and ensure websites are free from Malware, Botnets, and Spam.</h6>
+            </div>
+        </div>
+        <button class="btn btn-success" type="button" data-toggle="collapse"
+                data-target="#div-domain-report-iprep" aria-expanded="false" aria-controls="div-domain-report-iprep"
+                style="float:right;">
+            View Results
+        </button>
+    </div>
+    <div id="div-domain-report-iprep" class="collapse" aria-labelledby="heading7">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th style="width: 35%">Test</th>
+                        <th style="width: 10%; text-align: center">Result</th>
+                        <th style="width: 55%">Info</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for test in tests %}
+                        {% if test.definition.category == "infrastructure" and "reputation" in test.definition.keywords %}
+                            <tr>
+                                <td style="width: 35%">
+                                    {{ test.definition.name }}
+                                    <span data-toggle="tooltip" title="" data-original-title="{{ test.definition.description }}">
+                                            <i class="mdi mdi-information-outline"></i>
+                                        </span>
+                                </td>
+                                <td style="width: 10%; text-align: center">
+                                        {% if test.has_succeed %}
+                                        <span class="badge A">passed</span>
+                                        {% elif test.has_partially_succeed %}
+                                        <span class="badge C">partial</span>
+                                        {% elif test.has_failed %}
+                                        <span class="badge E">failed</span>
+                                        {% else %}
+                                        -
+                                        {% endif %}
+                                </td>
+                                <td style="width: 55%">
+                                    {{ test.message|safe }}
+                                    {% if test.has_failed %}
+                                        <br>
+                                        <small><a href="{% url 'remediation-ip' %}"  target="_blank">remediation</a> </small>
+                                        {% endif %}
+                                </td>
+                            </tr>
+                            {% if test.data and test.data|length > 0 and not test.has_error %}
+                                {% if test.definition.label == "hostreputation" %}
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <ul>
+                                            {% for list in test.blacklists %}
+                                                <li>{{ list }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </td>
+                                {% elif test.definition.label == "ipblocklist" and not test.has_error %}
+                                    {% for k, v in test.reputation_state_desc %}
+                                        <tr>
+                                            <td style="text-align: right;"></td>
+                                            <td class="text-center">
+                                                {% if k %}
+                                                    <span class="badge E">failed</span>
+                                                {% else %}
+                                                    <span class="badge A">passed</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {{ v }}
+                                            </td>
+                                        </tr>
+                                    {%endfor %}
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #component:dashboard/domain-reputation:end -->

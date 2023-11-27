@@ -1,0 +1,81 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block extrajs %}{% endblock extrajs %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+<div class="col-md-5 col-8 align-self-center">
+    <h3 class="text-themecolor m-b-0 m-t-0">Server Header </h3>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Remediations</a></li>
+        <li class="breadcrumb-item active">Server Header </li>
+    </ol>
+</div>
+
+</div>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+                    <div class="container-fluid">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <div class="entry-content article-content">
+                                        <h3> Server Header </h3>
+
+                                        <p>If you are running a web server, that web server is probably showing the world what type of server it is, and possibly its version number. This information is ignored by most people, with the exception of hackers, who use this information to launch targeted attacks against your web server and version. In addition, if the version of your web server is known to be vulnerable to a specific exploit, the hacker would just need to use the exploit as part of his attack on your server.</p>
+
+                                        <p> Removing the entire header, while perfectly acceptable, is usually not necessary. However, it is recommended to remove the version numbers from the header. In the case that bugs exist for a specific web server version, including the version number can act as an invitation for script kiddies to try exploits against the server.</p>
+
+
+                                        <div class="card m-t-30">
+                                            <div class="card-header">
+
+                                                <div class="card-actions">
+                                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                                </div>
+                                                <h4 class="card-title m-b-0"> Masking the Server Header</h4>
+                                            </div>
+
+                                            <div class="card-body collapse show">
+
+                                                <h3> Masking in Nginx</h3>
+
+                                                <p>Edit /etc/nginx/nginx.conf and add this line (or remove comment from existinf line under http</p>
+                                                <p><code>server_tokens off;</code></p>
+                                                <h3>Masking in Apache</h3>
+                                                <p>Edit /etc/httpd/conf/httpd.conf and add the followng code at the ed of the config file:</p>
+                                                <p><code>ServerSignature Off</code></p>
+                                                <h3>Enable on IIS</h3>
+                                                <p>Masking in IIS </p>
+
+                                                <ol>
+                                                    <li>Open the IIS Manager</li>
+                                                    <li>Select the website that Secret Server is running under.</li>
+                                                    <li>Select "HTTP Response Headers"</li>
+                                                    <li>Select the "X-Powered-By" HTTP Header and select "Remove"</li>
+                                                </ol>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+         <!-- #location:dashboard/remediation-headers-server -->
+{% endblock page_content %}

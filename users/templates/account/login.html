@@ -1,0 +1,104 @@
+{% extends "public/base_login.html" %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load widget_tweaks %}
+
+{% block page_content %}
+<section class="login-register">
+    <div class="row register">
+            <div class="login-box card shadow">
+                <div class="card-body">
+                    <h5 class="mb-3">{% trans "Sign In" %}</h5>
+
+                    {% get_providers as socialaccount_providers %}
+
+                    {% if socialaccount_providers %}
+                    <p>{% blocktrans with site.name as site_name %}Please sign in with one
+                    of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+                    for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+
+                    <div class="socialaccount_ballot">
+
+                      <ul class="socialaccount_providers">
+                        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                      </ul>
+
+                      <div class="login-or">{% trans 'or' %}</div>
+
+                    </div>
+
+                    {% include "socialaccount/snippets/login_extra.html" %}
+
+                    {% else %}
+
+                    {% endif %}
+
+                    <form class="login" method="POST" action="{% url 'account_login' %}">
+                        {% csrf_token %}
+                        <div class="form-row">
+                          <div class="col">
+                              <div class="input-group mb-2">
+                                  <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                                    </div>
+                                  </div>
+                                  {% render_field form.login class="form-control" %}
+                              </div>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="col">
+                              <div class="input-group mb-2">
+                                  <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-key" aria-hidden="true"></i>
+                                    </div>
+                                  </div>
+                                  {% render_field form.password class="form-control" %}
+                              </div>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                            <ul class="errorlist">
+                            {% for key, value in form.errors.items %}
+                                <li class="text-danger font-weight-bold">{% if key != '__all__' %}{{ key }} {% endif %}{{ value }}</li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                        <div>
+                        <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                        </div>
+                        <div class="form-row text-center  mt-3">
+                            <div class="col">
+
+
+                                    <button type="submit" id="btn-login" class="theme-btn btn-style-one">
+                                        {% trans "Sign In" %}
+                                    </button>
+
+                            </div>
+                        </div>
+                      {% if redirect_field_value %}
+                      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                      {% endif %}
+
+                    </form>
+                       <div class="text-center   mt-2">
+                        <p>{% blocktrans %}Don't have an account?
+                    <a href="{{ signup_url }}">Sign Up</a>{% endblocktrans %}</p>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+    </div>
+</section>
+{% endblock page_content %}
+
+
+{% block extra_js %}
+
+{% endblock extra_js %}

@@ -1,0 +1,54 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block extrajs %}{% endblock extrajs %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb  -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Data Leaks </h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Remediations</a></li>
+            <li class="breadcrumb-item active">Data Leaks  </li>
+        </ol>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="container-fluid">
+        <div class="col-12">
+            <div class="card card-outline-info">
+
+                <div class="card-body">
+
+                    <div class="entry-content article-content">
+                        <h3>Data Leaks </h3>
+                        <p>This searches across multiple data breaches to see if any of your email addresses have been compromised. If you are affected, we recommend you change your password on the respective services.</p>
+                        <p>We don't provide access to the dataleaks files, passwords, or personal details.</p>
+
+                        <p>There are multiple sources for data breaches, with more than 4 billion compromised accounts. This information is provided for reference only and does not effect your rating. If you would like more information a full assessment will provide the full source of this data - this can only be provided for your own domain.</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+{% include "members/_full_scan.html" %}
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+<!-- #location:dashboard/remediation-vulnerabilities -->
+{% endblock page_content %}

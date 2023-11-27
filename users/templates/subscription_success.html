@@ -1,0 +1,31 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block page_content %}
+<section class="about-section">
+    <div class="auto-container">
+        <div class="row register">
+        <div class="form-column col-lg-3 col-md-2 col-sm-12">
+        </div>
+        <div class="form-column col-lg-6 col-md-8 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>{% trans "Subscription Completed!" %}</h5>
+                </div>
+                <div class="card-body">
+                    <p>Congratulations!  You are successfully subscribe to Riskrate.me!
+                    Click below to start securing your IT infrastructure.</p>
+                    <a class="theme-btn btn-style-one" href="{% url 'my-rating' %}">Continue</a>
+                </div>
+                <div class="card-footer">
+
+                </div>
+            </div>
+        </div>
+        <div class="form-column col-lg-3 col-md-2 col-sm-12">
+        </div>
+    </div>
+    </div>
+</section>
+{% endblock page_content %}

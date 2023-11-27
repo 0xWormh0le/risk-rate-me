@@ -1,0 +1,94 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block extrajs %}{% endblock extrajs %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Open Ports </h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Remediations</a></li>
+            <li class="breadcrumb-item active">Open Ports</li>
+        </ol>
+    </div>
+
+</div>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="entry-content article-content">
+                        <h3>Open Ports </h3>
+                        <p>An open port is an attack surface. An important principle in security is reducing your attack
+                            surface, and ensure that servers have the minimum number of exposed services.</p>
+
+
+                        <p><strong>Confidentiality: </strong>Open ports (actually the programs listening and responding
+                            at them) may reveal information about the system or network architecture. They can leak
+                            banners, software versions, content, the fact a system is there at all and what type of
+                            system it is.</p>
+                        <p><strong>Integrity: </strong>Without open port controls, software can open any candidate port
+                            and immediately communicate unhindered. This is often relied upon by games, chat programs
+                            and other useful software, but is undesirable for malware.</p>
+                        <p>Open ports are not always a security risk, for example a web server has to have 80 or 443
+                            open otherwise users can not connect to use the web server.</p>
+                        <p>However open ports associated with unecessary services can be a security risk if the software
+                            they are associated with has vulnerabilities or the component has not been configured
+                            securely.</p>
+
+                        <p>Here is a list of the most common ports:</p>
+
+                        <ul>
+                            <li>7&nbsp; Ping</li>
+                            <li>21 FTP(File transfer protocol)</li>
+                            <li>22&nbsp; SSH (Secure shell)</li>
+                            <li>23 Telnet</li>
+                            <li>25 SMTP (Mail)</li>
+                            <li>43 WHOIS</li>
+                            <li>53 DNS</li>
+                            <li>80 HTTP</li>
+                            <li>110 POP3 (Mail Access)</li>
+                            <li>119 Network News Transfer Protocol (NNTP)</li>
+                            <li>143 Internet Message Access Protocol (IMAP)</li>
+                            <li>161 Simple Network Management Protocol (SNMP)</li>
+                            <li>443 HTTP Secure (HTTPS)</li>
+                            <li>513 Remote login</li>
+                            <li>4444 Generic Malicious Software</li>
+                            <li>8080 Proxy</li>
+                        </ul>
+
+                        <p>Our scan uses <strong>PASSIVE</strong> identification of open ports - active scans on remote
+                            systems are not allowed without prior permission. A full <strong>ACTIVE</strong> scan can
+                            enumerate all of a systems open ports.</p>
+                        <p>An open port scanner will tell you which ports are open and which ones are not. It will
+                            identify any open ports that are exposing your system to vulnerabilities.</p>
+
+                        <p>In order to ensure your network the best protection available you should perform regular
+                            scans to identifiy all of your network vulnerabilities. These vulnerabilities and weak spots
+                            are the ideal place for attackers to come after you and your company. it is absolutely
+                            necessary to implement all the adequate measures in order to prevent these possible exploits
+                            from hackers.</p>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% include "private/_full_scan.html" %}
+        </div>
+</div>
+
+<!-- #location:dashboard/remediation-ports -->
+{% endblock page_content %}

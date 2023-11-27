@@ -1,0 +1,140 @@
+{% extends "private/base.html" %}
+
+{% block extrajs %}{% endblock extrajs %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb  -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">X-Frame-Options Header</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Remediations</a></li>
+            <li class="breadcrumb-item active">X-Frame-Options Header</li>
+        </ol>
+    </div>
+
+</div>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="container-fluid">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="entry-content article-content">
+                        <h3>X-Frame-Options Header </h3>
+                        <p>Clickjacking takes advantage of vulnerabilities that are present in applications and web
+                            pages to allow the attacker to manipulate the user's computer.</p>
+                        <p>
+                            For example, a clickjacked page tricks a user into performing undesired actions by clicking
+                            on a concealed link. On a clickjacked page, the attackers load another page over it in a
+                            transparent layer. The unsuspecting users think that they are clicking visible buttons,
+                            while they are actually performing actions on the invisible page. The hidden page may be an
+                            authentic page; therefore, the attackers can trick users into performing actions which the
+                            users never intended. There is no way of tracing such actions to the attackers later, as the
+                            users would have been genuinely authenticated on the hidden page.</p>
+
+                        <p>Sites can avoid clickjacking attacks by implementing the X-Frame-options response
+                            header. </p>
+                        <p>This header can be used to indicate whether or not a browser should be allowed to render a
+                            page in a &lt;frame&gt;, &lt;iframe&gt;, &lt;embed&gt; or &lt;object&gt; to avoid
+                            clickjacking attacks, by ensuring that their content is not embedded into other sites. </p>
+
+                        <div class="card m-t-30">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0">Implementing the X-Frame-Options Header</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+
+
+                                <p>There are a number of defined mechanisms that can be used for this header:</p>
+
+
+                                <table class="table">
+                                    <tr>
+                                        <td>deny</td>
+
+                                        <td>The page cannot be displayed in a frame, regardless of the site attempting
+                                            to do so.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>sameorigin</td>
+
+                                        <td>The page can only be displayed in a frame on the same origin as the page
+                                            itself.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>allow-from uri</td>
+
+                                        <td>The page can only be displayed in a frame on the specified origin.</td>
+                                    </tr>
+
+                                </table>
+
+                                <p>The x-xss-protection header is easy to implement and only requires a slight web
+                                    server configuration change. </p>
+
+
+                                <h3> Enable in Nginx</h3>
+                                <p><code>add_header X-Frame-Options sameorigin always;</code></p>
+                                <h3>Enable in Apache</h3>
+                                <p><code>Header always set X-Frame-Options "sameorigin"</code></p>
+                                <h3>Enable on IIS</h3>
+                                <p>To enable on IIS simply add it to your site’s Web.config file.</p>
+
+                                <code>
+                                    &lt;system.webServer&gt;<br>
+                                    ...<br><br>
+
+                                    &lt;httpProtocol&gt;<br>
+                                    &lt;customHeaders&gt;<br>
+                                    &lt;add name="X-Frame-Options" value="sameorigin" /&gt;<br>
+                                    &lt;/customHeaders&gt;<br>
+                                    &lt;/httpProtocol&gt;<br><br>
+
+                                    ...<br>
+                                    &lt;/system.webServer&gt;
+
+                                </code>
+
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="m-l-10">
+                            <h3>References</h3>
+
+                            <a href="https://tools.ietf.org/html/rfc7034">https://tools.ietf.org/html/rfc7034</a><br>
+                            <a href="https://tools.ietf.org/html/draft-ietf-websec-x-frame-options-01">https://tools.ietf.org/html/draft-ietf-websec-x-frame-options-01</a><br>
+                            <a href="https://tools.ietf.org/html/draft-ietf-websec-frame-options-00">https://tools.ietf.org/html/draft-ietf-websec-frame-options-00</a><br>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options</a><br>
+                            <a href="https://www.owasp.org/index.php/Clickjacking">https://www.owasp.org/index.php/Clickjacking</a><br>
+                            <a href="https://blogs.msdn.microsoft.com/ieinternals/2010/03/30/combating-clickjacking-with-x-frame-options/">https://blogs.msdn.microsoft.com/ieinternals/2010/03/30/combating-clickjacking-with-x-frame-options/</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- #location:dashboard/remediation-headers-xframe -->
+{% endblock page_content %}

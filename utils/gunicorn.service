@@ -1,0 +1,18 @@
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User=riskrateme
+Group=www-data
+EnvironmentFile=/home/riskrateme/riskrate.me/.env
+WorkingDirectory=/home/riskrateme/riskrate.me
+ExecStart=/home/riskrateme/riskrate.me/venv/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicorn.sock \
+          riskrateme.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

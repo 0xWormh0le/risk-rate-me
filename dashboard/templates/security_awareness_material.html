@@ -1,0 +1,338 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block extra_css %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+{% endblock extra_css %}
+{% block extrajs %}{% endblock extrajs %}
+
+{% block page_content %}
+
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-12 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Cyber Security Awareness Training</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item ">Resources</li>
+            <li class="breadcrumb-item active">Awareness Posters</li>
+        </ol>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+
+<div class="row m-b-30">
+    <div class="col-12">
+      <div class="card m-b-0">
+     <div class="row no-gutters">
+         <div class="col-md-4">
+             <div class="card-body bg-info h-100 p-r-0 text-center">
+                 <div class="p-t-30">
+                     <i class="mdi mdi-security fa-3x text-white p-t-30"></i>
+                     <h2 class="text-white font-weight-light">My Security <br><span class="font-bold">Action Plan</span>
+                     </h2>
+                 </div>
+                 <h2 class="text-white font-weight-light p-t-10">Step 4
+                 </h2>
+             </div>
+         </div>
+         <div class="col-md-8">
+             <div class="card-body p-0">
+                 <div class="message-box contact-box position-relative">
+                     <div class="message-widget contact-widget position-relative">
+                         <!-- Message -->
+                         <a href="{% url 'my-rating' %}" class="py-3 px-2 border-bottom d-block text-decoration-none">
+                             <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">1</span>
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Risk Report Remediation</h5> <span class="mail-desc font-12 d-block">Find and fix all issues to protect your organisation from common vulnerabilities </span>
+                             </div>
+                         </a>
+                         <!-- Message -->
+                         <a href="{% url 'internal_assessment' %}" class="py-3 px-2 border-bottom d-block text-decoration-none">
+                             <div class="user-img position-relative d-inline-block mr-3  ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">2</span>
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Security Self Assessment</h5> <span class="mail-desc font-12  d-block">Identify weaknesses and generate a remediation plan to ensure essential cybersecurity measures are in place. </span>
+                             </div>
+                         </a>
+                         <!-- Message -->
+                         <a href="{% url 'security_framework' %}" class="py-3 px-2 border-bottom d-block text-decoration-none">
+                             <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">3</span>
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Safeguard Your Assests </h5><span class="mail-desc font-12  d-block">Review, update, manage, develop policies and procedures to maintain your cyber security.</span>
+                             </div>
+                         </a>
+                         <!-- Message -->
+                         <a href="{% url 'security_training' %}" class="py-3 px-2 d-block text-decoration-none" style="background: #f2f4f8;">
+                             <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">4</span>
+
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Security Awareness Education</h5> <span class="mail-desc font-12  d-block">Take preventive action against cyber risks with the deployment of staff awareness training.</span>
+                             </div>
+                         </a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Security Awareness Training</h4>
+                <h6 class="card-subtitle">Bite-Sized cyber security information sheets.</h6>
+
+
+                <p>The following information sheets cover key areas of cyber security and are intended to give staff a bsic understanding of each issue. They are available in PDF format and can print up to A3 size with space to add your own company name and branding.
+                </p>
+                <p>If you require in depth, tracked, security training, please <a href="{% url 'contact-us' %}" >contact us</a> for full details of our online Learning Mangement System that provides a complete suite of material.  </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row el-element-overlay">
+
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="{% static 'images/resource/phishing_poster.jpg' %}" alt="user">
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="{% static 'images/resource/phishing_poster.jpg' %}"  data-toggle="tooltip" data-original-title="Magnifiy" ><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="/download/bite-sized/bite-sized_01.pdf"  data-toggle="tooltip" data-original-title="Download PDF" ><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="{% static 'images/resource/dog_password.jpg' %}" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="{% static 'images/resource/dog_password.jpg' %}"  data-toggle="tooltip" data-original-title="Magnifiy" ><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="/download/bite-sized/bite-sized_03.pdf"  data-toggle="tooltip" data-original-title="Download PDF" ><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="{% static 'images/resource/share.jpg' %}" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="{% static 'images/resource/share.jpg' %}"  data-toggle="tooltip" data-original-title="Magnifiy" ><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="/download/bite-sized/bite-sized_04.pdf"  data-toggle="tooltip" data-original-title="Download PDF" ><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="{% static 'images/resource/connect.jpg' %}" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="{% static 'images/resource/connect.jpg' %}"  data-toggle="tooltip" data-original-title="Magnifiy" ><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="/download/bite-sized/bite-sized_05.pdf"  data-toggle="tooltip" data-original-title="Download PDF" ><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="{% static 'images/resource/strong_password.jpg' %}" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="{% static 'images/resource/strong_password.jpg' %}"  data-toggle="tooltip" data-original-title="Magnifiy" ><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="/download/bite-sized/bite-sized_06.pdf"  data-toggle="tooltip" data-original-title="Download PDF" ><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="{% static 'images/resource/tailgaters.jpg'%}" alt="user">
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="{% static 'images/resource/tailgaters.jpg' %}"  data-toggle="tooltip" data-original-title="Magnifiy" ><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="/download/bite-sized/bite-sized_07.pdf"  data-toggle="tooltip" data-original-title="Download PDF" ><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+    <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="{% static 'images/resource/stop.jpg' %}" alt="user">
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="{% static 'images/resource/stop.jpg' %}"  data-toggle="tooltip" data-original-title="Magnifiy" ><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="/download/bite-sized/bite-sized_08.pdf"  data-toggle="tooltip" data-original-title="Download PDF" ><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+
+
+
+
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="{% static 'images/resource/GTCorporate.jpg' %}" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="{% static 'images/resource/GTCorporate.jpg' %}"  data-toggle="tooltip" data-original-title="Magnifiy" ><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="/download/bite-sized/bite-sized_09.pdf"  data-toggle="tooltip" data-original-title="Download PDF" ><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="{% static 'images/resource/_donuts.jpg' %}" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="{% static 'images/resource/_donuts.jpg' %}"  data-toggle="tooltip" data-original-title="Magnifiy" ><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="/download/bite-sized/bite-sized_10.pdf"  data-toggle="tooltip" data-original-title="Download PDF" ><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="{% static 'images/resource/backup_fool.jpg'  %}" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="{% static 'images/resource/backup_fool.jpg'  %}"  data-toggle="tooltip" data-original-title="Magnifiy" ><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="/download/bite-sized/bite-sized_11.pdf"  data-toggle="tooltip" data-original-title="Download PDF" ><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+    <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="{% static 'images/resource/cyber_crime.jpg'  %}" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="{% static 'images/resource/cyber_crime.jpg'  %}"  data-toggle="tooltip" data-original-title="Magnifiy" ><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="/download/bite-sized/bite-sized_11.pdf"  data-toggle="tooltip" data-original-title="Download PDF" ><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="{% static 'images/resource/ceo-fraud.jpg' %}" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="{% static 'images/resource/ceo-fraud.jpg'  %}"  data-toggle="tooltip" data-original-title="Magnifiy" ><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="/download/bite-sized/bite-sized_12.pdf"  data-toggle="tooltip" data-original-title="Download PDF" ><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+    <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="{% static 'images/resource/birthdays.jpg' %}" alt="user">
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="{% static 'images/resource/birthdays.jpg' %}"  data-toggle="tooltip" data-original-title="Magnifiy" ><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="/download/bite-sized/bite-sized_02.pdf"  data-toggle="tooltip" data-original-title="Download PDF" ><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+     <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="{% static 'images/resource/backup.jpg'%}" alt="user" />
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="{% static 'images/resource/backup.jpg'  %}"  data-toggle="tooltip" data-original-title="Magnifiy" ><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="/download/bite-sized/bite-sized_12.pdf"  data-toggle="tooltip" data-original-title="Download PDF" ><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+    <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1"> <img src="{% static 'images/resource/stop_.jpg' %}" alt="user">
+                                    <div class="el-overlay">
+                                        <ul class="el-info">
+                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="{% static 'images/resource/stop_.jpg' %}"  data-toggle="tooltip" data-original-title="Magnifiy" ><i class="icon-magnifier"></i></a></li>
+                                            <li><a class="btn default btn-outline" href="/download/bite-sized/bite-sized_02.pdf"  data-toggle="tooltip" data-original-title="Download PDF" ><i class="icon-link"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+</div>
+
+{% endblock page_content %}
+{% block extra_js %}
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/jquery.magnific-popup-init.js' %}"></script>
+
+
+{% endblock extra_js %}

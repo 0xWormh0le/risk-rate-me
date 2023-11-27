@@ -1,0 +1,45 @@
+{% extends "public/base_login.html" %}
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block extra_css %}
+<link href="{% static 'css/public/registration.css' %}" rel="stylesheet" type="text/css">
+{% endblock extra_css %}
+
+{% block page_content %}
+<section class="login-register">
+
+
+
+                <div class="login-box card shadow">
+                    <div class="card-header">
+                        <h5>{% trans "Sign Out" %}</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-3">{% trans 'Are you sure you want to sign out?' %}</p>
+                        <form method="post" action="{% url 'account_logout' %}">
+                            {% csrf_token %}
+
+                            {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                            {% endif %}
+
+                            <div class="form-row">
+                                <button class="theme-btn btn-style-one" type="submit">{% trans 'Sign Out' %}</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                    </div>
+                </div>
+
+
+
+</section>
+{% endblock page_content %}
+
+
+{% block extra_js %}
+
+{% endblock extra_js %}

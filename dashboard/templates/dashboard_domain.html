@@ -1,0 +1,458 @@
+{% extends "private/base.html" %}
+{% load static %}
+
+{% block header_extra_js %}{% endblock header_extra_js %}
+
+
+{% block page_content %}
+
+<div class="row page-titles">
+    <div class="col-12 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">My Dashboard</h3>
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">
+                  {% if report and report.domain.company %}
+                    {{ report.domain.company.name }}
+                {% else %}
+                     {{ domain }}
+                {% endif %}
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="row m-b-30">
+<div class="col-12">
+  <div class="card m-b-0">
+     <div class="row no-gutters">
+         <div class="col-md-4">
+             <div class="card-body bg-info h-100 p-r-0 text-center">
+                 <div class="position-relative my-auto assessment-score">
+                     <i class="mdi mdi-security fa-3x text-white p-t-30"></i>
+                     <h2 class="text-white font-weight-light">My Security <br><span class="font-bold">Action Plan</span>
+                     </h2>
+                 </div>
+             </div>
+         </div>
+         <div class="col-md-8">
+             <div class="card-body p-0">
+                 <div class="message-box contact-box position-relative">
+                     <div class="message-widget contact-widget position-relative">
+                         <!-- Message -->
+                         <a href="{% url 'my-rating' %}" class="py-3 px-2 border-bottom d-block text-decoration-none">
+                             <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">1</span>
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Risk Report Remediation</h5> <span class="mail-desc font-12 d-block">Find and fix all issues to protect your organisation from common vulnerabilities </span>
+                             </div>
+                         </a>
+                         <!-- Message -->
+                         <a href="{% url 'internal_assessment' %}" class="py-3 px-2 border-bottom d-block text-decoration-none">
+                             <div class="user-img position-relative d-inline-block mr-3  ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">2</span>
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Security Self Assessment</h5> <span class="mail-desc font-12  d-block">Identify weaknesses and generate a remediation plan to ensure essential cybersecurity measures are in place. </span>
+                             </div>
+                         </a>
+                         <!-- Message -->
+                         <a href="{% url 'security_framework' %}" class="py-3 px-2 border-bottom d-block text-decoration-none">
+                             <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">3</span>
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Safeguard Your Assests </h5><span class="mail-desc font-12  d-block">Review, update, manage, develop policies and procedures to maintain your cyber security.</span>
+                             </div>
+                         </a>
+                         <!-- Message -->
+                         <a href="{% url 'security_training' %}" class="py-3 px-2 d-block text-decoration-none" >
+                             <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">4</span>
+
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Security Awareness Education</h5> <span class="mail-desc font-12  d-block">Take preventive action against cyber risks with the deployment of staff awareness training.</span>
+                             </div>
+                         </a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+
+ </div>
+</div>
+
+
+
+{% if report %}
+<!-- #component:dashboard/ratings:start -->
+<div class="row">
+    <div class="col-lg-6 m-b-30">
+        <div class="card h-100 m-b-0">
+    <div class="card-body text-center  m-b-0 p-b-0">
+        <h3 class="card-title ">Public Risk Rating</h3>
+        <div id="overall-rating-gage" style="width:100%;min-height:400px;" ></div>
+        {% if ratings %}
+            {% if report.overall_rating == "A" %}
+                <h3>EXCELLENT</h3>
+            {% elif report.overall_rating == "B" %}
+                <h3>GOOD</h3>
+            {% elif report.overall_rating == "C" %}
+                <h3>NEEDS IMPROVEMENT</h3>
+            {% elif report.overall_rating == "D" %}
+                <h3>POOR</h3>
+            {% elif report.overall_rating == "E" %}
+                <h3>VERY POOR</h3>
+            {% elif report.overall_rating == "F" %}
+                <h3>CRITICAL</h3>
+            {% else %}
+
+            {% endif %}
+        {% endif %}
+
+    </div>
+    <div class="card-footer text-center">{% if user.profile.can_access_full_report %}
+                 <a class="btn btn-secondary" type="button" id="btn-view-report" href="{% url 'my-rating' %}">
+                     <span class="btn-label">
+                         <i class="fas fa-file-alt"></i>
+                     </span>
+                     <span class="btn-content">View Risk Report</span>
+                 </a>
+                 <br />
+                 {% else %}
+                 <a href="{% url 'subscribe' %}" class="btn btn-secondary">Upgrade to View Full Report</a>
+                 {% endif %}</div>
+        </div>
+    </div>
+    <div class="col-lg-6 m-b-30">
+      <div class="card h-100">
+       <div class="card-body p-b-0">
+                <h3 class="card-title text-center p-b-10">Internal Assessment</h3>
+                <div class="text-center my-5 position-relative">
+                    <img src="/static/images/essentials-blank.svg"  class="assessment-img" style="max-width:21em;"/>
+                   <span class="position-absolute text-muted display-3 m-auto assessment-score">
+                            <strong>85%</strong>
+                        </span>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                    <a class="btn btn-secondary" href="{% url 'nist_assessment' %}"><span class="btn-label">
+                         <i class="fas fa-file-alt"></i>
+                     </span>
+                        <span class="btn-content">View Assessment</span></a>
+                </div>
+        </div>
+    </div>
+
+
+
+</div>
+<!-- #component:dashboard/ratings:end -->
+{% endif %}
+
+{% if user.profile.on_trial_or_free_account %}
+    {% include "private/_domain_report.html" %}
+{% endif %}
+
+
+{% if user.profile.can_track_companies %}
+<!-- #component:dashboard/my-companies-info:start -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center align-self-center">
+                    {% if user.profile.followed_domains|length <= 0 %}
+                        <h2 class="card-title">You are not tracking any organizations.</h2>
+                    {% else %}
+                        <h2 class="card-title">
+                            <i class="mdi mdi-security-network"></i> {{ user.profile.followed_domains|length }} Tracked Organisations
+                        </h2>
+
+                        <small>My custom tags:</small>
+                            {% if not tags %}
+                                <small><strong>no tags set</strong></small>
+                            {% else %}
+                                {% for tag in tags %}
+                                    <a href='{% url "tag-info" tag=tag %}' class="label label-light-tag m-r-2" id="btn-load-tag"> {{ tag }}</a>
+                                {% endfor %}
+                            {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- #component:dashboard/my-companies-info:end -->
+
+    {% include "private/_warning_stats_tracked.html" %}
+
+<!-- #component:dashboard/my-companies-table:start -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">My Tracked Companies
+                <a class="btn btn-success pull-right m-t-0" type="button" style="color:#fff" href='{% url "my-companies" %}' >
+                             View All</a>
+                </h4>
+                <div class="table-responsive m-t-20">
+                    <table id="tracked-companies" data-source="/user/companies" class="table stylish-table datatable m-t-30"  style="width:100%" data-page-length='5'>
+                        <thead>
+                            <tr>
+                                <th style="width:50px;" data-toggle='tooltip' title='Overall Rating'>Rating</th>
+                                <th class="tb-cat" data-toggle='tooltip' title='Email Security'><i class="mdi mdi-email"></i></th>
+                                <th class="tb-cat" data-toggle='tooltip' title='Web Security'><i class="mdi mdi-lock"></i></th>
+                                <th class="tb-cat" data-toggle='tooltip' title='Web Application'><i class="mdi mdi-web"></i></th>
+                                <th class="tb-cat" data-toggle='tooltip' title='Infrastructure'><i class="mdi mdi-server-security"></i></th>
+                                <th >Domain/Company</th>
+                                <th>Tags</th>
+                                <th>Date</th>
+                                <th class="tb-actions" style="width:80px;">Options</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #component:dashboard/my-companies-table:end -->
+{% endif %}
+
+
+{% include "private/_ads_training.html" %}
+
+{% endblock page_content %}
+
+
+{% block extra_js %}
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap-tagsinput.min.js' %}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            {% if report %}
+            var g = echarts.init(document.getElementById("overall-rating-gage"));
+            var option = {
+                tooltip : {
+                    formatter: "{a} <br/>{b} : {c}%"
+                },
+                toolbox: {
+                    show: false
+                },
+                series: [
+                    {
+                        name: "Rating",
+                        type: "gauge",
+                        detail: {
+                            formatter:function customValue(value) {
+                                    if (value < 0) {
+                                        return "N/A";
+                                    } else {
+                                        return "{{ report.overall_rating }}";
+                                    }
+                                },
+                            fontSize: 80,
+                            fontWeight: "900",
+                            fontFamily: "Poppins, sans-serif",
+                            offsetCenter: [0, "100%"]
+                        },
+                        data: [{
+                            value: {{ report.overall_score }} * 100,
+                            name: "RATING"
+                        }],
+                        itemStyle: {
+                            color: "#000"
+                        },
+                        title: {
+                            offsetCenter: [0, "40%"],
+                            fontSize: 10,
+                            color: "#99abb4",
+                            fontWeight: "lighter"
+                        },
+                         splitNumber: 8,
+                        axisLine: {
+                            lineStyle: {
+                                color: [[0.375, "#ff3728"], [0.75, "#ffb22b"], [1, "#a1bc2b"]]
+                                , width: 30
+                            }
+                        },
+                        splitLine: {
+                            show: true,
+                            lineStyle: {
+                                width: 3,
+                                color: "#fff"
+                            }
+                        },
+                        axisLabel: false,
+                        axisTick: false,
+                        pointer: {
+                            length: "90%",
+                        },
+
+                    }
+                ]
+            };
+
+            g.setOption(option, true), $(function () {
+                function resize() {
+                    setTimeout(function () {g.resize();}, 100)
+                }
+                $(window).on("resize", resize), $(".sidebartoggler").on("click", resize);
+            });
+            {% endif %}
+
+            {% if sector %}
+                $(".sector").click(function() {
+                    location.href = "{% url 'sector-info' sector=domain_profile.domain.company.sector.code %}";
+                });
+            {% endif %}
+
+            // For select 2
+            $(".select2").select2();
+
+            //
+            {% if form_company %}
+                $("#btn-update-company").click(function(event) {
+                    event.preventDefault();
+                    data = $("#form-update-domain").serialize();
+                    $.post("{% url 'update-domain-info' %}", data, function(data) {
+
+                    }).done(function(data) {
+                        console.log(data);
+                        location.reload();
+                    }).fail(function(data) {
+                        console.log(data);
+                        alert("Cannot update company data!");
+                    });
+                });
+            {% endif %}
+
+        });
+
+            var table = $('#tracked-companies').DataTable( {
+            processing: false,
+            serverSide: false,
+            searching: false,
+        dom: 'Bfrtip',
+        "columns": [
+            {
+                "data": "overall_rating",
+                "sort": "overall_rating",
+                "sClass": "tb-rating",
+                render: function ( data, type, row ) {
+                    return type === "display" || type === "filter" ?
+                    "<div class='round " + data + "'>" + data + "</div>": data;
+                }
+            },
+            {
+                "data": "email_security_score",
+                "sort": "email_security_score",
+                "sClass": "tb-cat",
+                render: function ( data, type, row ) {
+                    return type === "display" || type === "filter" ?
+                    "<span class='tb-seg" + data + "'><i class='mdi mdi-email'></i></span>" : data;
+                }
+            },
+            {
+                "data": "web_security_score",
+                "sort": "web_security_score",
+                "sClass": "tb-cat",
+                render: function ( data, type, row ) {
+                    return type === "display" || type === "filter" ?
+                    "<span class='tb-seg" + data + "'><i class='mdi mdi-lock'></i></span>" : data;
+                }
+            },
+            {
+                "data": "web_application_score",
+                "sort": "web_application_score",
+                "sClass": "tb-cat",
+                render: function ( data, type, row ) {
+                    return type === "display" || type === "filter" ?
+                    "<span class='tb-seg" + data + "'><i class='mdi mdi-web'></i></span>" : data;
+                }
+            },
+            {
+                "data": "infrastructure_score",
+                "sort": "infrastructure_score",
+                "sClass": "tb-cat",
+                 render: function ( data, type, row ) {
+                    return type === "display" || type === "filter" ?
+                    "<span class='tb-seg" + data + "'><i class='mdi mdi-server-security'></i></span>" : data;
+                }
+            },
+            {
+                "data": "company_name",
+                "sort": "company_name",
+                "searchable": true,
+                "sClass": "tb-name",
+                render: function ( data, type, full, meta ) {
+                    return type === "display" || type === "filter"
+                        ? "<h6><a href='/dashboard/report/" + full.domain + "'>" + full.domain + "</a></h6>" +
+                          "<small><a class='text-muted' href='/dashboard/report/" + full.domain + "'>" + full.company_name + "</a></small>"
+                        : full.domain;
+                }
+            },
+            {
+                "data": "company_tags",
+                "sClass": "tb-tags",
+                render: function ( data, type, row ) {
+                    var contents = "";
+                    $.each(data, function( index, value ) {
+                        contents += "<a href='/dashboard/tag/"+value+"'><span class='tag label label-light-tag'>" + value.trim() + "</span></a> ";
+                    });
+                    return contents;
+                }
+            },
+            {
+                "data": "updated",
+                "sort": "updated",
+                "sClass": "tb-data",
+                render: function ( data, type, row ) {
+                var dateSplit = data.split('T');
+                return type === "display" || type === "filter" ?
+                    dateSplit[0]  :
+                    data;
+                }
+            },
+            {
+                "data": "domain",
+                "sClass": "tb-actions",
+                "sortable": false,
+                render: function ( data, type, full, meta  ) {
+                    var contents;
+                    contents = "<a href='/dashboard/report/" + data + "'><i class='mdi mdi-binoculars'></i></a>   ";
+                    if (full.is_followed) {
+                        contents += "<a href='javascript:void(0)' data-toggle='tooltip' title='You are following this organization' class='unfollow'>" +
+                                    "<i class='mdi mdi-radar text-success'></i></a>";
+                     } else {
+                        contents += "<a href='javascript:void(0)' data-toggle='tooltip' title='You are not following this organization' class='follow'>" +
+                                    "<i class='mdi mdi-radar text-danger'></i></a>";
+                     }
+                    return contents;
+                }
+            }
+        ],
+    });
+
+    var data = $("#search-by-domain-form").serialize();
+    table.clear().draw();
+    $.get("{% url 'do-follow' %}", data, function(data) {
+
+    }).done(function(data) {
+        table.rows.add(data).draw();
+        $("#row-no-result").hide();
+        $("#row-search-results").show();
+    }).fail(function(data) {
+        $("#row-no-result").show();
+        $("#row-search-results").hide();
+    });
+
+    </script>
+{% endblock extra_js %}

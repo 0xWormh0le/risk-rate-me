@@ -1,0 +1,90 @@
+{% load widget_tweaks %}
+   {% if form_company %}
+    <div id="company-info" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                {% if company is None %}
+                        Add Company Details
+                {% elif company.sector is None %}
+                        Update Company Details
+                {% else %}
+                        Edit Tags
+                {% endif %}
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+
+                <div class="modal-body">
+                    <form novalidate="" id="form-update-domain" method="post" class="m-t-30">
+                        {% csrf_token %}
+                        {% render_field form_company.domain %}
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="id_name">Name</label>
+                                    <div class="company-selector">
+                                {% if company is None or user.is_superuser %}
+                                        <select id="id_name" name="name" class="form-control">
+                                            <option value="0">Choose or enter new company name</option>
+                                    {% for c in companies %}
+                                            <option value="{{ c.id }}" {% if company.pk == c.id %}selected{% endif %}>{{ c.name }}</option>
+                                    {% endfor %}
+                                        </select>
+                                {% else %}
+                                        <input type="hidden" name="name" value="{{ company.pk }}" />
+                                        <select id="id_name" name="name" class="form-control" disabled>
+                                            <option>{{ company.name }}</option>
+                                        </select>
+                                {% endif %}
+                                
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="{{ form_company.sector.id_for_label }}">{{ form_company.sector.label }}</label>
+                                {% if company is not None and company.sector is not None and not user.is_superuser %}
+                                    {% render_field form_company.sector class="form-control" disabled="true" %}
+                                {% else %}
+                                    {% render_field form_company.sector class="form-control" %}
+                                {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                    {% if followed %}
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <div class="tags-default">
+                                        <label for="{{ form_company.tags.id_for_label }}">{{ form_company.tags.label }}</label><br>
+                                        {% render_field form_company.tags class="form-control" data-role="tagsinput" style="width:100%" %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                    <button type="submit" id="btn-update-company" class="btn btn-success waves-effect waves-light">
+                {% if company is None %}
+                        Add
+                {% else %}
+                        Save
+                {% endif %}
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endif %}

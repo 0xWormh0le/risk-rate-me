@@ -1,0 +1,628 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block extrajs %}{% endblock extrajs %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-lg-12 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Domain Messaging Authentication, Reporting and Conformance (DMARC)</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Remediations</a></li>
+            <li class="breadcrumb-item active">Domain Messaging Authentication, Reporting and Conformance (DMARC)</li>
+        </ol>
+    </div>
+
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="container-fluid">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="entry-content article-content">
+                        <h3> Domain Messaging Authentication, Reporting and Conformance (DMARC)</h3>
+
+                        <p class="text-info"><strong>DMARC, which stands for “Domain-based Message Authentication,
+                            Reporting & Conformance”, is an email authentication, policy, and reporting protocol. It
+                            builds on the widely deployed SPF and DKIM protocols, adding linkage to the author (“From:”)
+                            domain name, published policies for recipient handling of authentication failures, and
+                            reporting from receivers to senders, to improve and monitor protection of the domain from
+                            fraudulent email.</strong></p>
+
+                        <p>DMARC serves three primary functions:</p>
+
+                        <ul>
+                            <li><strong>Authentication:</strong> It verifies alignment between the domain listed in the
+                                email address that gets displayed to an email recipient and the outcome of SPF and DKIM
+                                authentication checks.
+                            </li>
+                            <li><strong>Reporting:</strong> It enables a reporting mechanism so an email sender can
+                                validate their email authentication setup is working as expected.
+                            </li>
+                            <li><strong>Conformance:</strong> It allows a domain owner to establish what the final
+                                disposition of email that fails email authentication checks should be.
+                            </li>
+                        </ul>
+
+
+                        <p>DMARC is not itself an email authentication protocol, but rather builds on SPF and DKIM to
+                            supplement the Simple Mail Transfer Protocol (SMTP). In the past two years, both the U.K and
+                            the U.S. issued directives to their agencies to enhance their email security by implementing
+                            DMARC .</p>
+                        <p>The private sector is, however, lagging behind: two-thirds of the Fortune 500 companies did
+                            not publish any DMARC policy as of 2017. To make matters worse, it is not uncommon for
+                            organizations to misconfigure their email authentication protocols. To assist IT departments
+                            in implementing DMARC, we aim to provide a short overview on the DMARC protocol and its
+                            general implementation, and list quick tips for deploying this technology within their
+                            organization.</p>
+                        <p>DMARC is defined in <a href="https://tools.ietf.org/html/rfc7489">RFC 7489</a>, dated March
+                            2015</p>
+                        <h4>Overview </h4>
+                        <p>DMARC provides organizations a mean to publish their policies on email validation and
+                            provides instructions to receiving mail agents on enforcement and reporting.</p>
+                        <p>The policy specifies whether the sending domain authenticates its emails using SPF and/or
+                            DKIM and how the receiving agent should handle rejections: reject them, flag them or simply
+                            let them through anyway.</p>
+                        <p>A simplified overview of the validation process used by DMARC is described below:</p>
+
+                        <ul>
+                            <li>A domain administrator publishes a DMARC Domain Name Service (DNS) record detailing the
+                                rejection policy and reporting information;
+                            </li>
+                            <li>When an inbound mail server receives an incoming email, it uses the domain used in the
+                                “From” header to look up the DMARC policy for the domain;
+                            </li>
+                            <li>Depending on the authentication measures enabled by the sender, the receiving mail agent
+                                will:
+                                <ul>
+                                    <li>Confirm that the DKIM signature is valid;</li>
+                                    <li>Confirm that the IP address listed in the header is authorized to send on behalf
+                                        of the domain listed in the email as per SPF; and
+                                    </li>
+                                    <li>Check if domains are “aligned”, i.e., confirm that SPF validates the MAIL
+                                        FROM/Return-PATH/HELO domain and DKIM validates the domain specified in the DKIM
+                                        header.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>Based on the results of the SPF and DKIM checks, the receiving mail agent will apply the
+                                sending domain’s DMARC policy on whether to accept, reject, or otherwise flag the email
+                                message; and
+                            </li>
+                            <li>After applying the DMARC policy, the receiving mail server will report the outcome to
+                                the administrator of the sending domain.
+                            </li>
+                        </ul>
+
+
+                        <div class="card m-t-30">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0">DMARC by Example </h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+
+                                <p>To demonstrate the DMARC validation process, let’s take, for example, a mail agent
+                                    receiving an email from the company.net domain. Upon reception, the receiving mail
+                                    agent will perform a DNS query to the sender’s domain and retrieve its DMARC record,
+                                    which typically looks like the one shown below: </p>
+
+
+                                <p><code>_dmarc.company.net. IN TXT "v=DMARC1; p=none;
+                                    rua=mailto:dmarc-aggregate@company.net; ruf=mailto:dmarc-afrf@company.net; pct=100"
+                                </code></p>
+
+
+                                <p>While DMARC records may contain additional information, most records will at least
+                                    contain the following properties: </p>
+
+
+                                <table class="table m-t-30">
+                                    <tr>
+                                        <td>v:</td>
+                                        <td> specifies the DMARC version;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>p:</td>
+                                        <td> specifies the DMARC policy. Values for the policy can be ‘none’,
+                                            ‘quarantine’ or ‘reject’. Typically, all implementations start with ‘none’
+                                            and gradually become ‘reject’ once the system is validated;
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>rua:</td>
+                                        <td> specifies a mailbox to which aggregate reports will be sent. Aggregate
+                                            reports are daily compressed XML files, containing data on DMARC validation
+                                            for each email received from the domain;
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>ruf:</td>
+                                        <td> specifies the mailbox to which forensic reports will be sent. Forensic
+                                            reports contain copies of the original emails that failed the DMARC check
+                                            attached; and
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>pct:</td>
+                                        <td> is the percentage of mail to which the domain owner would like to have its
+                                            policy applied. This should always be 100.
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <p>Once the DMARC record retrieved, the mail agent will perform the SPF and DKIM checks,
+                                    if they are implemented. The overall validation will pass if one of the 2 tests
+                                    passes. It will then check for “domain alignment”, i.e., confirm that the domains
+                                    listed in the email, the envelope and the DKIM header match. In this case, no action
+                                    is taken, even if the tests fail: the email will get to the user’s inbox. However, a
+                                    report about the failure will be included in the daily aggregate report (see below
+                                    for an example) and sent to dmarc-aggregate@company.net. A copy of the email which
+                                    failed validation will be sent to dmarc-afrf@company.net. </p>
+
+                                <pre><code>
+ &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+        &lt;feedback&gt;
+            &lt;version&gt;1.0&lt;/version&gt;
+            &lt;report_metadata&gt;
+                &lt;org_name&gt;Company Inc.&lt;/org_name&gt;
+                &lt;email&gt;dmarc-aggregate@company.net&lt;/email&gt;
+                &lt;report_id&gt;v1-1483425166-company.net&lt;/report_id&gt;
+                &lt;date_range&gt;
+                    &lt;begin&gt;1483315200&lt;/begin&gt;
+                    &lt;end&gt;1483401600&lt;/end&gt;
+                &lt;/date_range&gt;
+            &lt;/report_metadata&gt;
+            &lt;policy_published&gt;
+                &lt;domain&gt;company.net&lt;/domain&gt;
+                &lt;adkim&gt;r&lt;/adkim&gt;
+                &lt;aspf&gt;r&lt;/aspf&gt;
+                &lt;p&gt;quarantine&lt;/p&gt;
+                &lt;sp&gt;none&lt;/sp&gt;
+                &lt;pct&gt;100&lt;/pct&gt;
+                &lt;fo&gt;0&lt;/fo&gt;
+            &lt;/policy_published&gt;
+            &lt;record&gt;
+                &lt;row&gt;
+                    &lt;source_ip&gt;1.1.1.1&lt;/source_ip&gt;
+                    &lt;count&gt;1&lt;/count&gt;
+                    &lt;policy_evaluated&gt;
+                        &lt;disposition&gt;none&lt;/disposition&gt;
+                        &lt;dkim&gt;fail&lt;/dkim&gt;
+                        &lt;spf&gt;fail&lt;/spf&gt;
+                    &lt;/policy_evaluated&gt;
+                &lt;/row&gt;
+                &lt;identifiers&gt;
+                    &lt;header_from&gt;company.net&lt;/header_from&gt;
+                &lt;/identifiers&gt;
+                &lt;auth_results&gt;
+                    &lt;spf&gt;
+                        &lt;domain&gt;bounce.secureserver.net&lt;/domain&gt;
+                        &lt;scope&gt;mfrom&lt;/scope&gt;
+                        &lt;result&gt;pass&lt;/result&gt;
+                    &lt;/spf&gt;
+                &lt;/auth_results&gt;
+            &lt;/record&gt;
+        &lt;/feedback&gt;
+                                                             </code></pre>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0">Implementation</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+
+
+
+
+                                    <h4 class="card-title">Required tags</h4>
+
+                                     <table class="table m-t-30">
+                                    <tr>
+                                        <td>v:</td>
+                                        <td> specifies the DMARC version;</td>
+                                    </tr>
+                                    <tr class="border-bottom">
+                                        <td>p:</td>
+                                        <td> specifies the DMARC policy. Values for the policy can be ‘none’,
+                                            ‘quarantine’ or ‘reject’. Typically, all implementations start with ‘none’
+                                            and gradually become ‘reject’ once the system is validated;
+                                        </td>
+                                    </tr>
+
+
+                                </table>
+
+                                <h4 class="card-title  m-t-30">Optional but recommended tags</h4>
+
+                                     <table class="table m-t-30">
+                                   <tr>
+                                        <td>rua:</td>
+                                        <td> specifies a mailbox to which aggregate reports will be sent. Aggregate
+                                            reports are daily compressed XML files, containing data on DMARC validation
+                                            for each email received from the domain;
+                                        </td>
+                                    </tr>
+                                    <tr class="border-bottom">
+                                        <td>fo:</td>
+                                        <td> This is a tag that lets mailbox providers know you want message samples of emails that failed either SPF and/or DKIM. There are four value options available:
+<ul>
+<li>0:&nbsp;Generate a DMARC failure report if all underlying authentication mechanisms (SPF and DKIM) fail to produce an aligned “pass” result. (default)</li>
+<li>1:&nbsp;Generate a DMARC failure report if any underlying authentication mechanism (SPF or DKIM) produced something other than an aligned “pass” result. (recommended)</li>
+<li>d:&nbsp;Generate a DKIM failure report if the message had a signature that failed evaluation, regardless of its alignment.</li>
+<li>s:&nbsp;Generate an SPF failure report if the message failed SPF evaluation, regardless of its alignment.</li>
+</ul>
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+                                <h4 class="card-title  m-t-30">Optional tags</h4>
+
+                                     <table class="table m-t-30">
+                                   <tr>
+                                        <td>ruf:</td>
+                                        <td> specifies the mailbox to which forensic reports will be sent. Forensic
+                                            reports contain copies of the original emails that failed the DMARC check
+                                            attached; and
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td>pct:</td>
+                                        <td> is the percentage of mail to which the domain owner would like to have its
+                                            policy applied. This should always be 100.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>sp: </td>
+                                        <td> This tag is used to indicate a requested policy for all subdomains where mail is failing the DMARC authentication and alignment checks. It is most effective when a domain owner wants to specify different policies for the primary domain and all subdomains.
+                                        </td>
+                                    </tr>
+                                       <tr>
+                                        <td>adkim:  </td>
+                                        <td> Indicates strict or relaxed DKIM identifier alignment. The default is relaxed.
+                                        </td>
+                                    </tr>
+                                       <tr>
+                                        <td>aspf: </td>
+                                        <td> Indicates strict or relaxed SPF identifier alignment. The default is relaxed.
+                                        </td>
+                                    </tr>
+                                       <tr>
+                                        <td>rf:</td>
+                                        <td>  Format for message failure reports. The default is Authentication Failure Reporting Format, or “afrf.” Afrf is the only value supported at this time.
+                                        </td>
+                                    </tr>
+                                    <tr class="border-bottom">
+                                        <td>ri: </td>
+                                        <td> The number of seconds elapsed between sending aggregate reports to the sender. The default value is 86400 seconds which is equivalent to one day.
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+                             <h4 class="card-title m-t-40">Implementation Process</h4>
+
+                                <p>Getting started with DMARC is fairly easy, compared to SPF and DKIM. Implementation
+                                    is typically done in incremental stages until SPF and DKIM are fine-tuned in such a
+                                    way as to minimize erroneous rejections. </p>
+                                <table class="table  m-t-30">
+                                    <tr>
+                                        <td>While not strictly necessary, the initial step is to implement either SPF or
+                                            DKIM or both. Include a DMARC record with a policy set to “none” and confirm
+                                            reception of aggregate reports. Doing so will help with troubleshooting SPF
+                                            and DKIM. When starting to implement DMARC, only receive aggregate reports,
+                                            to avoid flooding your mailbox, until you have a better assessment of the
+                                            email traffic generated by DMARC;
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ideally, use a visualization tool to better interpret the data from the
+                                            reports and understand where issues exist. Fix any major issues with SPF and
+                                            DKIM to reduce the rate of false positives and false negatives to a minimum;
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Note any email forwarders or mailing lists being used by your organizations
+                                            and add them to your DMARC filters. Forwarders and mailing lists are a major
+                                            source of problems when implementing SPF, DKIM and DMARC;
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Once major issues are fixed, update your DMARC record to receive forensics
+                                            reports to assist with uncommon errors;
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>When you are confident that you have troubleshot most problems and have a
+                                            general awareness of the type of email traffic transiting to your network,
+                                            change your DMARC policy from “none” to “quarantine”;
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Monitor aggregate reports and forensics reports afterwards for any potential
+                                            new issue arising from your policy change. After a period of time, once no
+                                            additional incidents occur and business operations are confirmed to be
+                                            running smoothly, consider upgrading your DMARC policy to “reject ”; and
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Once DMARC is fully implemented, continue to monitor reports and events to
+                                            identify potential attacks against your network, keep aware of the latest
+                                            threats and maintain user awareness training.
+                                        </td>
+                                    </tr>
+                                </table>
+
+
+                            </div>
+                        </div>
+                        <hr class="m-t-30">
+
+                        <h3 class="m-b-30 m-l-10">DMARC Troubleshooting</h3>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-actions"><a class="" data-action="collapse"><i
+                                        class="ti-minus"></i></a></div>
+                                <h4 class="card-title m-b-0" id="DmarcRecordCountTest">Multiple DMARC records </h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+                                <p>A domain should have only a single DMARC record. Multiple DMARC reocrds will
+                                    terminate any DMARC processing.</p>
+
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-actions"><a class="" data-action="collapse"><i
+                                        class="ti-minus"></i></a></div>
+                                <h4 class="card-title m-b-0" id="DmarcSyntaxIsValid">DMARC Syntax </h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+
+
+                                <p>DMARC makes as few demands as possible to produce clear, understandable records. But
+                                    there are a few areas where the requirements are exacting and can cause DMARC
+                                    failure.</p>
+                                <p>The “v=DMARC1” tag must appear first in the record.</p>
+                                <p>The “p=” policy tag must appear immediately following the “v=” tag.</p>
+                                <p>The string “DMARC” must always appear in capital letters.</p>
+                                <p>The string “DMARC” is the only portion of the DMARC policy record that is
+                                    case-sensitive. For best results, keep everything but “DMARC” lower case.</p>
+                                <p>Missing or Incorrect Characters – there may be a few missing characters, or an extra
+                                    space in a place that invalidates a key part of the record.</p>
+
+
+                                <h4>Syntax error examples:</h4>
+
+                                <p>
+                                    <code>DMARC1;p=none;rua=mailto:dmarc@company.com</code><br>
+                                    The record must start with “v=DMARC1”.
+                                </p>
+
+                                <p><code>v=DMARC1: p=none: rua=mailto: mail@company.com</code><br>
+                                    Note the use of colons as separators, instead of semi-colons.</p>
+
+                                <p><code>v=DMARC1 p=none pct=100 rua=mailto:admin@company.com</code><br>
+                                    This example completely lacks the required semi-colon separators between tag/value
+                                    pairs.</p>
+
+                                <p><code>v=DMARC; p=reject; rua=mailto:dmarc@company.com;</code><br>
+                                    In this case the “v=DMARC” pair is missing the number 1.</p>
+
+                                <p>
+                                    <code>v=DMARC1; p=none; rua= mailto:dmarc_feedback@company.com</code><br>
+                                    There is a space after “rua=” in this example. Some DMARC record parsers might not
+                                    handle it correctly.</p>
+
+
+                                <p><code>“v=DMARC1;” “p=quarantine;” “pct=25;”
+                                    “rua=mailto:postmaster@company.com”</code><br>
+                                    This represents two different conditions. In one case, the domain owner’s DNS server
+                                    is returning a DMARC record with quotes around each key/value pair. This output can
+                                    also be seen in cases where the domain owner’s DNS server is returning each
+                                    key/value pair as a separate response record. Each of these is most likely due to an
+                                    error in entering the DMARC record into the nameserver’s database.
+                                </p>
+
+                            </div>
+                        </div>
+
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-actions"><a class="" data-action="collapse"><i
+                                        class="ti-minus"></i></a></div>
+                                <h4 class="card-title m-b-0" id="DmarcPolicyIsNotNone">Policy is not NONE</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+                                <p>If <code>p=none; </code> then DMARC is not protecting a domain against phishing and
+                                    spoofing threats. </p>
+
+                                <p>
+                                    Setting a Quarantine or Reject value <code>p=quarantine;</code> or
+                                    <code>p=reject;</code> will prevent fraudsters from spoofing the domain as mail
+                                    servers will Quarantine or Reject messages that fail authentication tests.</p>
+
+                                <p>It is advised to not set a Quarantine or Reject policy until you have evaluated your
+                                    DMARC reports to make sure you don't have any legitimate senders that have email
+                                    delivery problems.</p>
+
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-actions"><a class="" data-action="collapse"><i
+                                        class="ti-minus"></i></a></div>
+                                <h4 class="card-title m-b-0" id="DmarcReportEmailsAreSet">Reporting Emails</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+                                <p>A DMARC record requires the inclusion of email addresses that will receive the
+                                    generated reports in order to be effective. </p>
+                                <p>rua – Indicates where the aggregated email reports should go. This is for the count
+                                    (volume) of messages and how they did with SPF and DKIM.</p>
+                                <p>ruf – Indicates where the forensic email reports should go. This has some more
+                                    information for the SPF and DKIM failures used to investigate what went wrong.</p>
+                                <p>You should specify email addresses for both aggregate and forensics reports to ensure
+                                    you are receiving all reports.</p>
+
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-actions"><a class="" data-action="collapse"><i
+                                        class="ti-minus"></i></a></div>
+                                <h4 class="card-title m-b-0" id="DmarcExternalReportsTest">External Reports</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+
+                                <p>If you want to send your DMARC reports to a domain other than the one that the record
+                                    is for, then the recieving domain needs to configure a DNS record so that Email
+                                    Serivce Providers know that the recipient is authorizing the the reports.</p>
+
+
+                                <h4>Verifying External Destinations</h4>
+                                <p>It is possible to specify destinations for the different reports that are outside the
+                                    authority of the Domain Owner making the request. This allows domains that do not
+                                    operate mail servers to request reports and have them go someplace that is able to
+                                    receive and process them. Without checks, this would allow a bad actor to publish a
+                                    DMARC policy record that requests that reports be sent to a victim address, and then
+                                    send a large volume of mail that will fail both DKIM and SPF checks to a wide
+                                    variety of destinations; the victim will in turn be flooded with unwanted reports.
+                                    Therefore, a verification mechanism is included.</p>
+
+                                <p> if the operators of example.com wanted to receive their aggregate reports at
+                                    reports@otherdomain.com, hey would include this rua tag in their DMARC record:</p>
+
+                                <p><code>rua=reports@otherdomain.com</code></p>
+                                <p>When a report generator has an aggregate report to send to example.com, it will
+                                    consult example.com‘s DMARC record and extract the address above. Since the domain
+                                    in that address is not example.com or its organizational domain, it would have to
+                                    make an authorization check first.</p>
+                                <p>It would take that domain the report is for (example.com), and the domain that the
+                                    rua field references (otherdomain.com), and construct a new name like this:</p>
+                                <p>
+                                    <code>example.com._report._dmarc.otherdomain.com</code>
+                                </p>
+                                <p>The report generator would then look that name up in DNS. If the domain operator for
+                                    otherdomain.com has published a DNS record at that name with the contents <code>“v=DMARC1”</code>,
+                                    then the report generator may send reports for example.com to an email address at
+                                    otherdomain.com.</p>
+
+
+                                <p><strong>This record is something that the recipient of your DMARC reports needs to
+                                    configure.</strong></p>
+
+                                <p>In the majority of cases the recipient domain will create a wild card record, which
+                                    essentially means the domain is willing to receive DMARC reports for ANY domain. A
+                                    wildcard record would look like this: <code>*._report._dmarc.example.com</code> with
+                                    a value of <code>"v=DMARC1"</code></p>
+
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-actions"><a class="" data-action="collapse"><i
+                                        class="ti-minus"></i></a></div>
+                                <h4 class="card-title m-b-0" id="DmarcExternalReportsTest">Percentage Value</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+                                <p>This is the percentage of messages to which the DMARC policy is to be applied. This
+                                    tag provides a way to gradually implement and test the impact of the policy. Values
+                                    are integers ranging from 1 - 100. The default value is 100.</p>
+                                <p>Unless testing a DMARC policy this value should be 100</p>
+
+                            </div>
+                        </div>
+
+                        <hr class="m-t-30">
+
+                        <div class="m-l-10">
+                            <h3>References</h3>
+
+                            <p>
+                                Domain-based Message Authentication, Reporting, and Conformance (DMARC)<br>
+                                <a href="https://tools.ietf.org/html/rfc7489">https://tools.ietf.org/html/rfc7489</a>
+
+
+                            </p>
+
+                            <p>
+                                Domain-based Message Authentication, Reporting, and Conformance (DMARC)<br>
+                                <a href="https://dmarc.org/">https://dmarc.org/</a>
+                            </p>
+
+                            <p>
+                                NIST Special Publication 800-177 Revision 1 - Trustworthy Email<br>
+                                <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-177.pdf#page=55">https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-177.pdf#page=55</a>
+                            </p>
+
+
+                            <p> Open Web Application Security Project - Phishing<br>
+                                <a href="https://www.owasp.org/index.php/Phishing">https://www.owasp.org/index.php/Phishing</a>
+                            </p>
+
+
+                            <h3>Additional Reading</h3>
+
+
+                            <p> How HMRC implemented DMARC to stop 300 million phishing emails<br>
+                                <a href="https://www.itproportal.com/features/how-hmrc-implemented-dmarc-to-stop-300-million-phishing-emails/">https://www.itproportal.com/features/how-hmrc-implemented-dmarc-to-stop-300-million-phishing-emails/</a>
+                            </p>
+
+
+                            <p> Google help page that offers a stepped approach to enabling DMARC<br>
+                                <a href="https://support.google.com/a/answer/2466563?hl=en">Add a DMARC Record</a></p>
+                            <p> Microsoft Office 365-related guidance for implementing DMARC on outbound and inbound
+                                mail delivery<br>
+                                <a href="https://technet.microsoft.com/en-us/library/mt734386(v=exchg.150).aspx">Use
+                                    DMARC to validate email in Office 365</a></p>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!-- #location:dashboard/remediation-dmarc -->
+{% endblock page_content %}

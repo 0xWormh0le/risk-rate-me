@@ -1,0 +1,772 @@
+{% extends "private/base.html" %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-12 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Domain Report - Data View</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="/dashboard/report/{{ domain }}">
+                    {{ domain }}
+                </a>
+            </li>
+            <li class="breadcrumb-item active">
+
+                Data View
+
+            </li>
+        </ol>
+    </div>
+</div>
+<!-- Action Plan -->
+<div class="row m-b-30">
+    <div class="col-12">
+      <div class="card m-b-0">
+     <div class="row no-gutters">
+         <div class="col-md-4">
+             <div class="card-body bg-info h-100 p-r-0 text-center">
+                 <div class="p-t-30">
+                     <i class="mdi mdi-security fa-3x text-white p-t-30"></i>
+                     <h2 class="text-white font-weight-light">My Security <br><span class="font-bold">Action Plan</span>
+                     </h2>
+                 </div>
+                 <h2 class="text-white font-weight-light p-t-10">Step 1
+                 </h2>
+             </div>
+         </div>
+         <div class="col-md-8">
+             <div class="card-body p-0">
+                 <div class="message-box contact-box position-relative">
+                     <div class="message-widget contact-widget position-relative">
+                         <!-- Message -->
+                         <a href="{% url 'my-rating' %}" class="py-3 px-2 border-bottom d-block text-decoration-none"  style="background: #f2f4f8;">
+                             <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">1</span>
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Risk Report Remediation</h5> <span class="mail-desc font-12 d-block">Find and fix all issues to protect your organisation from common vulnerabilities </span>
+                             </div>
+                         </a>
+                         <!-- Message -->
+                         <a href="{% url 'internal_assessment' %}" class="py-3 px-2 border-bottom d-block text-decoration-none">
+                             <div class="user-img position-relative d-inline-block mr-3  ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">2</span>
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Security Self Assessment</h5> <span class="mail-desc font-12  d-block">Identify weaknesses and generate a remediation plan to ensure essential cybersecurity measures are in place. </span>
+                             </div>
+                         </a>
+                         <!-- Message -->
+                         <a href="{% url 'security_framework' %}" class="py-3 px-2 border-bottom d-block text-decoration-none">
+                             <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">3</span>
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Safeguard Your Assests </h5><span class="mail-desc font-12  d-block">Review, update, manage, develop policies and procedures to maintain your cyber security.</span>
+                             </div>
+                         </a>
+                         <!-- Message -->
+                         <a href="{% url 'security_training' %}" class="py-3 px-2 d-block text-decoration-none">
+                             <div class="user-img position-relative d-inline-block mr-3 ml-3"> <span class="round text-white d-inline-block text-center rounded-circle bg-info">4</span>
+
+                             </div>
+                             <div class="mail-contnet d-inline-block align-middle">
+                                 <h5 class="my-1">Security Awareness Education</h5> <span class="mail-desc font-12  d-block">Take preventive action against cyber risks with the deployment of staff awareness training.</span>
+                             </div>
+                         </a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+
+    </div>
+</div>
+
+
+<div class="row m-b-30">
+    <div class="col-md-8">
+        <div class="card h-100 m-b-0">
+            <div class="card-body">
+             <h4 class="card-title">Risk Report Remediation</h4>
+                <h6 class="card-subtitle">Find and fix all issues to protect your organisation from common vulnerabilities </h6>
+
+                <p >Here you can find all of the data from the public risk rating assessment. Default view is to show "Only Failed" items. Use the appropriate buttons below to view the full data set.</p>
+                <p>For each failed item we provide a short description and remedation suggestion. Accessing the "more details" link will direct you to the relevant page in our remeidaiotn library. This will provide full technical guidelines on each security control and how to implement them. </p>
+                <p>Once you have addressed any issues the <a href="{% url 'internal_assessment' %}">Internal Security Assessments</a> provide a quick and effective way for you to review your internal controls to get a complete overview of your organisation’s current security posture</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100  m-b-0 bg-dark ">
+
+                            <div class="card-body card-inverse social-profile d-flex ">
+                                <div class="align-self-center"> <img src="/static/images/eye.svg" style="width:100px;" class="m-b-20">
+                                    <h4 class="card-title">Security Consultancy</h4>
+                                    <h6 class="card-subtitle">contact@riskrate.me</h6>
+                                    <p class="text-white">Relieve the burden of managing cyber security internally and get direct access to a specialist team of cyber security experts. </p>
+                                </div>
+                            </div> <div class="card-footer text-center social-profile"><a href="#" class="btn btn-secondary">Contact Us</a> </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- #component:dashboard/domain-report:start -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header pull-right">
+                <div class="pull-right">
+                    <button id="showall" class="btn btn-info">Show All</button> <button id="success" class="btn btn-info">Show Only Success</button> <button id="failed" class="btn btn-info">Show Only Failed</button>
+                </div>
+            </div>
+            <div class="card-body">
+
+
+
+
+                <!-- mail agents -->
+                <table class="custom table p-t-40">
+                    <thead>
+                        <tr>
+                            <th style="width: 35%">Test</th>
+                            <th style="width: 10%; text-align: center">Result</th>
+                            <th style="width: 55%">Info</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="rem-title">
+                            <td colspan="3" >
+                               <strong> Email Security</strong>
+                            </td>
+                        </tr>
+                        {% for test in tests %}
+                        {% if "mail-agent" in test.definition.keywords and not test.has_no_value  %}
+                        <tr id="table-ma-row-{{ test.definition.label }}" class="dtr-{{ test.state }}">
+                            <td style="width: 35%">
+                                {{ test.definition.name }}<br>
+                                <small>{{ test.definition.description }}</small>
+                            </td>
+                            <td style="width: 10%; text-align: center">
+                                {% if test.has_succeed %}
+                                <span class="badge A">passed</span>
+                                {% elif test.has_partially_succeed %}
+                                <span class="badge C">partial</span>
+                                {% elif test.has_failed %}
+                                <span class="badge E">failed</span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td style="width: 55%">
+                                {{ test.message | safe }}
+                                {% if not test.has_succeed %}
+                                <br><small><a href="{% url 'remediation-smtp' %}" target="_blank">more details</a> </small>
+                                {% endif %}
+
+                            </td>
+                        </tr>
+                        {% if test.data and test.data|length > 0 %}
+                        {% for server in test.smtp_servers  %}
+                        {% if not server.data == "not_available" %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td></td>
+                            <td class="" style="width: 10%; text-align: center">
+                                {% if server.data == "success" %}
+                                <span class="badge A ">passed</span>
+                                {% elif server.data == "partial" %}
+                                <span class="badge C ">partial</span>
+                                {% elif server.data == "failed" %}
+                                <span class="badge E ">failed</span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td class="font-italic ">{{ server.host }}</td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+
+                        <!-- spf -->
+
+                        {% for test in tests%}
+                        {% if test.definition.category == "email_security" and "spf" in test.definition.keywords and not test.state == "not_available" %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td style="width: 35%">
+                                {{ test.definition.name }}<br>
+                                <small>{{ def.description }}</small>
+                            </td>
+                            <td style="width: 10%; text-align: center">
+                                {% if test.has_succeed %}
+                                <span class="badge A">passed</span>
+                                {% elif test.has_partially_succeed %}
+                                <span class="badge C">partial</span>
+                                {% elif test.has_failed %}
+                                <span class="badge E">failed</span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td style="width: 55%">
+                                {{ test.message | safe }}
+                                {% if not test.has_succeed %}
+                                <br><small><a href="{% url 'remediation-spf' %}" target="_blank">more details</a> </small>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                        {% if test.data and test.data|length > 0 %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <ul>
+                                    {% if test.definition.label == "spfvoidlookupscount" %}
+                                    <li>Void Lookups: {{ test.info_void_lookups }}</li>
+                                    {% elif test.definition.label == "spfvalidlookupcount" %}
+                                    <li>Lookups: {{ test.info_lookups }}</li>
+                                    {% elif test.definition.label == "spfrecordnottoopermissive" %}
+                                    <li>Policy: {{ test.spf_policy }}</li>
+                                    {% elif test.definition.label == "spfrecordcount" %}
+                                    {% for record in test.spf_records %}
+                                    <li>{{ record }}</li>
+                                    {% endfor %}
+                                    {% endif %}
+                                </ul>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+
+                        <!-- dkim -->
+                        {% for test in tests %}
+                        {% if test.definition.category == "email_security" and "dkim" in test.definition.keywords %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td style="width: 35%">
+                                {{ test.definition.name }}
+                                <span data-toggle="tooltip" title="test.definition.name" data-original-title="{{ test.definition.description }}">
+                                    <i class="mdi mdi-information-outline"></i>
+                                </span>
+                            </td>
+                            <td style="width: 10%; text-align: center">
+                                {% if test.has_succeed %}
+                                <span class="badge A">passed</span>
+                                {% elif test.has_partially_succeed %}
+                                <span class="badge C">partial</span>
+                                {% elif test.has_failed %}
+                                <span class="badge E">failed</span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td style="width: 55%">
+                                {{ test.message | safe }}
+                                {% if not test.has_succeed %}
+                                <br><small><a href="{% url 'remediation-dkim' %}" target="_blank">more details</a> </small>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% if test.data and test.data|length > 0 %}
+                        <tr class="dtr-{{ test.state }}">
+                            {% for d in test.data %}
+
+                            {% endfor %}
+                        </tr>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+
+                        <!-- dmarc -->
+                        {% for test in tests %}
+                        {% if test.definition.category == "email_security" and "dmarc" in test.definition.keywords and not test.state == "not_available" %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td style="width: 35%">
+                                {{ test.definition.name }}
+                                <span data-toggle="tooltip" title="" data-original-title="{{ test.definition.description }}">
+                                    <i class="mdi mdi-information-outline"></i>
+                                </span>
+                            </td>
+                            <td style="width: 10%; text-align: center">
+                                {% if test.has_succeed %}
+                                <span class="badge A">passed</span>
+                                {% elif test.has_partially_succeed %}
+                                <span class="badge C">partial</span>
+                                {% elif test.has_failed %}
+                                <span class="badge E">failed</span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td style="width: 55%">
+                                {{ test.message | safe }}
+                                {% if not test.has_succeed %}
+                                <br>
+                                <small><a href="{% url 'remediation-dmarc' %}" target="_blank">more details</a> </small>
+                                {% endif %}
+
+
+                                {% if test.data and test.data|length > 0 %}
+                                <ul>
+                                    {% if test.definition.label == "dmarcsinglerecordcheck" and "record" in test.data %}
+                                    {% for record in test.data %}
+                                    <li>{{ record }}</li>
+                                    {% endfor %}
+                                    {% elif test.definition.label == "dmarcruaisset" %}
+                                    {% if "rua" in test.data %}
+                                    <li>{{ test.dmarc_rua }}</li>
+                                    {% endif %}
+                                    {% elif test.definition.label == "dmarcrufisset" %}
+                                    {% if "ruf" in test.data %}
+                                    <li>{{ test.dmarc_ruf }}</li>
+                                    {% endif %}
+                                    {% elif test.definition.label == "dmarcpolicyisnotnone" %}
+                                    <li>Policy: {{ test.dmarc_policy }}</li>
+                                    {% elif test.definition.label == "dmarcrecordcounttest" %}
+                                    {% for record in test.dmarc_records %}
+                                    <li>{{ record }}</li>
+                                    {% endfor %}
+                                    {% endif %}
+                                </ul>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+
+                        <tr  class="rem-title">
+                            <td colspan="3">
+                                <strong>Web Security</strong>
+                            </td>
+                        </tr>
+
+                        <!-- https -->
+                        {% for test in tests %}
+                        {% if test.definition.category == "web_security" and "https" in test.definition.keywords and not test.state == "not_available"  %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td style="width: 35%">
+                                {{ test.definition.name }}
+                                <span data-toggle="tooltip" title="{{ test.definition.name }}" data-original-title="{{ test.definition.description }}">
+                                    <i class="mdi mdi-information-outline"></i>
+                                </span>
+                            </td>
+                            <td style="width: 10%; text-align: center">
+                                {% if test.has_succeed %}
+                                <span class="badge A">passed</span>
+                                {% elif test.has_partially_succeed %}
+                                <span class="badge C">partial</span>
+                                {% elif test.has_failed %}
+                                <span class="badge E">failed</span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td style="width: 55%">
+                                {{ test.message | safe }}
+                                {% if not test.has_succeed %}
+                                <br>
+                                <small><a href="{% url 'remediation-https' %}" target="_blank">more details</a> </small>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% if test.data and test.data|length > 0 %}
+                        {% if "cookie" in test.definition.keywords and "invalid" in test.data  %}
+                        {% for cookie in test.data %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td>{{ cookie }}</td>
+                            <td>{{ cookie }}</td>
+                            <td>{{ cookie }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+
+
+                        <!-- DNSSEC -->
+                        {% for test in tests %}
+                        {% if test.definition.category == "web_security" and "dnssec" in test.definition.keywords and not test.state == "not_available" %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td style="width: 35%">
+                                {{ test.definition.name }}
+                                <span data-toggle="tooltip" title="{{ test.definition.name }}" data-original-title="{{ test.definition.description }}">
+                                    <i class="mdi mdi-information-outline"></i>
+                                </span>
+                            </td>
+                            <td style="width: 10%; text-align: center">
+                                {% if test.has_succeed %}
+                                <span class="badge A">passed</span>
+                                {% elif test.has_partially_succeed %}
+                                <span class="badge C">partial</span>
+                                {% elif test.has_failed %}
+                                <span class="badge E">failed</span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td style="width: 55%">
+                                {{ test.message | safe }}
+                                {% if not test.has_succeed %}
+                                <br>
+                                <small><a href="{% url 'remediation-dnssec' %}" target="_blank">more details</a> </small>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% if test.data and test.data|length > 0 %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <ul>
+
+                                    <li>{{ test.data }}</li>
+
+                                </ul>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+
+                        <tr  class="rem-title">
+                            <td colspan="3" >
+                                <strong>Web Application</strong>
+                            </td>
+                        </tr>
+                        <!-- headers -->
+                        {% for test in tests %}
+                        {% if test.definition.category == "web_application" and "headers" in test.definition.keywords %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td style="width: 35%">
+                                {{ test.definition.name }}
+                                <span data-toggle="tooltip" title="{{ test.definition.name }}" data-original-title="{{ test.definition.description }}">
+                                    <i class="mdi mdi-information-outline"></i>
+                                </span>
+                            </td>
+                            <td style="width: 10%; text-align: center" class="{{ test.definition }}">
+                                {% if test.has_succeed %}
+                                <span class="badge A">passed</span>
+                                {% elif test.has_partially_succeed %}
+                                <span class="badge C">partial</span>
+                                {% elif test.has_failed %}
+                                <span class="badge E">failed</span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td style="width: 55%">
+                                {{ test.message | safe }}
+                                {% if not test.has_succeed %}
+                                <br>
+                                <small><a href="/dashboard/remediation/headers/{{ test.definition }}" target="_blank">more details</a> </small>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% if test.data and test.data|length > 0 %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <ul>
+                                    <li>{{ test.data }}</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+
+                        <!-- cookies -->
+                        {% for test in tests %}
+                        {% if test.definition.category == "web_application" and "cookies" in test.definition.keywords and not test.state == "not_available"  %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td style="width: 35%">
+                                {{ test.definition.name }}
+                                <span data-toggle="tooltip" title="{{ test.definition.name }}" data-original-title="{{ test.definition.description }}">
+                                    <i class="mdi mdi-information-outline"></i>
+                                </span>
+                            </td>
+                            <td style="width: 10%; text-align: center">
+                                {% if test.has_succeed %}
+                                <span class="badge A">passed</span>
+                                {% elif test.has_partially_succeed %}
+                                <span class="badge C">partial</span>
+                                {% elif test.has_failed %}
+                                <span class="badge E">failed</span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td style="width: 55%">
+                                {{ test.message | safe }}
+                                {% if not test.has_succeed %}
+                                <br><small><a href="{% url 'remediation-cookies' %}" target="_blank">more details</a> </small>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% if test.data and test.data|length > 0 %}
+                        <tr class="dtr-{{ test.state }}">
+                            {% for d in test.data %}
+
+                            {% endfor %}
+                        </tr>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+
+
+                        <tr  class="rem-title">
+                            <td colspan="3" >
+                                <strong>Infrastructure</strong>
+                            </td>
+                        </tr>
+
+                        <!-- IP Rep -->
+                        {% for test in tests %}
+                        {% if test.definition.category == "infrastructure" and "reputation" in test.definition.keywords %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td style="width: 35%">
+                                {{ test.definition.name }}
+                                <span data-toggle="tooltip" title="{{ test.definition.name }}" data-original-title="{{ test.definition.description }}">
+                                    <i class="mdi mdi-information-outline"></i>
+                                </span>
+                            </td>
+                            <td style="width: 10%; text-align: center">
+                                {% if test.has_succeed %}
+                                <span class="badge A">passed</span>
+                                {% elif test.has_partially_succeed %}
+                                <span class="badge C">partial</span>
+                                {% elif test.has_failed %}
+                                <span class="badge E">failed</span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td style="width: 55%">
+                                {{ test.message | safe }}
+                                {% if not test.has_succeed %}
+                                <br>
+                                <small><a href="{% url 'remediation-ip' %}" target="_blank">more details</a> </small>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% if test.data and test.data|length > 0 and not test.has_error %}
+                        {% if test.definition.label == "hostreputation" and "is-listed" in test.data %}
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <ul>
+                                {% for list in test.blacklists %}
+                                <li>{{ list }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        {% elif test.definition.label == "ipblocklist" and not test.has_error %}
+                        {% for k, v in test.reputation_state_desc %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td style="text-align: right;"></td>
+                            <td class="text-center">
+                                {% if k %}
+                                <span class="badge E">failed</span>
+                                {% else %}
+                                <span class="badge A">passed</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ v }}
+                            </td>
+                        </tr>
+                        {%endfor %}
+                        {% endif %}
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+
+                        <!--CVE -->
+                        {% for test in tests %}
+                        {% if test.definition.category == "infrastructure" and "cves" in test.definition.keywords %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td style="width: 35%">
+                                {{ test.definition.name }}
+                                <span data-toggle="tooltip" title="{{ test.definition.name }}" data-original-title="{{ test.definition.description }}">
+                                    <i class="mdi mdi-information-outline"></i>
+                                </span>
+                            </td>
+                            <td style="width: 10%; text-align: center">
+                                {% if test.has_succeed %}
+                                <span class="badge A">passed</span>
+                                {% elif test.has_partially_succeed %}
+                                <span class="badge C">partial</span>
+                                {% elif test.has_failed %}
+                                <span class="badge E">failed</span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td style="width: 55%">
+                                {{ test.message | safe }}
+                                {% if not test.has_succeed %}
+                                <br>
+                                <small><a href="{% url 'remediation-vulns' %}" target="_blank">more details</a> </small>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% if test.data and test.data|length > 0 and not test.has_error %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <ul>
+                                    {% for vuln in test.cves %}
+                                    <li>
+                                        <a href="https://nvd.nist.gov/vuln/detail/{{ vuln }}">{{ vuln }}</a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+
+                        <!-- ports -->
+                        {% for test in tests %}
+                        {% if test.definition.category == "infrastructure" and "ports" in test.definition.keywords %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td style="width: 35%">
+                                {{ test.definition.name }}
+                                <span data-toggle="tooltip" title="{{ test.definition.name }}" data-original-title="{{ test.definition.description }}">
+                                    <i class="mdi mdi-information-outline"></i>
+                                </span>
+                            </td>
+                            <td style="width: 10%; text-align: center">
+                                {% if test.has_succeed %}
+                                <span class="badge A">passed</span>
+                                {% elif test.has_partially_succeed %}
+                                <span class="badge C">partial</span>
+                                {% elif test.has_failed %}
+                                <span class="badge E">failed</span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td style="width: 55%">
+                                {{ test.message | safe }}
+                                {% if not test.has_succeed %}
+                                <br>
+                                <small><a href="{% url 'remediation-ports' %}" target="_blank">more details</a> </small>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% if test.data and test.data|length > 0 and not test.has_error %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td style="width: 10%; text-align: center"></td>
+                            <td style="width: 10%; text-align: center"></td>
+                            <td style="width: 55%">
+                                <ul>
+                                    {% for port in test.ports %}
+                                    <li>{{ port }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+
+                        <!-- leaks -->
+                        {% for test in tests %}
+                        {% if test.definition.category == "infrastructure" and "leaks" in test.definition.keywords %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td style="width: 35%">
+                                {{ test.definition.name }}
+                                <span data-toggle="tooltip" title="{{ test.definition.name }}" data-original-title="{{ test.definition.description }}">
+                                    <i class="mdi mdi-information-outline"></i>
+                                </span>
+                            </td>
+                            <td style="width: 10%; text-align: center">
+                                {% if test.has_succeed %}
+                                <span class="badge A">passed</span>
+                                {% elif test.has_partially_succeed %}
+                                <span class="badge C">partial</span>
+                                {% elif test.has_failed %}
+                                <span class="badge E">failed</span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td style="width: 55%">
+                                {{ test.message | safe }}
+
+                            </td>
+                        </tr>
+                        {% if test.data and "groups" in test.data and not test.has_error %}
+                        {% for group in test.leaked_groups %}
+                        <tr class="dtr-{{ test.state }}">
+                            <td></td>
+                            <td style="width: 10%; text-align: center"></td>
+                            <td style="width: 55%">
+                                {{ group.leak }}: {{ group.count }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #component:dashboard/domain-report:end -->
+
+{% endblock page_content %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
+
+<!-- This is data table -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
+<!-- start - This is for export functionality only -->
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+<!-- end - This is for export functionality only -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#failed").click(function() {
+            $(".dtr-failed").show();
+            $(".dtr-partial").show();
+            $(".dtr-success").hide();
+        });
+
+        $("#success").click(function() {
+            $(".dtr-success").show();
+            $(".dtr-failed").hide();
+            $(".dtr-partial").hide();
+        });
+
+        $("#showall").click(function() {
+            $(".dtr-success").show();
+            $(".dtr-failed").show();
+            $(".dtr-partial").show();
+        });
+    });
+
+</script>
+{% endblock extra_js %}

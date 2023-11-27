@@ -1,0 +1,169 @@
+{% extends "private/base.html" %}
+{% load static %}
+
+{% block header_extra_js %}{% endblock header_extra_js %}
+
+
+{% block page_content %}
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">My Rating</h3>
+        <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item">
+                <a href="javascript:void(0)">My Rating</a>
+            </li>
+            <li class="breadcrumb-item active">
+               {% if report and report.domain.company %}
+                    {{ report.domain.company.name }}
+                {% else %}
+                     {{ domain }}
+                {% endif %}
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 m-b-30">
+        <div class="card h-100 d-table" style="width:100%">
+            <div class="card-body text-center p-b-0 d-table-cell align-middle">
+                {% if report.domain.company %}
+                    <h2 class="card-title m-t-20"><i class="far fa-building m-r-10"></i> {{ report.domain.company.name }}</h2>
+                {% else %}
+                    <h2 class="card-title m-t-20"><i class="far fa-building m-r-10"></i> {{ domain }}</h2>
+                {% endif %}
+
+                <h5 class="card-subtitle">
+                    <i class="fas fa-globe"></i>
+                    <a href='http://{{ domain }}'> {{ domain }}</a>
+                </h5>
+                {% if report.domain.company %}
+                    <span class="label label-light-sector m-r-5" id="btn-load-sector">
+                    {% if report.domain.company.sector %}
+                        {{ report.domain.company.sector.name }}
+                         {% else %}
+                <a href="javascript:void();" data-toggle="modal" data-target="#company-info">
+                    <small><strong>+</strong> Add Sector</small>
+                </a>
+                    {% endif %}
+                    </span>
+
+                {% endif %}
+
+                    {% if report %}
+                        <h6 class="card-subtitle m-t-20"> <i class="far fa-calendar-alt"></i> {{ report.generated_on }}</h6>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 m-b-30">
+        {% if report %}
+            {% include "private/_ratings_actions.html" %}
+        {% else %}
+            <div class="card h-100 text-center">
+                <div class="m-t-40"> no data available</div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% if report %}
+<div class="row">
+    <div class="col-lg-6 m-b-30">
+        {% include "private/_ratings_gauge.html" with chart_title='Risk Rating'  %}
+    </div>
+    <div class="col-lg-6 m-b-30">
+        {% include "private/_ratings_categories.html" %}
+    </div>
+</div>
+{% endif %}
+
+{% include "private/_domain_report.html" %}
+{% include "private/_legend.html" %}
+
+{% include "private/_ads_training.html" %}
+
+<!-- #location:my-rating -->
+{% endblock page_content %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap-tagsinput.min.js' %}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            {% if report %}
+            var g = echarts.init(document.getElementById("overall-rating-gage"));
+            var option = {
+                tooltip : {
+                    formatter: "{a} <br/>{b} : {c}%"
+                },
+                toolbox: {
+                    show: false
+                },
+                series: [
+                    {
+                        name: "Rating",
+                        type: "gauge",
+                        detail: {
+                            formatter:function customValue(value) {
+                                    if (value < 0) {
+                                        return "N/A";
+                                    } else {
+                                        return "{{ report.overall_rating }}";
+                                    }
+                                },
+                            fontSize: 80,
+                            fontWeight: "900",
+                            fontFamily: "Poppins, sans-serif",
+                            offsetCenter: [0, "100%"]
+                        },
+                        data: [{
+                            value: {{ report.overall_score }} * 100,
+                            name: "RATING"
+                        }],
+                        itemStyle: {
+                            color: "#000"
+                        },
+                        title: {
+                            offsetCenter: [0, "40%"],
+                            fontSize: 10,
+                            color: "#99abb4",
+                            fontWeight: "lighter"
+                        },
+                        splitNumber: 6,
+                        axisLine: {
+                            lineStyle: {
+                                color: [[0.33333, "#ff3728"], [0.6666, "#ffb22b"], [1, "#a1bc2b"]]
+                                , width: 30
+                            }
+                        },
+                        splitLine: {
+                            show: true,
+                            lineStyle: {
+                                width: 3,
+                                color: "#fff"
+                            }
+                        },
+                        axisLabel: false,
+                        axisTick: false,
+                        pointer: {
+                            length: "90%",
+                        },
+
+                    }
+                ]
+            };
+
+            g.setOption(option, true), $(function () {
+                function resize() {
+                    setTimeout(function () {g.resize();}, 100)
+                }
+                $(window).on("resize", resize), $(".sidebartoggler").on("click", resize);
+            });
+            {% endif %}
+        });
+    </script>
+{% endblock extra_js %}

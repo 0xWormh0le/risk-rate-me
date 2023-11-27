@@ -1,0 +1,157 @@
+{% extends "private/base.html" %}
+
+{% block extrajs %}{% endblock extrajs %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb  -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">X-XSS Header</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Remediations</a></li>
+            <li class="breadcrumb-item active">X-XSS Header</li>
+        </ol>
+    </div>
+
+</div>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="container-fluid">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="entry-content article-content">
+                        <h3> X-XSS Header </h3>
+                        <p>Cross-Site Scripting (XSS) attacks occur when:</p>
+                        <p>1. Data enters a Web application through an untrusted source, most frequently a web
+                            request.</p>
+                        <p>2. The data is included in dynamic content that is sent to a web user without being validated
+                            for malicious content.</p>
+                        <p>The malicious content sent to the web browser often takes the form of a segment of
+                            JavaScript, but may also include HTML, Flash, or any other type of code that the browser may
+                            execute. The variety of attacks based on XSS is almost limitless, but they commonly include
+                            transmitting private data, like cookies or other session information, to the attacker,
+                            redirecting the victim to web content controlled by the attacker, or performing other
+                            malicious operations on the user's machine under the guise of the vulnerable site.</p>
+                        <h3>XSS Attack Consequences</h3>
+                        <p>XSS can cause a variety of problems for the end user that range in severity from an annoyance
+                            to complete account compromise. The most severe XSS attacks involve disclosure of the user’s
+                            session cookie, allowing an attacker to hijack the user’s session and take over the account.
+                            Other damaging attacks include the disclosure of end user files, installation of Trojan
+                            horse programs, redirect the user to some other page or site, or modify presentation of
+                            content. An XSS vulnerability allowing an attacker to modify a press release or news item
+                            could affect a company’s stock price or lessen consumer confidence.</p>
+                        <p>The HTTP X-XSS-Protection response header is a feature of Internet Explorer, Chrome and
+                            Safari that stops pages from loading when they detect reflected cross-site scripting (XSS)
+                            attacks. </p>
+
+                        <div class="card m-t-30">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0">Implementing the X-XSS Header</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+
+                                <p>The recommended configuration is to set this header to the following value, which
+                                    will enable the XSS protection and instruct the browser to block the response in the
+                                    event that a malicious script has been inserted from user input, instead of
+                                    sanitizing:</p>
+
+                                <p><code>x-xss-protection: 1; mode=block</code></p>
+
+                                <p>There are a number of defined mechanisms that can be used for this header:</p>
+
+
+                                <table class="table">
+                                    <tr>
+                                        <td>0</td>
+
+                                        <td>Disables XSS filtering.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+
+                                        <td>Enables XSS filtering (usually default in browsers). If a cross-site
+                                            scripting attack is detected, the browser will sanitize the page (remove the
+                                            unsafe parts).
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1; mode=block</td>
+
+                                        <td>Enables XSS filtering. Rather than sanitizing the page, the browser will
+                                            prevent rendering of the page if an attack is detected.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1; report=&lt;reporting-URI&gt; (Chromium only)</td>
+
+                                        <td>Enables XSS filtering. If a cross-site scripting attack is detected, the
+                                            browser will sanitize the page and report the violation. This uses the
+                                            functionality of the CSP report-uri directive to send a report.
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <p>The x-xss-protection header is easy to implement and only requires a slight web
+                                    server configuration change. </p>
+
+
+                                <h3> Enable in Nginx</h3>
+                                <p><code>add_header x-xss-protection "1; mode=block" always;</code></p>
+                                <h3>Enable in Apache</h3>
+                                <p><code>Header set x-xss-protection "1; mode=block"</code></p>
+                                <h3>Enable on IIS</h3>
+                                <p>To enable on IIS simply add it to your site’s Web.config file.</p>
+
+                                <code>
+                                    &lt;system.webServer&gt;<br>
+                                    ...<br><br>
+
+                                    &lt;httpProtocol&gt;<br>
+                                    &lt;customHeaders&gt;<br>
+                                    &lt;add name="X-XSS-Protection" value="1; mode=block" /&gt;<br>
+                                    &lt;/customHeaders&gt;<br>
+                                    &lt;/httpProtocol&gt;<br><br>
+
+                                    ...<br>
+                                    &lt;/system.webServer&gt;
+
+                                </code>
+
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="m-l-10">
+                            <h3>References</h3>
+                            <a rel="nofollow" class="external free"
+                               href="https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)">https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- #location:dashboard/remediation-headers-x-xss -->
+{% endblock page_content %}

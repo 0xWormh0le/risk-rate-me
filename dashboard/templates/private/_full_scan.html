@@ -1,0 +1,57 @@
+                       <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card card-outline-info">
+                                        <div class="card-header">
+                                            <h4 class="m-b-0 text-white">Request a FULL Web Application Vulnerability Assessment </h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                    <div class="m-b-30">Provide us with the URL of the intended target and any special instructions. We will then provide you with a quote based on the scope of the assessment. As a guide the cost for an average SME is US$950. This cost will be higher for an organisation with a number of web applications and larger digital footprint.</div>
+
+                                                    <form id="form-contact" action="{% url 'feedback' %}"  method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="redirect" value="{{ request.path }}" />
+
+                                                        <div class="form-body">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Target URL(s) to be tested and any special instructions:</label>
+                                                                <br>
+                                                                <textarea rows="5" name="message" id="form-contact-message" class="form-control" required> http://...</textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label">Your Email:</label>
+                                                                <input hidden="name"  name="name" id="form-contact-name" value="{{ user.first_name }}" >
+                                                                <input hidden="company_name"  name="name" id="form-contact-company" value="{{ user.company.name }}" >
+                                                                <input type="email" class="form-control form-control-danger"  required name="email" id="form-contact-email" value="{{ user.email }}" >
+                                                                <small class="form-control-feedback"> If different from your account email address</small>
+                                                            </div>
+                                                            <div>
+                                                                <strong><i>Security scanning services are provided for owners and operators of internet facing systems and websites. Security scanning is only to be performed against systems and websites that you own or have explicit permission to test from the systems owner. If you have a website hosted on a shared hosting environment you must obtain permission from the web hosting provider before testing your website.</i></strong>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="form-group">
+                                                                <button type="submit" class="btn btn-info">Submit Request</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item disabled">Scan Includes:</li>
+                                                        <li class="list-group-item ">Website fingerprinting</li>
+                                                        <li class="list-group-item">Version-based vulnerability detection</li>
+                                                        <li class="list-group-item">Common configuration issues</li>
+                                                        <li class="list-group-item">SQL injection</li>
+                                                        <li class="list-group-item">Cross-Site Scripting</li>
+                                                        <li class="list-group-item">Local/Remote File Inclusion</li>
+                                                        <li class="list-group-item">Remote command execution</li>
+                                                        <li class="list-group-item">Discovery of sensitive files</li>
+                                                        <li class="list-group-item">Technical Report (based on OWASP Top 10)</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>

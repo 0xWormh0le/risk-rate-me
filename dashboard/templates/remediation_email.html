@@ -1,0 +1,266 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block extrajs %}{% endblock extrajs %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Securing Email Services</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Remediations</a></li>
+            <li class="breadcrumb-item active">Securing Email Services</li>
+        </ol>
+    </div>
+
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="container-fluid">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="entry-content article-content">
+                        <h3> Securing Email Services</h3>
+                        <h5>Best practices for Information Technology Specialists and Managers</h5>
+
+                        <h4 class="m-t-30">Introduction</h4>
+                        <p> Email is inherently insecure. It may surprise you to learn just how insecure it really is. For example, did you know that messages which you thought were deleted years ago may be sitting on servers half-way around the world? Or that your messages can be read and modified in transit, even before they reach their destination? Or even that the username and password that you use to login to your email servers can be stolen and used by hackers?</p>
+
+                        <p>It's no suprise then that email remains the primary vector of attack used by malicious online actors. In 2016, the delivery method of 71% of the known ransomware families was via email . At the same time, Business Email Compromise (BEC) scams increased by 45% . Spoofing and impersonation were leveraged in 67% of phishing email attacks in 2017 . The importance of securing the authentication and delivery of email cannot be understated. Ignoring it can lead to significant reputational and financial impact on any corporation. </p>
+
+                        <p>Some of the common problems involved n email communications are:</p>
+                        <table class="table m-t-30">
+                            <tr>
+                                <td>
+                                    <p>Eavesdropping</p>
+                                </td>
+
+                                <td>
+                                    <p>Anyone who has access to the computers or networks through which your information is traveling to capture this information and read it. People using computers “near” the path your email takes through the Internet can potentially read and copy your messages.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Identity Theft</p>
+                                </td>
+
+                                <td>
+                                    <p>If someone can obtain the username and password that you use to access your email servers, they can read your email and send false email messages as you. Very often, these credentials can be obtained by eavesdropping on SMTP, POP, IMAP, or Webmail connections.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Invasion of Privacy</p>
+                                </td>
+
+                                <td>
+                                    <p>If you are very concerned about your privacy, then you should consider the possibility of “unprotected backups”, listed below. You may also be concerned about letting your recipients know the IP address of your computer. This information may be used to tell in what city you are located or even to find out what your address is in some cases! This is not usually an issue with WebMail, POP, or IMAP, but is an issue with the transport of email, securely or insecurely, from any email client over SMTP.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Message Modification</p>
+                                </td>
+
+                                <td>
+                                    <p>Anyone who has system administrator permission on any of the SMTP Servers that your message visits, can not only read your message, but they can delete or change the message before it continues on to its destination. Your recipient has no way to tell if the email message that you sent has been altered.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>False Messages</p>
+                                </td>
+
+                                <td>
+                                    <p>It is very easy to construct messages that appear to be sent by someone else. Many viruses take advantage of this situation to propagate themselves. In general, there it is very hard to be sure that the apparent sender of a message is the true sender – the sender’s name could have been easily fabricated. </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Message Replay</p>
+                                </td>
+
+                                <td>
+                                    <p>Just as a message can be modified, messages can be saved, modified, and re-sent later. You could receive a valid original message, but then receive subsequent faked messages that appear to be valid.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Unprotected Backups</p>
+                                </td>
+
+                                <td>
+                                    <p>Messages are usually stored in plain text on SMTP Servers. Thus, backups of these servers’ disks usually contains plain text copies of your messages. As backups may be kept for years and can be read by anyone with access to them.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Repudiation</p>
+                                </td>
+
+                                <td>
+                                    <p>Because normal email messages can be forged, there is no way for you to prove that someone sent you a particular message. This means that even if someone DID send you a message, they can successfully deny it. This has implications with regards to using email for contracts, business communications, electronic commerce, etc.</p>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p>The ability to use valid domains to make phishing emails appear to originate from a legitimate organization greatly improves the social engineering tradecraft and, thus, the effectiveness of phishing campaigns and other criminal activity. Companies often invest large amounts in network security devices and services, yet omit to properly configure basic email security mechanisms such as SPF, DKIM and DMARC, which would go a long way in reducing the effectiveness of spamming and phishing campaigns. This document will briefly explain how spoofing occurs, why this could be an issue for your organization and some solutions to reduce these risks.</p>
+
+
+                        <div class="card m-t-30">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0">Spoofing and Social Engineering</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+
+                                <p>Despite the spread of video-teleconferencing, instant messaging and social media, email remains a critical component of communications in modern organizations and, as such, is the most popular attack vector for threat actors. Threats such as malware and phishing are often well-understood, despite not being always well-managed. However, email security goes beyond the well-known spam or regular phishing campaigns; it also targets unsecured network infrastructure, allowing attackers to leverage unsecured mail servers to spoof email addresses.</p>
+                                <p>An often overlooked issue is the lack of domain validation, which greatly contributes to the increased effectiveness of social engineering efforts by providing legitimate-looking senders. Consider the email below:</p>
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p> <strong>FROM: </strong>David Anderson david.anderson@company.net<br>
+                                            <br><br>
+
+                                            Hi Pete,<br><br>
+
+                                            Please make a payment that was suppose to go out the previous week to a new Chinese supplier we signed last week. I need you to process this immediately.<br><br>
+
+                                            Bank name: Fujian Haixia Bank<br>
+                                            Beneficiary Name: Alex Wang<br>
+                                            Beneficiary Address: China, Fujian Shi, Chaoyang Qu, SanYuan Qiao, 东三环北路东方路1号 邮政编码: 100096<br>
+                                            Account Number: 1029 193283<br>
+                                            Routing Number: 211770093<br>
+                                            Swift #: 2837288<br>
+                                            <br><br>
+                                            I am a bit busy now, but I'll call you in about an hour or two regarding this payment.
+                                            <br><br>
+                                            Regards
+                                            <br><br>
+                                            Dave<br>
+                                            CEO, Founder<br>
+                                            Company Inc.<br><br>
+
+                                            Sent from my iPhone<br><br>
+                                        </p>
+
+
+                                    </div>
+                                </div>
+                                <p>Anyone receiving this email may naturally comply with the request: there is no attachment and no links to be suspicious of. In fact, most would quickly process this email as it comes from the CEO. However, in this case, the email was sent by criminals who used an unprotected mail server to forge the sender’s email address to appear to be from the CEO. How is this possible?</p>
+
+
+                                <h4>Spoofing Email Senders</h4>
+                                <p>Spoofing email addresses was common before domain protection schemes such as the Domain Message Authentication Reporting & Conformance (DMARC) protocol were developed. However, many organizations still do not use these mechanisms or they improperly configure them, allowing attackers to forge legitimate-looking emails resulting in effective spear-phishing campaigns. The general steps criminals take to spoof emails are as follows:</p>
+                                <p style="padding-left: 30px;">1: Assess if the Sender Policy Framework (SPF), DomainKeys Identified Mail (DKIM) and DMARC are implemented by consulting the public Domain Name System (DNS) records of the target organization. If they are, locate any misconfiguration, subdomains not explicitly listed and the availability of similar-looking domains.</p>
+                                <p style="padding-left: 30px;">2: Scan the Internet for an opened Simple Mail Transmission Protocol (SMTP) email server on port 25 or stand up your own and SSH (Secure Shell) into it.</p>
+                                <p style="padding-left: 30px;">3: Craft the spoofed email by entering SMTP commands directly as shown below.</p>
+                                <p>For example, let’s say an attacker found an unprotected server located at mail.university.edu.sg. He could connect to it via port 25 and type the following command to craft the email shown above:</p>
+
+                                <div class="m-l-30">
+
+                                    <code>
+                                        <br>220 mail.university.edu.sg Microsoft ESMTP MAIL Service ready at Fri, 5 Aug 2018 16:24:41 -0700
+                                        <br>&gt; EHLO company.net
+                                        <br>250-mail.university.edu.sg Hello [172.16.0.5]
+                                        <br>[...]
+                                        <br>&gt;MAIL FROM: david.anderson@company.net
+                                        <br>250 2.1.0 Sender OK
+                                        <br>&gt; RCPT TO: peter.cash@company.net
+                                        <br>250 2.1.5 Recipient OK
+                                        <br>&gt; DATA
+                                        <br>
+                                        354 Start mail input; end with &lt;CRLF&gt;.&lt;CRLF&gt;
+                                        <br>Subject: Payment
+                                        <br>Hi Pete….
+                                        <br>[...]
+                                        <br>.
+                                        <br>250 2.6.0 &lt;c89b4fcc-3ad1-4758-a1ab-1e820065d622@mail.university.edu.sg&gt; [InternalId=5111011082268, Hostname=mail.university.edu.sg ] Queued mail for delivery
+                                        <br>> QUIT
+                                        <br>221 2.0.0 Service closing transmission channel
+                                    </code>
+                                </div>
+
+
+
+
+                                <p class="m-t-30">As you can see, the SMTP protocol was never designed with any security controls built-in. The EHLO and MAIL FROM commands simply ensure that a valid email address and domain are entered by the user. It does not validate if the domain typed matches the domain of the mail server. Without any additional measures, anyone can setup a mail server and spoof any email address they want to. Fortunately, there are common security controls that administrators can implement to mitigate these threats.</p>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0">Mitigation - Best Practices</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+
+                                <p>Blocking malicious content is an important aspect of email security and is one that security vendors address with solutions. Another one is to degrade the effectiveness and tradecraft of the attackers’ social engineering efforts by limiting email spoofing. Users are less likely to open malicious attachments or click fraudulent links for fraudsters if the sender is unrecognized. Endpoint protection, intrusion detection systems and other similar solutions cannot reliably prevent spoofing, but technical and procedural solutions exist to mitigate this particular risk, namely SPF, DKIM and DMARC</p>
+                                <p>However many organizations fail to implement these frameworks or they may often misconfigure them, rendering them useless. Others rely only on the typical security solutions without considering their limitations, but implementing SPF, DKIM and DMARC should be a priority for any network administrator, as they can greatly reduce the effectiveness of spam and phishing when properly configured.</p>
+                                <p>SPF is used to validate which mail servers can send emails on behalf of the organization’s domains, preventing rogue mail servers from being leveraged to spoof senders. DKIM provides domain authentication and email integrity. Lastly, DMARC builds on SPF and DKIM to provide domain authentication and reporting. All these three techniques require changes to the organization’s DNS records but are easy ways to limit email spoofing. Implementing these mechanisms will prevent threat actors from using your domains for spoofing phishing emails. When properly implemented, these 3 technologies will greatly increase your defenses against attackers spoofing your domains for phishing operations. However, issues remain, as hackers can still use unsecured domains from suppliers and customers. You should talk to your partners about how they mitigate their risk and request that they implement SPF, DKIM and DMARC as well.</p>
+                                <p>When considering domain authentication, do not only focus on the domains owned by your organization, but also consider similar domains. Consider domains with foreign Top-Level Domain (TLD suffixes), i.e. .us, .in, .co, .cn, etc… or domains with typos that could be used for social engineering purposes. For example, if your primary domain is company.net you may want to consider registering conpany.net or c0mpany.net. Don’t forget to include all your subdomains as well. When creating your records, define explicit deny rules for www.company.net, app.company.net, intranet.company.net and so on. This will prevent their usage in email-based attacks.</p>
+                                <p>Encryption remains an underused technology that can be critical in limiting data breaches and intellectual property theft. Encourage the use of email encryption - both in transit and at rest - using recommended algorithms and proper key management. Implement email encryption using strong algorithms, especially when sending confidential information to external parties; doing so will prevent information disclosure from man-in-the-middle attacks. Also ensure mail databases and backups are encrypted to limit the impact of potential data breaches.</p>
+                                <p>While encryption ensures confidentiality and integrity, it does not provide non-repudiation - a key element to prevent spoofing. A procedural change to prevent spoofing is to enable and enforce the use of digital signatures: have personnel with financial decision-making powers and transaction digitally sign their emails when requesting money transfers. With this in place, the threat actor is now forced to steal the keys of the sender to spoof their email, increasing the level of effort needed and thus reducing the likelihood of a successful compromise. To further increase the cost in time to the attacker, have personnel use a physical token such as a Public Key Infrastructure (PKI) card or USB drive to store their keys. This would force the adversary to either physically steal a card, or find a way to extract the key store from the token when inserted into the card reader. If you make it hard enough for the attackers, they are likely to move to an easier target.</p>
+                                <p>Lastly, once you have implemented solutions to harden your infrastructure, remain vigilant by constantly auditing and testing the security of your network and awareness of your users. Audit event logs regularly and test your security measures regularly against the latest threats. Combine external auditors and red teaming with annual anti-phishing awareness training and testing to ensure your users are kept aware of the potential threats. Your security posture will constantly change as threats evolve. As such, you must constantly monitor, review and adjust your defenses.</p>
+                            </div>
+                        </div>
+
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0">Conclusion</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+                                <p>Cybercrime is not about to stop anytime soon. In 2015, cybercrime had a Return-on-Investment (ROI) of 1,425% and BEC losses are up 2.375% between 2015 and 2017. As email remains the #1 vector by which threat actors infiltrate networks and conduct fraud, email security should remain the priority of security specialists and IT managers. </p>
+
+                                <p> This includes not only constantly updating anti-virus and network defenses appliances with the latest threat intelligence, but also user awareness training and hardening the network infrastructure, including email servers and authentication. DMARC, along with SPF and DKIM are not only simple and proven technologies to reduce the effectiveness of social engineering attempts against your organization, but also reduce the risk of your infrastructure being used as a launch point by attackers. </p>
+
+                                <p>Security is an ongoing process that relies on updated threat intelligence, vulnerability assessment, user awareness training and audits to constantly maintain a high security posture. Always be ready for the next threat.</p>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<!-- #location:dashboard/remediation-email -->
+{% endblock page_content %}

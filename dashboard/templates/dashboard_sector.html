@@ -1,0 +1,199 @@
+{% extends "private/base.html" %}
+{% load static %}
+
+{% block header_extra_js %}{% endblock header_extra_js %}
+
+
+{% block page_content %}
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">{{ sector.name }}</h3>
+        <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item active">{{ sector.name }}</li>
+        </ol>
+    </div>
+</div>
+
+
+{% if report %}
+<!-- #component:dashboard/sector-info:start -->
+<div class="row">
+    <div class="col-12" style="text-align: center">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col text-center">
+                        <h2 class="card-title"><i class="far fa-building m-r-10"></i> {{ sector.name }}</h2>
+                        <h3>{{ report.count }} Organisations</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='col-12 text-center'>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #component:dashboard/sector-info:end -->
+{% endif %}
+
+{% if report %}
+<!-- #component:dashboard/sector-report:start -->
+<div class="row ">
+    <div class="col-12">
+        <div class="card-group-custom h-100">
+            {% include "private/_ratings_gauge.html" %}
+            {% include "private/_ratings_categories.html" %}
+            {% include "private/_ratings_distribution.html" %}
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top: 20px"></div>
+{% include "private/_warning_stats.html" %}
+<!-- #component:dashboard/sector-report:end -->
+{% else %}
+<div class="row ">
+    <div class="col-12">
+        <div class="card-group-custom card-stats">
+            <div class="card">
+                <div class="card-body text-center  p-t-0" style="padding:40px;">
+                    <h2>No domain found for this sector.</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- #location:dashboard/sector -->
+{% endblock page_content %}
+
+{% block extra_js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/justgage.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            {% if report %}
+            var g = echarts.init(document.getElementById("overall-rating-gage"));
+            var option = {
+                tooltip : {
+                    formatter: "{a} <br/>{b} : {c}%"
+                },
+                toolbox: {
+                    show: false
+                },
+                series: [
+                    {
+                        name: "Rating",
+                        type: "gauge",
+                        detail: {
+                            formatter:function customValue(value) {
+                                    if (value < 0) {
+                                        return "N/A";
+                                    } else {
+                                        return "{{ report.avg_overall_rating }}";
+                                    }
+                                },
+                            fontSize: 80,
+                            fontWeight: "900",
+                            fontFamily: "Poppins, sans-serif",
+                            offsetCenter: [0, "100%"]
+                        },
+                        data: [{
+                            value: {{ report.avg_overall_score }} * 100,
+                            name: "RATING"
+                        }],
+                        itemStyle: {
+                            color: "#000"
+                        },
+                        title: {
+                            offsetCenter: [0, "40%"],
+                            fontSize: 10,
+                            color: "#99abb4",
+                            fontWeight: "lighter"
+                        },
+                         splitNumber: 8,
+                        axisLine: {
+                            lineStyle: {
+                                color: [[0.375, "#ff3728"], [0.75, "#ffb22b"], [1, "#a1bc2b"]]
+                                , width: 30
+                            }
+                        },
+                        splitLine: {
+                            show: true,
+                            lineStyle: {
+                                width: 3,
+                                color: "#fff"
+                            }
+                        },
+                        axisLabel: false,
+                        axisTick: false,
+                        pointer: {
+                            length: "90%",
+                        },
+
+                    }
+                ]
+            };
+
+            g.setOption(option, true), $(function () {
+                function resize() {
+                    setTimeout(function () {g.resize();}, 100)
+                }
+                $(window).on("resize", resize), $(".sidebartoggler").on("click", resize);
+            });
+
+
+            var ratingsChartSector = echarts.init(document.getElementById("sector-distribution"));
+            var option = {
+                    tooltip : {
+                    formatter: "{b} : {c}"
+                    },
+                    xAxis: {
+                        type: "category",
+                        axisLine: {
+                        lineStyle: {color:"#ccc"}
+                            },
+                    boundaryGap: true,
+                    splitLine: {
+                        show: true,
+                        lineStyle: {color:"#eee"}
+                    },
+                    data: ["A", "B", "C", "D", "E", "F"]
+                    },
+                    yAxis: [{
+                        type: "value",
+                        axisLine: {
+                        lineStyle: {color:"#ccc"}
+                            },
+                    axisLabel: {
+                        formatter: "{value} "
+                    },
+                    splitLine: {
+                        lineStyle: {color:"#eee"}
+                    }
+                  }],
+                    series: [{
+                        data: [{{ report.distribution.A }}, {{ report.distribution.B }}, {{ report.distribution.C }}, {{ report.distribution.D }}, {{ report.distribution.E }}, {{ report.distribution.F }}],
+                        type: "bar",
+                        color: ["#26c6da"],
+                    }]
+                };
+
+                ratingsChartSector.setOption(option, true), $(function () {
+                    function resize() {
+                        setTimeout(function () {
+                            ratingsChartSector.resize()
+                        }, 100);
+                    }
+                    $(window).on("resize", resize), $(".sidebartoggler").on("click", resize);
+                });
+            {% endif %}
+        });
+    </script>
+{% endblock extra_js %}

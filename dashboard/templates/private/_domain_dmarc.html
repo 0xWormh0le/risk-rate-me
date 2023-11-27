@@ -1,0 +1,91 @@
+<!-- #component:dashboard/domain-dmarc:start -->
+<div class="card expand-card">
+    <div class="card-header" id="heading4" style="border-bottom:0;">
+          <div class="d-flex">
+                <div class="m-r-20 align-self-center  cat-icon-circle">
+                        <h1>
+                        {% if report.dmarc_rating == "A" %}
+                        <i id="icon-dmarc-score" class="fas fa-check-circle text-passed"></i>
+                        {% elif report.dmarc_rating in "EF" %}
+                        <i id="icon-dmarc-score" class="fas fa-exclamation-circle text-danger"></i>
+                        {% else %}
+                        <i id="icon-dmarc-score" class="fas fa-exclamation-circle text-warning"></i>
+                        {% endif %}
+                    </h1>
+                </div>
+              <div>
+                <h4 class="card-title">Domain-based Message Authentication, Reporting & Conformance (DMARC)</h4>
+                <h6 class="card-subtitle">DMARC improves and monitors the protection of a domain from fraudulent email.</h6>
+              </div>
+          </div>
+            <button class="btn btn-success" type="button" data-toggle="collapse"
+                    data-target="#div-domain-report-dmarc" aria-expanded="false" aria-controls="div-domain-report-dmarc"
+                    style="float:right;">View Results
+            </button>
+    </div>
+    <div id="div-domain-report-dmarc" class="collapse" aria-labelledby="heading2">
+        <div class="table-responsive">
+            <table class="custom table">
+                <tbody>
+                {% for test in tests %}
+                    {% if test.definition.category == "email_security" and "dmarc" in test.definition.keywords and not test.state == "not_available" %}
+                    <tr>
+                        <td style="width: 35%">
+                            {{ test.definition.name }}
+                            <span data-toggle="tooltip" title="" data-original-title="{{ test.definition.description }}">
+                                <i class="mdi mdi-information-outline"></i>
+                            </span>
+                        </td>
+                        <td style="width: 10%; text-align: center">
+                                    {% if test.has_succeed %}
+                                    <span class="badge A">passed</span>
+                                    {% elif test.has_partially_succeed %}
+                                    <span class="badge C">partial</span>
+                                    {% elif test.has_failed %}
+                                    <span class="badge E">failed</span>
+                                    {% else %}
+                                    -
+                                    {% endif %}
+                        </td>
+                        <td style="width: 55%">
+                            {{ test.message|safe }}
+                            {% if test.has_failed %}
+                                <br>
+                                <small><a href="{% url 'remediation-dmarc' %}"  target="_blank">remediation</a> </small>
+                                {% endif %}
+
+
+                    {% if test.data and test.data|length > 0 %}
+
+                            <ul>
+                            {% if test.definition.label == "dmarcsinglerecordcheck" and "record" in test.data %}
+                                {% for record in test.data %}
+                                    <li>{{ record }}</li>
+                                {% endfor %}
+                            {% elif test.definition.label == "dmarcruaisset" %}
+                                {% if "rua" in test.data %}
+                                    <li>{{ test.dmarc_rua }}</li>
+                                {% endif %}
+                            {% elif test.definition.label == "dmarcrufisset" %}
+                                {% if "ruf" in test.data %}
+                                    <li>{{ test.dmarc_ruf }}</li>
+                                {% endif %}
+                            {% elif test.definition.label == "dmarcpolicyisnotnone" %}
+                                    <li>Policy: {{ test.dmarc_policy }}</li>
+                            {% elif test.definition.label == "dmarcrecordcounttest" %}
+                                {% for record in test.dmarc_records %}
+                                    <li>{{ record }}</li>
+                                {% endfor %}
+                            {% endif %}
+                            </ul>
+                      </td>
+                    </tr>
+                    {% endif %}
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- #component:dashboard/domain-dmarc:end -->

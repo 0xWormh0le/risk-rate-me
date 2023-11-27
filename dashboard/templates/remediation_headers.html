@@ -1,0 +1,96 @@
+{% extends "private/base.html" %}
+{% load static %}
+{% block extrajs %}{% endblock extrajs %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-12 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Web Server Example Configurations</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0)">Remediation</a></li>
+             <li class="breadcrumb-item active">Sender Policy Framework</li>
+        </ol>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="container-fluid">
+    <div class="col-12">
+        <div class="card">
+
+            <div class="card-body">
+            <h2>Web Server Example Configurations</h2>
+
+
+<p>Generally, it's best to add headers site-wide in your server configuration. Cookies are the exception, as they are often defined in the application itself.</p>
+
+
+           <h2>Apache Configuration</h2>
+
+A sample Apache setting
+
+          <code class=" language-bash"><span class="token operator">&lt;</span>IfModule mod_headers.c<span class="token operator">&gt;</span>
+    <span class="token comment">## CSP</span>
+    Header <span class="token keyword">set</span> Content-Security-Policy: default-src <span class="token string">'self'</span><span class="token punctuation">;</span> img-src <span class="token string">'self'</span> https://i.imgur.com<span class="token punctuation">;</span> object-src <span class="token string">'none'</span><span class="token punctuation">;</span> script-src <span class="token string">'self'</span><span class="token punctuation">;</span> style-src <span class="token string">'self'</span><span class="token punctuation">;</span> frame-ancestors <span class="token string">'self'</span><span class="token punctuation">;</span> base-uri <span class="token string">'self'</span><span class="token punctuation">;</span> form-action <span class="token string">'self'</span><span class="token punctuation">;</span>
+
+    <span class="token comment">## General Security Headers</span>
+    Header <span class="token keyword">set</span> X-XSS-Protection: 1<span class="token punctuation">;</span> mode<span class="token operator">=</span>block
+    Header <span class="token keyword">set</span> Access-Control-Allow-Origin: http://www.one.site.com
+    Header <span class="token keyword">set</span> X-Frame-Options: deny
+    Header <span class="token keyword">set</span> X-Content-Type-Options: nosniff
+    Header <span class="token keyword">set</span> Strict-Transport-Security: max-age<span class="token operator">=</span>3600<span class="token punctuation">;</span> includeSubDomains
+
+    <span class="token comment">## Caching rules</span>
+    <span class="token comment"># Don’t cache by default</span>
+    Header <span class="token keyword">set</span> Cache-Control no-cache
+    Header <span class="token keyword">set</span> Expires: 0
+
+    <span class="token comment"># Cache static assets for 1 day</span>
+    <span class="token operator">&lt;</span>filesMatch <span class="token string">".(ico|css|js|gif|jpeg|jpg|png|svg|woff|ttf|eot)$"</span><span class="token operator">&gt;</span>
+        Header <span class="token keyword">set</span> Cache-Control <span class="token string">"max-age=86400, public"</span>
+    <span class="token operator">&lt;</span>/filesMatch<span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span>/IfModule<span class="token operator">&gt;</span>
+</code>
+
+   Nginx Configuration
+
+           ## CSP
+add_header Content-Security-Policy: default-src 'self'; img-src 'self' https://i.imgur.com; object-src 'none'; script-src 'self'; style-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self';
+
+## General Security Headers
+add_header X-XSS-Protection: 1; mode=block;
+add_header Access-Control-Allow-Origin: http://www.one.site.com;
+add_header X-Frame-Options: deny;
+add_header X-Content-Type-Options: nosniff;
+add_header Strict-Transport-Security: max-age=3600; includeSubDomains;
+
+## Caching rules
+# Don’t cache by default
+add_header Cache-Control no-cache;
+add_header Expires: 0;
+
+# Cache static assets for 1 day
+location ~* \.(?:ico|css|js|gif|jpe?g|png|svg|woff|ttf|eot)$ {
+    try_files $uri @rewriteapp;
+    add_header Cache-Control "max-age=86400, public";
+}
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+<!-- #location:dashboard/remediation-headers -->
+{% endblock page_content %}

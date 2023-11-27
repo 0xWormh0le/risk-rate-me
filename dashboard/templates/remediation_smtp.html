@@ -1,0 +1,268 @@
+{% extends "private/base.html" %}
+
+{% block extrajs %}{% endblock extrajs %}
+
+{% block page_content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Remediation</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Remediation</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Email Security</a></li>
+            <li class="breadcrumb-item active">Sender Policy Framework</li>
+        </ol>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="container-fluid">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="entry-content article-content">
+                        <h2>Mail Agents</h2>
+                        <p class="text-primary"><strong>Correctly configured mail servers are essential for the secure
+                            and private transmission of email communications. Incorrect configuations can result in
+                            problems with deliverability and trust worthiness of email communications.</strong></p>
+
+                        <h3>SMTP TLS</h3>
+                        <p>It is becoming ever more important to use a company that supports TLS for email transmission
+                            as more and more banks, health care, and other organizations who have any kind of security
+                            policy are requiring their vendors and clients to use this type of encryption for emailed
+                            communications with them. Additionally, if your email provider supports TLS for email
+                            transmission, and you are communicating with people whose providers do also, then you can be
+                            reasonably sure that all of the email traffic between you and them will be encrypted.</p>
+                        <p>It’s important to use SSL or TLS with your email setup because unsecure email is a common
+                            attack vector. Anyone who intercepts encrypted emails is left with garbage text that they
+                            can’t do anything with, because only the email server and client have the keys to decode the
+                            messages.</p>
+                        <p>This is key for ensuring the protection of user names, passwords, personal details, and other
+                            sensitive information that’s often found in emails. If an attacker discovers a weakness,
+                            they will exploit it for as long as they can and mine data that will be sold on the black
+                            market.</p>
+                        <p>TLS is the preferred encryption method because it’s newer and offers more robust security
+                            features than SSL does. It’s good practivce to combine TLS-based email encryption with email
+                            authentication (SPF, DKIM & DMARC) to ensure the integrity of email messages.</p>
+
+                        <hr class="m-t-30">
+
+                        <h3 class="m-b-30 m-l-10">Mail Agents Troubleshooting</h3>
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0" id="SmtpBannerCheck">SMTP Banner Check</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+                                <p>Email servers answer connections on port 25 with a string of text called an SMTP
+                                    Banner whose purpose is to announce the server and any information that the
+                                    administrator would like to convey to the world.</p>
+                                <p>It is best practice to put the name of your server in your SMTP banner so that
+                                    anybody who connects via your IP Address has a clue as to who they are talking to.
+                                    You will get this warning if the name you present yourself as is not in the same
+                                    domain as the hostname we get when we perform a PTR lookup on your IP Address.</p>
+                                <p>If you do not have a PTR record, or your record does not match your hostname, we
+                                    recommend that you contact your ISP and ask them to setup a reverse (PTR) record
+                                    that matches the hostname of your mail server.</p>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0" id="SmtpIsClosedRelay">SMTP Closed Relay</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+                                <p>An open mail relay is an SMTP server configured in such a way that it allows anyone
+                                    on the Internet to send e-mail through it, not just mail destined to or originating
+                                    from known users. This used to be the default configuration in many mail servers;
+                                    indeed, it was the way the Internet was initially set up, but open mail relays have
+                                    become unpopular because of their exploitation by spammers and worms. Many relays
+                                    were closed, or were placed on blacklists by other servers.</p>
+                                <p>In order not to be considered "open", an e-mail relay should be secure and configured
+                                    to accept and forward only the following messages (details will vary from system to
+                                    system - in particular, further restrictions may well apply):</p>
+                                <p>Messages from local IP addresses to local mailboxes</p>
+                                <p>Messages from local IP addresses to non-local mailboxes</p>
+                                <p>Messages from non-local IP addresses to local mailboxes</p>
+                                <p>Messages from clients that are authenticated and authorized</p>
+                                <p>In particular, a properly secured SMTP mail relay should not accept and forward
+                                    arbitrary e-mails from non-local IP addresses to non-local mailboxes by an
+                                    unauthenticated or unauthorized user.</p>
+                                <p>In general, any other rules which an administrator chooses to enforce (for instance,
+                                    based on what an e-mail gives as its own envelope from address) must be in addition
+                                    to, rather than instead of, the above. If not, the relay is still effectively open
+                                    (for instance, by the above rules): it is easy to forge e-mail header and envelope
+                                    information, it is considerably harder to successfully forge an IP address in a
+                                    TCP/IP transaction because of the three-way handshake that occurs as a connection is
+                                    started.</p>
+                                <p>Open relays have also resulted from security flaws in software, rather than
+                                    misconfiguration by system administrators. In these cases, security patches need to
+                                    be applied to close the relay.</p>
+
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0" id="SmtpReverseLookup">SMTP Reverse DNS Resolution</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+                                <p>Computer networks use the DNS to determine the IP address associated with a domain
+                                    name. This process is also known as forward DNS resolution. Reverse DNS lookup is
+                                    the inverse process of this, the resolution of an IP address to its designated
+                                    domain name.</p>
+                                <p>While receiving an email message, a mail server may try to attempt reverse DNS
+                                    lookup. If the lookup fails (no PTR record) or PTR record is not forward confirmed
+                                    or looks like generic, the message may be marked as spam or rejected.</p>
+                                <p>If you do not have a PTR record, or your record does not match your hostname, we
+                                    recommend that you contact your ISP and ask them to setup a reverse (PTR) record
+                                    that matches the hostname of your mail server.</p>
+
+
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0" id="#SmtpStartTlsIsEnabled">SMTP TLS</h4>
+                            </div>
+
+                            <div class="card-body collapse show">
+                                <p>SSL, TLS, and STARTTLS refer to standard protocols used to secure email
+                                    transmissions.</p>
+                                <p>SSL (Secure Sockets Layer) and its successor, Transport Layer Security (TLS),&nbsp;provide
+                                    a way to encrypt a communication channel between two computers over the Internet.&nbsp;In
+                                    most cases, the&nbsp;terms SSL and TLS can be&nbsp;used interchangeably unless
+                                    you’re referring to a specific version of the protocol.</p>
+                                <p>Because&nbsp;TLS and SSL&nbsp;are application-layer protocols, senders and receivers
+                                    need to know that they are being&nbsp;used to encrypt emails during transit. That’s
+                                    where STARTTLS comes into play.</p>
+                                <p>STARTTLS is an email protocol command that tells an email server that an email
+                                    client, including an email client running in a web browser, wants to turn an
+                                    existing insecure connection into a secure one. (By the way, the use of “TLS” in the
+                                    STARTTLS command name does not mean that it only works with the TLS security
+                                    protocol. It works with SSL too.)</p>
+                                <h3>How does SSL work?</h3>
+                                <p>When an email client sends and receives email, it uses TCP (Transmission Control
+                                    Protocol) via the transport layer to initiate a “handshake” with the email server.
+                                    During that basic setup process, the email client tells the email server which
+                                    version of SSL or TLS it’s running and what cipher suites (a combination of
+                                    processes used to negotiate security settings) and compression methods it wants to
+                                    use.</p>
+                                <p>After the setup is finished, the email server verifies its identity to the email
+                                    client by sending a certificate that is trusted by the user’s software, or by a
+                                    third party trusted by it. Doing so ensures that the email client isn’t sending
+                                    messages to an imposter. Once the client knows it can trust the server, a key is
+                                    exchanged between the two, which allows all messages sent and received to be
+                                    encrypted.</p>
+                                <h3>When to force TLS</h3>
+
+                                <p>STARTTLS is not a flawless technique - it is susceptible to a downgrade attack by a
+                                    'man in the middle' sitting between the two communicating parties.</p>
+                                <p>With parties that you contact regularly by email (e.g. partner organisations), it is
+                                    possible to configure connections so that TLS will always be used and that the
+                                    certificates presented by both mail servers are authenticated, verifying the
+                                    identities of both parties.</p>
+
+                                <h3>Mail server certificates</h3>
+                                <p>In order for TLS connections to be established, the application connecting to your
+                                    service will need to validate the identity of your server using the X.509v3
+                                    certificate which it presents.</p>
+                                <p>This means your service will need a certificate which is signed by an authority that
+                                    the party connecting to your service recognises and trusts. If you are using a
+                                    cloud-based email provider this is likely to be done for you, and can be easily
+                                    tested. However, if you operate your own MTA, you should generate a private key and
+                                    request a certificate from a Certificate Authority.</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+
+                                <div class="card-actions">
+                                    <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                                </div>
+                                <h4 class="card-title m-b-0" id="SmtpCertificateCipherTest">TLS Certificate</h4>
+                            </div>
+
+                            <div class="card-body collapse ">
+
+                                <p>A TLS Certificate error or any warning messages when connecting to a server using TLS
+                                    should be taken seriously. While your provider may just have a small technical
+                                    problem that is causing the warning, these warnings can also indicate that your
+                                    communications are being intercepted. These warnings usually indicate one of the
+                                    following:</p>
+                                <p>The server’s SSL “certificate” (i.e. public/private key pair) has expired.</p>
+                                <p>Some of the information in the certificate doesn’t match the information you expect —
+                                    i.e. the certificate was issued for a different server name than the one you are
+                                    trying to connect to. (You could be inadvertently connecting to the wrong
+                                    server.)</p>
+                                <p>The certificate was issued by an untrusted agency.</p>
+                                <p>There is a “man in the middle” eavesdropping on your connection</p>
+                                <p>SSL/TLS certificates are (generally) issued by third party agencies. These 3rd party
+                                    companies do a background check on companies that request certificates, and only
+                                    issue certificates if the companies have a right to them. The certificate includes
+                                    the name of the company, the name of the issuing company, and the name of the server
+                                    to which it is issued. When you connect to an SSL server you can verify this
+                                    embedded information and the fact that it was issued by a third party company that
+                                    you trust. If the certificate is valid then you can have a high degree of confidence
+                                    that the server you are connecting to is the server you want to reach.</p>
+
+                            </div>
+                        </div>
+
+
+                        <hr class="m-t-30">
+
+                        <div class="m-l-10">
+                            <h3>References</h3>
+
+
+                            <p>
+                                IRCv3 Strict Transport Security<br>
+                                <a href="https://ircv3.net/specs/extensions/sts.html">https://ircv3.net/specs/extensions/sts.html</a>
+                            </p>
+
+                            <p>
+                                Cleartext Considered Obsolete: Use of Transport Layer Security (TLS)
+                                for Email Submission and Access<br>
+                                <a href="https://tools.ietf.org/html/rfc8314">https://tools.ietf.org/html/rfc8314</a>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #location:dashboard/remediation-smtp -->
+{% endblock page_content %}
